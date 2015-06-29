@@ -19,7 +19,6 @@
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/sample_cat"
         android:layout_gravity="center_vertical"
         android:layout_weight="2"
         android:scaleType="fitCenter"
@@ -30,7 +29,6 @@
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/sample_car"
         android:layout_gravity="center_vertical"
         android:layout_weight="2"
         android:scaleType="fitCenter"
@@ -41,7 +39,6 @@
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/sample_dog"
         android:layout_gravity="center_vertical"
         android:layout_weight="2"
         android:scaleType="fitCenter"
