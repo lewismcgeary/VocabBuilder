@@ -4,7 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageButton;
+
+import java.io.IOException;
 import java.util.Random;
+
 
 /**
  * Created by Lewis on 23/06/15.
@@ -34,8 +37,28 @@ public class Question extends AppCompatActivity{
         butto.setImageResource(Answers[i].imageRes(context));
         }
 
+       VocabularyDbHelper myDbHelper = new VocabularyDbHelper(this);
+
+
+        try {
+
+            myDbHelper.createDataBase();
+
+        } catch (IOException ioe) {
+
+            throw new Error("Unable to create database");
+
+        }
+
+
+
+            myDbHelper.openDataBase();
+
+
+        }
+
 
 /*    Answer[correct].getAudio();
     Then do some display magic and wait for an answer*/
     }
-}
+
