@@ -28,15 +28,15 @@ public class Question extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         correctSound = MediaPlayer.create(this, R.raw.correct);
+        TextView promptText = (TextView) findViewById(R.id.promptText);
         Vocabulary vocab = new Vocabulary();
         Context context = this.getApplicationContext();
         int nAns = 3; // 3 for now, could be 2 or 4 or whatever
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3}; // TODO: Get these programatically
         Random rn = new Random();
         int correct = rn.nextInt(nAns);
-
         Word Answers[] = vocab.getn(nAns);
-
+        promptText.setText(Answers[correct].getWordText());
         for (int i = 0; i < Answers.length; i++) {
             ImageButton butto = (ImageButton) findViewById(imRes[i]);
             butto.setImageResource(Answers[i].imageRes(context));
