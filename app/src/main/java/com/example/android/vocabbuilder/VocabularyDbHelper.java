@@ -1,6 +1,7 @@
 package com.example.android.vocabbuilder;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,14 +15,15 @@ import java.io.OutputStream;
  * Created by Lewis on 24/06/15.
  */
 public class VocabularyDbHelper extends SQLiteOpenHelper {
-
+    private final Context myContext;
     private static final int DATABASE_VERSION = 1;
     private static String DB_PATH = "/data/data/com.example.android.vocabbuilder/databases/";
 
-    private static final String DATABASE_NAME = "VocabDB";
+    private static final String DATABASE_NAME = "vocabulary.sqlite";
 
+    private static VocabularyDbHelper mInstance = null;
     private SQLiteDatabase myDataBase;
-    private final Context myContext;
+
 
     public VocabularyDbHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -30,7 +32,7 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
 
     public void createDataBase() throws IOException{
 
-        boolean dbExist = checkDataBase();
+        boolean dbExist = false;
 
         if(dbExist){
             //do nothing - database already exist
@@ -77,7 +79,8 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
     private void copyDataBase() throws IOException {
 
         //Open your local db as the input stream
-        InputStream myInput = myContext.getAssets().open(DATABASE_NAME);
+
+            InputStream myInput = myContext.getAssets().open(DATABASE_NAME);
 
         // Path to the just created empty db
         String outFileName = DB_PATH + DATABASE_NAME;
@@ -105,6 +108,26 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
         String myPath = DB_PATH + DATABASE_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 
+    }
+    public static VocabularyDbHelper getInstance(Context ctx) {
+
+        // Use the application context, which will ensure that you
+        // don't accidentally leak an Activity's context.
+        // See this article for more information: http://bit.ly/6LRzfx
+        if (mInstance == null) {
+            mInstance = new VocabularyDbHelper(ctx.getApplicationContext());
+        }
+        return mInstance;
+    }
+    public int getWordCount() {
+        String countQuery = "SELECT  * FROM " + "'vocabulary'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int countReturned = cursor.getCount();
+        cursor.close();
+
+        // return count
+        return countReturned;
     }
     @Override
     public synchronized void close() {

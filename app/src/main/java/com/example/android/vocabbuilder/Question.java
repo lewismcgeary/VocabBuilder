@@ -37,7 +37,7 @@ public class Question extends AppCompatActivity{
         butto.setImageResource(Answers[i].imageRes(context));
         }
 
-       VocabularyDbHelper myDbHelper = new VocabularyDbHelper(this);
+       VocabularyDbHelper myDbHelper = VocabularyDbHelper.getInstance(this);
 
 
         try {
@@ -54,7 +54,9 @@ public class Question extends AppCompatActivity{
 
             myDbHelper.openDataBase();
 
+            int wordCount= myDbHelper.getWordCount();
 
+        myDbHelper.close();
         }
 
 
