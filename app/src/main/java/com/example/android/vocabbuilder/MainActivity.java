@@ -47,19 +47,4 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void checkAnswer(View view) {
-        // This is called when an answer is selected
-        // answerSubmitted is the Tag of the selected button
-        String answerSubmitted = view.getTag().toString();
-        TextView feedbackText = (TextView) findViewById(R.id.feedbackText);
-        // Checks if the correct answer was given or not
-        // and gives corresponding result
-        // TODO: update if statement so answer is not hard-coded
-        if (answerSubmitted.equals("car")) {
-            correctSound.start();
-            feedbackText.setText("Correct");
-        } else {
-            feedbackText.setText("Wrong");
-        }
-    }
 }
