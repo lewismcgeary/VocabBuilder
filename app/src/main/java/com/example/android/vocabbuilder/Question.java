@@ -41,6 +41,26 @@ public class Question extends AppCompatActivity{
             butto.setImageResource(Answers[i].imageRes(context));
             if(i == correct) {butto.setTag("correct");} else {butto.setTag("wrong");}
         }
+        VocabularyDbHelper myDbHelper = new VocabularyDbHelper(this);
+
+
+        try {
+
+            myDbHelper.createDataBase();
+
+        } catch (IOException ioe) {
+
+            throw new Error("Unable to create database");
+
+        }
+
+
+
+        myDbHelper.openDataBase();
+
+        int wordCount= myDbHelper.getWordCount();
+
+
     }
     public void checkAnswer(View view) {
         // This is called when an answer is selected
@@ -57,28 +77,9 @@ public class Question extends AppCompatActivity{
             feedbackText.setText("Wrong");
         }
     }
-        VocabularyDbHelper myDbHelper = new VocabularyDbHelper(this);
-
-       VocabularyDbHelper myDbHelper = new VocabularyDbHelper(this);
-
-
-        try {
-
-            myDbHelper.createDataBase();
-
-        } catch (IOException ioe) {
-
-            throw new Error("Unable to create database");
-
-        }
 
 
 
-            myDbHelper.openDataBase();
-
-            int wordCount= myDbHelper.getWordCount();
-
-        }
 
 
 /*    Answer[correct].getAudio();
