@@ -21,7 +21,6 @@ public class Question extends AppCompatActivity{
     // TODO: A Question could have a method to select from Vocabulary
     // TODO: A Question could create several Answer Objects to use
     // TODO:
-    int correct;
     MediaPlayer correctSound;
 
     @Override
@@ -35,7 +34,7 @@ public class Question extends AppCompatActivity{
         int nAns = 3; // 3 for now, could be 2 or 4 or whatever
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3}; // TODO: Get these programatically
         Random rn = new Random();
-        correct = rn.nextInt(nAns);
+        int correct = rn.nextInt(nAns);
         Word Answers[] = vocab.getn(nAns);
         promptText.setText(Answers[correct].getWordText());
         for (int i = 0; i < Answers.length; i++) {
