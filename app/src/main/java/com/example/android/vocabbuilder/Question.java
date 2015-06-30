@@ -59,7 +59,7 @@ public class Question extends AppCompatActivity{
     }
         VocabularyDbHelper myDbHelper = new VocabularyDbHelper(this);
 
-
+/*
         try {
 
             myDbHelper.createDataBase();
@@ -75,6 +75,6 @@ public class Question extends AppCompatActivity{
             myDbHelper.openDataBase();
 
 
-        }
+        }*/
 }
 
