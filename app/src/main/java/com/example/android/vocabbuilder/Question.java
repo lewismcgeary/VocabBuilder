@@ -18,6 +18,7 @@ public class Question extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         Vocabulary vocab = new Vocabulary();
         Context context = this.getApplicationContext();
         int nAns = 3; // 3 for now, could be 2 or 4 or whatever
