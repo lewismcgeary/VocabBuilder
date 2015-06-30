@@ -1,6 +1,7 @@
 package com.example.android.vocabbuilder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -19,10 +20,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Context context = this.getApplicationContext();
+        //Context context = this.getApplicationContext();
         // Fetch the feedback audio for use when a correct answer is given
         correctSound = MediaPlayer.create(this, R.raw.correct);
-        Vocabulary vocab = new Vocabulary();
+        Intent intent = new Intent(this, Question.class);
+        startActivity(intent);
+     /*   Vocabulary vocab = new Vocabulary();
         Word[] words = vocab.getn(3);
         ImageButton button1 = (ImageButton) findViewById(R.id.button1);
         button1.setImageResource(words[0].imageRes(context));//(R.drawable.sample_cat);
@@ -30,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
         button2.setImageResource(words[1].imageRes(context));//(R.drawable.sample_car);
         ImageButton button3 = (ImageButton) findViewById(R.id.button3);
         button3.setImageResource(words[2].imageRes(context));//(R.drawable.sample_dog);
-    }
+    */}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,22 +1,40 @@
 package com.example.android.vocabbuilder;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageButton;
+import java.util.Random;
+
 /**
  * Created by Lewis on 23/06/15.
  */
-public class Question {
+public class Question extends AppCompatActivity{
     // TODO: A Question will have several possible Answers,
     // TODO: only one is the correct answer
     // TODO: A Question could have a method to select from Vocabulary
     // TODO: A Question could create several Answer Objects to use
     // TODO:
-   /* nAns = 3 // 3 for now, could be 2 or 4 or whatever
-    Word Answers[] = Vocabulary.getn(nAns);
-    int correct = rand(nAns);
-    for wrd in Answers[]
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Vocabulary vocab = new Vocabulary();
+        Context context = this.getApplicationContext();
+        int nAns = 3; // 3 for now, could be 2 or 4 or whatever
+        int imRes[] = {R.id.button1, R.id.button2, R.id.button3}; // TODO: Get these programatically
+        Random rn = new Random();
+        int correct = rn.nextInt(nAns);
 
-    {
-        load.image(Answer[wrd].getPic());
-    }
-    Answer[correct].getAudio();
+        Word Answers[] = vocab.getn(nAns);
+
+        for (int i = 0; i < Answers.length; i++)
+        {
+        ImageButton butto = (ImageButton) findViewById(imRes[i]);
+        butto.setImageResource(Answers[i].imageRes(context));
+        }
+
+
+/*    Answer[correct].getAudio();
     Then do some display magic and wait for an answer*/
+    }
 }
