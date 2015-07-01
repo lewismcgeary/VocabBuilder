@@ -20,14 +20,14 @@ public class LanguageSelector extends AppCompatActivity {
         context = this.getApplicationContext();
 
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3, R.id.button4};
-        ImageButton b1 = (ImageButton) findViewById(imRes[1]);
-        b1.setImageResource(context.getResources().getIdentifier("en.png", "drawable", context.getPackageName()));
-        ImageButton b2 = (ImageButton) findViewById(imRes[2]);
-        b2.setImageResource(context.getResources().getIdentifier("ru.png", "drawable", context.getPackageName()));
-        ImageButton b3 = (ImageButton) findViewById(imRes[3]);
-        b3.setImageResource(context.getResources().getIdentifier("es.png", "drawable", context.getPackageName()));
-        ImageButton b4 = (ImageButton) findViewById(imRes[4]);
-        b4.setImageResource(context.getResources().getIdentifier("fr.png", "drawable", context.getPackageName()));
+        ImageButton b1 = (ImageButton) findViewById(imRes[0]);
+        b1.setImageResource(context.getResources().getIdentifier("en", "drawable", context.getPackageName()));
+        ImageButton b2 = (ImageButton) findViewById(imRes[1]);
+        b2.setImageResource(context.getResources().getIdentifier("ru", "drawable", context.getPackageName()));
+        ImageButton b3 = (ImageButton) findViewById(imRes[2]);
+        b3.setImageResource(context.getResources().getIdentifier("es", "drawable", context.getPackageName()));
+        ImageButton b4 = (ImageButton) findViewById(imRes[3]);
+        b4.setImageResource(context.getResources().getIdentifier("fr", "drawable", context.getPackageName()));
     }
     public void setLanguage(View view){
         String langRequested = view.getTag().toString();
