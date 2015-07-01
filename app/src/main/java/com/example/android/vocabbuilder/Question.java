@@ -12,14 +12,14 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * Created by Lewis on 23/06/15.
+ * This is our main question class. It gets words from Vocabulary, selects one to use as prompt
+ * and checks if the player has selected it.
  */
 public class Question extends AppCompatActivity{
     // TODO: A Question will have several possible Answers,
     // TODO: only one is the correct answer
     // TODO: A Question could have a method to select from Vocabulary
     // TODO: A Question could create several Answer Objects to use
-    // TODO:
     MediaPlayer correctSound;
 
     @Override
@@ -69,7 +69,6 @@ public class Question extends AppCompatActivity{
         TextView feedbackText = (TextView) findViewById(R.id.feedbackText);
         // Checks if the correct answer was given or not
         // and gives corresponding result
-        // TODO: update if statement so answer is not hard-coded
         if (answerSubmitted.equals("correct")) {
             correctSound.start();
             feedbackText.setText("Correct");
