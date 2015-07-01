@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,11 +39,12 @@ public class Vocabulary {
 
         int wordCount= myDbHelper.getWordCount();
 
-        vocabularyArrayList = myDbHelper.getWordsFromDataBase("EN");
+        vocabularyArrayList = myDbHelper.getWordsFromDataBase("RU");
     }
 
 
 public Word[] getn(int n) {     // returns n randomly-selected unique words from the total set
+    Collections.shuffle(vocabularyArrayList);
     Word[] words = new Word[n];
     for (int i = 0; i < n; i++){
         words[i] = vocabularyArrayList.get(i);
@@ -51,7 +53,4 @@ public Word[] getn(int n) {     // returns n randomly-selected unique words from
     }
 
 
-/*public Word[] scramble() {
-    return words;
-    }*/
 }
