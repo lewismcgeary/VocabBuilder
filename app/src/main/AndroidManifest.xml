@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Question" />
+        <activity android:name=".LanguageSelector" />
     </application>
 
 </manifest>
