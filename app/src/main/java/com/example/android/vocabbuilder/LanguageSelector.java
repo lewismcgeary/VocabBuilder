@@ -10,6 +10,8 @@ import android.widget.ImageButton;
 
 import com.example.android.vocabbuilder.R;
 
+import java.util.Locale;
+
 public class LanguageSelector extends AppCompatActivity {
 
     @Override
@@ -19,18 +21,31 @@ public class LanguageSelector extends AppCompatActivity {
         Context context;
         context = this.getApplicationContext();
 
+        // Swap so that current locale is at top of the list
+        String currentlocale = Locale.getDefault().getLanguage();
+        String locales[]= {"en", "ru", "es", "fr"};
+        int j = 0;
+        for(int i =0; i < locales.length; i++) {
+            if(currentlocale.toLowerCase().startsWith(locales[i].toLowerCase())) j = i;
+        }
+        String temp = locales[0];
+        locales[0] = locales[j];
+        locales[j] = temp;
+
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3, R.id.button4};
-        ImageButton b1 = (ImageButton) findViewById(imRes[0]);
-        b1.setImageResource(context.getResources().getIdentifier("en", "drawable", context.getPackageName()));
-        ImageButton b2 = (ImageButton) findViewById(imRes[1]);
-        b2.setImageResource(context.getResources().getIdentifier("ru", "drawable", context.getPackageName()));
-        ImageButton b3 = (ImageButton) findViewById(imRes[2]);
-        b3.setImageResource(context.getResources().getIdentifier("es", "drawable", context.getPackageName()));
-        ImageButton b4 = (ImageButton) findViewById(imRes[3]);
-        b4.setImageResource(context.getResources().getIdentifier("fr", "drawable", context.getPackageName()));
+        for(int i =0; i < locales.length; i++) {
+            ImageButton b = (ImageButton) findViewById(imRes[i]);
+            b.setImageResource(context.getResources().getIdentifier(locales[i], "drawable", context.getPackageName()));
+            b.setTag(locales[i]);
+        }
     }
     public void setLanguage(View view){
+        // The following doesn't appear to change the Locale
+        // See here for potential solution:
+        // https://stackoverflow.com/questions/2264874/changing-locale-within-the-app-itself?rq=1
         String langRequested = view.getTag().toString();
+        Locale newloc = new Locale(langRequested,"");
+        Locale.setDefault(newloc);
         Intent intent = new Intent(this, Question.class);
         startActivity(intent);
     }
