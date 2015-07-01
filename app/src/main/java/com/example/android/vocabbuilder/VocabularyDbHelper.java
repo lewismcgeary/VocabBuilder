@@ -10,6 +10,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Lewis on 24/06/15.
@@ -102,6 +104,8 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
 
     }
 
+
+
     public void openDataBase() {
 
         //Open the database
@@ -128,6 +132,28 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
 
         // return count
         return countReturned;
+    }
+    public List<Word> getWordsFromDataBase(String language) {
+        List<Word> wordList = new ArrayList<>();
+        String wordQuery = "SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = \"" + language + "\"";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(wordQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Word word = new Word(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                //word.setImageLocation(cursor.getString(0));
+                //word.setWordText(cursor.getString(1));
+                //word.setAudioLocation(cursor.getString(2));
+                // Adding contact to list
+                wordList.add(word);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return wordList;
+
+
     }
     @Override
     public synchronized void close() {

@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -28,7 +27,7 @@ public class Question extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         correctSound = MediaPlayer.create(this, R.raw.correct);
         TextView promptText = (TextView) findViewById(R.id.promptText);
-        Vocabulary vocab = new Vocabulary();
+        Vocabulary vocab = new Vocabulary(this.getApplicationContext());
         Context context = this.getApplicationContext();
         int nAns = 3; // 3 for now, could be 2 or 4 or whatever
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3}; // TODO: Get these programatically
@@ -41,24 +40,7 @@ public class Question extends AppCompatActivity{
             butto.setImageResource(Answers[i].imageRes(context));
             if(i == correct) {butto.setTag("correct");} else {butto.setTag("wrong");}
         }
-        VocabularyDbHelper myDbHelper = new VocabularyDbHelper(this);
 
-
-        try {
-
-            myDbHelper.createDataBase();
-
-        } catch (IOException ioe) {
-
-            throw new Error("Unable to create database");
-
-        }
-
-
-
-        myDbHelper.openDataBase();
-
-        int wordCount= myDbHelper.getWordCount();
 
 
     }

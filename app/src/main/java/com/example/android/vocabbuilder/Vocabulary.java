@@ -1,5 +1,11 @@
 package com.example.android.vocabbuilder;
 
+import android.content.Context;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Lewis on 23/06/15.
  */
@@ -8,17 +14,44 @@ public class Vocabulary {
     // TODO: There needs to be a way to select a certain number of the words
     // TODO: as answers and create objects to include in a Question
     // TODO: variables: language
-    Word[] words =  {
-            new Word("cat","sample_cat","cat.mp3"), // we chose this at random
-            new Word("car","sample_car","car.mp3"),
-            new Word("dog","sample_dog","dog.mp3")
-    };
+    //
+    // Sqlite database query SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = "EN"
+    List<Word> vocabularyArrayList = new ArrayList<Word>();
+
+    public Vocabulary(Context context){
+        VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
+
+
+        try {
+
+            myDbHelper.createDataBase();
+
+        } catch (IOException ioe) {
+
+            throw new Error("Unable to create database");
+
+        }
+
+
+
+        myDbHelper.openDataBase();
+
+        int wordCount= myDbHelper.getWordCount();
+
+        vocabularyArrayList = myDbHelper.getWordsFromDataBase("EN");
+    }
+
+
 public Word[] getn(int n) {     // returns n randomly-selected unique words from the total set
+    Word[] words = new Word[n];
+    for (int i = 0; i < n; i++){
+        words[i] = vocabularyArrayList.get(i);
+    }
     return words;
     }
 
 
-public Word[] scramble() {
+/*public Word[] scramble() {
     return words;
-    }
+    }*/
 }

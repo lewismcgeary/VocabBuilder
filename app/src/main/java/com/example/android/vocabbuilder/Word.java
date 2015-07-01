@@ -13,11 +13,25 @@ public class Word {
     public String wordText;
     public String imageLocation;
     public String audioLocation;
+
+    public void setWordText(String wordText) {
+        this.wordText = wordText;
+    }
+
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
+    }
+
+    public void setAudioLocation(String audioLocation) {
+        this.audioLocation = audioLocation;
+    }
+
     //
-    public Word(String word, String image, String audio){
-        wordText = word;
+    public Word(String image, String word, String audio){
         imageLocation = image;
+        wordText = word;
         audioLocation = audio;
+
 
     }
 
