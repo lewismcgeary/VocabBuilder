@@ -37,16 +37,16 @@ public class Word {
 
     public int imageRes(Context context){
 
-        return context.getResources().getIdentifier(imageLocation, "drawable", context.getPackageName());
+        return context.getResources().getIdentifier(imageLocation.replaceFirst("[.][^.]+$", ""), "drawable", context.getPackageName());
     }
     String getWordText(){
         return wordText;
     }
 
     String getImageLocation(){
-        return imageLocation;
+        return imageLocation.replaceFirst("[.][^.]+$", "");
     }
     String getAudioLocation(){
-        return audioLocation;
+        return audioLocation.replaceFirst("[.][^.]+$", "");
     }
 }
