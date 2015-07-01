@@ -8,8 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.android.vocabbuilder.R;
-
 import java.util.Locale;
 
 public class LanguageSelector extends AppCompatActivity {
@@ -44,9 +42,10 @@ public class LanguageSelector extends AppCompatActivity {
         // See here for potential solution:
         // https://stackoverflow.com/questions/2264874/changing-locale-within-the-app-itself?rq=1
         String langRequested = view.getTag().toString();
-        Locale newloc = new Locale(langRequested,"");
-        Locale.setDefault(newloc);
+        //Locale newloc = new Locale(langRequested,"");
+        //Locale.setDefault(newloc);
         Intent intent = new Intent(this, Question.class);
+        intent.putExtra("language", langRequested);
         startActivity(intent);
     }
 }
