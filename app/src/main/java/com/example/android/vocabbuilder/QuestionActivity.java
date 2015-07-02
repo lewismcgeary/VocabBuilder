@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -39,7 +40,7 @@ public class QuestionActivity extends AppCompatActivity{
         promptSound.start();
         correctSound = MediaPlayer.create(this, R.raw.yay); // TODO: make this audio variable?
         incorrectSound = MediaPlayer.create(this, R.raw.uhoh); // TODO: make this audio variable
-        TextView promptText = (TextView) findViewById(R.id.promptText);
+        Button promptText = (Button) findViewById(R.id.promptText);
         //Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
 
         //int nAns = 3; // 3 for now, could be 2 or 4 or whatever
@@ -56,6 +57,10 @@ public class QuestionActivity extends AppCompatActivity{
 
 
 
+    }
+
+    public void sayPrompt(View view) {
+        promptSound.start();
     }
     public void checkAnswer(View view) {
         // This is called when an answer is selected
