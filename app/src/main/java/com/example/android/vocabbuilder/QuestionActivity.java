@@ -76,6 +76,8 @@ public class QuestionActivity extends AppCompatActivity{
         }
     }
     private void nextQuestion(){
+        promptSound.release();
+        correctSound.release();
         Intent intent = new Intent(this, QuizActivity.class);
         startActivity(intent);
     }
