@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.Random;
+import java.util.ArrayList;
 
 /**
  * This is our main question class. It gets words from Vocabulary, selects one to use as prompt
@@ -24,21 +24,26 @@ public class Question extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String language = getIntent().getStringExtra("language");
+        //String language = getIntent().getStringExtra("language");
+       // Word Answers[] = getIntent().getParcelableExtra("Answers");
+
+        ArrayList<Word> Answers = getIntent().getParcelableArrayListExtra("Answers");
+
+        int correct = getIntent().getIntExtra("correct", 0);
         setContentView(R.layout.activity_main);
         correctSound = MediaPlayer.create(this, R.raw.correct);
         TextView promptText = (TextView) findViewById(R.id.promptText);
-        Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
+        //Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
         Context context = this.getApplicationContext();
-        int nAns = 3; // 3 for now, could be 2 or 4 or whatever
+        //int nAns = 3; // 3 for now, could be 2 or 4 or whatever
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3}; // TODO: Get these programatically
-        Random rn = new Random();
-        int correct = rn.nextInt(nAns);
-        Word Answers[] = vocab.getn(nAns);
-        promptText.setText(Answers[correct].getWordText());
-        for (int i = 0; i < Answers.length; i++) {
+        //Random rn = new Random();
+        //int correct = rn.nextInt(nAns);
+        //Word Answers[] = vocab.getn(nAns);
+        promptText.setText(Answers.get(correct).getWordText());
+        for (int i = 0; i < Answers.size(); i++) {
             ImageButton butto = (ImageButton) findViewById(imRes[i]);
-            butto.setImageResource(Answers[i].imageRes(context));
+            butto.setImageResource(Answers.get(i).imageRes(context));
             if(i == correct) {butto.setTag("correct");} else {butto.setTag("wrong");}
         }
 

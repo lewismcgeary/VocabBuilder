@@ -44,7 +44,7 @@ public class LanguageSelector extends AppCompatActivity {
         String langRequested = view.getTag().toString();
         //Locale newloc = new Locale(langRequested,"");
         //Locale.setDefault(newloc);
-        Intent intent = new Intent(this, Question.class);
+        Intent intent = new Intent(this, QuizActivity.class);
         intent.putExtra("language", langRequested);
         startActivity(intent);
     }

@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".Question" />
         <activity android:name=".LanguageSelector" />
+        <activity android:name=".QuizActivity" />
     </application>
 
 </manifest>

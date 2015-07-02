@@ -1,15 +1,29 @@
 package com.example.android.vocabbuilder;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by Lewis on 22/06/15.
  */
-public class Word {
+public class Word implements Parcelable{
     // TODO: The Word class will need to have an associated String version,
     // TODO: audio version and image file.
     // TODO: The paths will come from R.raw.vocabulary.sqlite
     // TODO:
+    public static final Parcelable.Creator<Word> CREATOR = new Parcelable.Creator<Word>() {
+
+        public Word createFromParcel(Parcel in) {
+            return new Word(in);
+        }
+
+
+        public Word[] newArray(int size) {
+            return new Word[size];
+        }
+    };
+
     public String wordText;
     public String imageLocation;
     public String audioLocation;
@@ -27,10 +41,22 @@ public class Word {
     }
 
     //
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(imageLocation);
+        dest.writeString(wordText);
+        dest.writeString(audioLocation);
+    }
     public Word(String image, String word, String audio){
-        imageLocation = image;
-        wordText = word;
-        audioLocation = audio;
+        imageLocation=image;
+        wordText=word;
+        audioLocation=audio;
+    }
+    private Word(Parcel in){
+        imageLocation = in.readString();
+        wordText = in.readString();
+        audioLocation = in.readString();
+
 
 
     }
@@ -49,4 +75,11 @@ public class Word {
     String getAudioLocation(){
         return audioLocation.replaceFirst("[.][^.]+$", "");
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+
 }

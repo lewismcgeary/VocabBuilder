@@ -43,11 +43,13 @@ public class Vocabulary {
     }
 
 
-public Word[] getn(int n) {     // returns n randomly-selected unique words from the total set
+public ArrayList<Word> getn(int n) {     // returns n randomly-selected unique words from the total set
     Collections.shuffle(vocabularyArrayList);
-    Word[] words = new Word[n];
+    //Word[] words = new Word[n];
+    ArrayList<Word> words = new ArrayList<>();
     for (int i = 0; i < n; i++){
-        words[i] = vocabularyArrayList.get(i);
+        //words[i] = vocabularyArrayList.get(i);
+        words.add(vocabularyArrayList.get(i));
     }
     return words;
     }
