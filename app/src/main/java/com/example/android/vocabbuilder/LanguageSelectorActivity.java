@@ -3,6 +3,7 @@ package com.example.android.vocabbuilder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,13 +19,14 @@ public class LanguageSelectorActivity extends AppCompatActivity {
         setContentView(R.layout.language_selector_activity);
         Context context;
         context = this.getApplicationContext();
-
-        // Swap so that current locale is at top of the list
-        String currentlocale = Locale.getDefault().getLanguage();
+        SharedPreferences settings = getPreferences(MODE_PRIVATE);
+        String currentLocale = Locale.getDefault().getLanguage().substring(0,2);
+        String lang = settings.getString("language", currentLocale);
+        // Swap so that last used or current locale is at top of the list
         String locales[]= {"en", "ru", "es", "fr"};
         int j = 0;
         for(int i =0; i < locales.length; i++) {
-            if(currentlocale.toLowerCase().startsWith(locales[i].toLowerCase())) j = i;
+            if(lang.equalsIgnoreCase(locales[i])) j = i;
         }
         String temp = locales[0];
         locales[0] = locales[j];
@@ -38,10 +40,15 @@ public class LanguageSelectorActivity extends AppCompatActivity {
         }
     }
     public void setLanguage(View view){
-        // The following doesn't appear to change the Locale
-        // See here for potential solution:
-        // https://stackoverflow.com/questions/2264874/changing-locale-within-the-app-itself?rq=1
+        // Get the language from the button tag
         String langRequested = view.getTag().toString();
+
+        SharedPreferences settings = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("language", langRequested);
+        // Commit the edits!
+        editor.commit();
+
         //Locale newloc = new Locale(langRequested,"");
         //Locale.setDefault(newloc);
         Intent intent = new Intent(this, QuizActivity.class);
