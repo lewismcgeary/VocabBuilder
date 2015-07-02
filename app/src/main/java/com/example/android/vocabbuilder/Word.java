@@ -65,6 +65,10 @@ public class Word implements Parcelable{
 
         return context.getResources().getIdentifier(imageLocation.replaceFirst("[.][^.]+$", ""), "drawable", context.getPackageName());
     }
+    public int audioRes(Context context){
+
+        return context.getResources().getIdentifier(audioLocation.replaceFirst("[.][^.]+$", ""), "raw", context.getPackageName());
+    }
     String getWordText(){
         return wordText;
     }

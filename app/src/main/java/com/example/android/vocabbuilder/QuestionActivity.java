@@ -21,6 +21,7 @@ public class QuestionActivity extends AppCompatActivity{
     // TODO: A Question could have a method to select from Vocabulary
     // TODO: A Question could create several Answer Objects to use
     MediaPlayer correctSound;
+    MediaPlayer promptSound;
 
 
     @Override
@@ -28,15 +29,17 @@ public class QuestionActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         //String language = getIntent().getStringExtra("language");
        // Word Answers[] = getIntent().getParcelableExtra("Answers");
-
+        Context context = this.getApplicationContext();
         ArrayList<Word> Answers = getIntent().getParcelableArrayListExtra("Answers");
 
         int correct = getIntent().getIntExtra("correct", 0);
         setContentView(R.layout.question_activity);
         correctSound = MediaPlayer.create(this, R.raw.correct);
+        promptSound = MediaPlayer.create(this, Answers.get(correct).audioRes(context));
+        promptSound.start();
         TextView promptText = (TextView) findViewById(R.id.promptText);
         //Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
-        Context context = this.getApplicationContext();
+
         //int nAns = 3; // 3 for now, could be 2 or 4 or whatever
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3}; // TODO: Get these programatically
         //Random rn = new Random();
@@ -62,11 +65,19 @@ public class QuestionActivity extends AppCompatActivity{
         if (answerSubmitted.equals("correct")) {
             correctSound.start();
             feedbackText.setText("Correct");
-            Intent intent = new Intent(this, QuizActivity.class);
-            startActivity(intent);
+            correctSound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                public void onCompletion(MediaPlayer mp) {
+                    nextQuestion();
+                }
+            });
+
         } else {
             feedbackText.setText("Wrong");
         }
+    }
+    private void nextQuestion(){
+        Intent intent = new Intent(this, QuizActivity.class);
+        startActivity(intent);
     }
 
 
