@@ -7,8 +7,8 @@
     android:orientation="horizontal">
 
     <ImageButton
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="400dp"
+        android:layout_height="match_parent"
 
         android:layout_gravity="center_horizontal"
         android:layout_weight="2"
@@ -16,7 +16,12 @@
         android:background="@android:color/transparent"
         android:tag="button1"
         android:id="@+id/button1"
-        android:onClick="setLanguage"/>
+        android:onClick="setLanguage"
+        android:padding="10dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -26,7 +31,8 @@
         android:background="@android:color/transparent"
         android:onClick="setLanguage"
         android:tag="button2"
-        android:id="@+id/button2"/>
+        android:id="@+id/button2"
+        android:padding="10dp"/>
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -36,7 +42,8 @@
         android:background="@android:color/transparent"
         android:tag="button3"
         android:id="@+id/button3"
-        android:onClick="setLanguage"/>
+        android:onClick="setLanguage"
+        android:padding="10dp"/>
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -46,5 +53,7 @@
         android:background="@android:color/transparent"
         android:tag="button3"
         android:id="@+id/button4"
-        android:onClick="setLanguage"/>
+        android:onClick="setLanguage"
+        android:padding="10dp"/>
+    </LinearLayout>
 </LinearLayout>
