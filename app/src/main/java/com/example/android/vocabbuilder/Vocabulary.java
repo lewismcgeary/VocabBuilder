@@ -19,7 +19,7 @@ public class Vocabulary {
     // Sqlite database query SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = "EN"
     List<Word> vocabularyArrayList = new ArrayList<Word>();
 
-    public Vocabulary(Context context){
+    public Vocabulary(Context context, String language){
         VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
 
 
@@ -39,7 +39,7 @@ public class Vocabulary {
 
         int wordCount= myDbHelper.getWordCount();
 
-        vocabularyArrayList = myDbHelper.getWordsFromDataBase("RU");
+        vocabularyArrayList = myDbHelper.getWordsFromDataBase(language);
     }
 
 

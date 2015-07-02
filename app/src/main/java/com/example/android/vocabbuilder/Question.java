@@ -24,10 +24,11 @@ public class Question extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String language = getIntent().getStringExtra("language");
         setContentView(R.layout.activity_main);
         correctSound = MediaPlayer.create(this, R.raw.correct);
         TextView promptText = (TextView) findViewById(R.id.promptText);
-        Vocabulary vocab = new Vocabulary(this.getApplicationContext());
+        Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
         Context context = this.getApplicationContext();
         int nAns = 3; // 3 for now, could be 2 or 4 or whatever
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3}; // TODO: Get these programatically
