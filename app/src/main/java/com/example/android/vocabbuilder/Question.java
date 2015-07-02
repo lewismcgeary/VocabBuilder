@@ -1,6 +1,7 @@
 package com.example.android.vocabbuilder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class Question extends AppCompatActivity{
     // TODO: A Question could have a method to select from Vocabulary
     // TODO: A Question could create several Answer Objects to use
     MediaPlayer correctSound;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,8 @@ public class Question extends AppCompatActivity{
         if (answerSubmitted.equals("correct")) {
             correctSound.start();
             feedbackText.setText("Correct");
+            Intent intent = new Intent(this, QuizActivity.class);
+            startActivity(intent);
         } else {
             feedbackText.setText("Wrong");
         }

@@ -11,10 +11,13 @@ import java.util.Random;
  * Created by Lewis on 01/07/15.
  */
 public class QuizActivity extends AppCompatActivity {
+    static String language;
+    static int questionCount;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String language = getIntent().getStringExtra("language");
+        if (language == null){
+        language = getIntent().getStringExtra("language");}
         Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
         //Context context = this.getApplicationContext();
         int nAns = 3; // 3 for now, could be 2 or 4 or whatever
@@ -26,10 +29,17 @@ public class QuizActivity extends AppCompatActivity {
         ArrayList<Word> Answers = new ArrayList<Word>(vocab.getn(nAns));
         //Word Answers[] = vocab.getn(nAns);
         //ArrayList<Word> answersArray = new ArrayList<Word>(Arrays.asList(Answers));
-
+        if (questionCount<10){
+            questionCount++;
         Intent intent = new Intent(this, Question.class);
         intent.putParcelableArrayListExtra("Answers", Answers);
         intent.putExtra("correct", correct);
-        startActivity(intent);
+        startActivity(intent);}
+        else{
+            language = null;
+            questionCount = 0;
+            Intent intent = new Intent(this, LanguageSelector.class);
+            startActivity(intent);
+        }
     }
 }
