@@ -9,7 +9,8 @@
         android:theme="@style/Theme.AppCompat" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +19,8 @@
         </activity>
         <activity android:name=".QuestionActivity" />
         <activity android:name=".LanguageSelectorActivity" />
-        <activity android:name=".QuizActivity" />
+        <activity android:name=".QuizActivity"
+            android:noHistory="true"/>
     </application>
 
 </manifest>
