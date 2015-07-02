@@ -21,7 +21,7 @@
             android:noHistory="true"/>
         <activity android:name=".LanguageSelectorActivity" />
         <activity android:name=".QuizActivity"
-            android:noHistory="true"/>
+            android:noHistory="true" />
     </application>
 
 </manifest>
