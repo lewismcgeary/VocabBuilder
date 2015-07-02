@@ -1,6 +1,8 @@
 package com.example.android.vocabbuilder;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
 /**
  * Created by Lewis on 23/06/15.
  */
-public class Vocabulary {
+public class Vocabulary extends AppCompatActivity{
     // TODO: Vocabulary will be a list of words from the R.raw.vocabulary database
     // TODO: There needs to be a way to select a certain number of the words
     // TODO: as answers and create objects to include in a Question
@@ -19,8 +21,12 @@ public class Vocabulary {
     // Sqlite database query SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = "EN"
     List<Word> vocabularyArrayList = new ArrayList<Word>();
 
-    public Vocabulary(Context context, String language){
+    public Vocabulary(Context context){
         VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
+        SharedPreferences settings = getSharedPreferences("PrefsFile", MODE_PRIVATE);
+        String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do
+
+
 
 
         try {

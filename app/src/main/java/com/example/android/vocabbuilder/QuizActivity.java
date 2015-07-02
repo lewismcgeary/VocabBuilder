@@ -1,7 +1,7 @@
 package com.example.android.vocabbuilder;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+// import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -17,9 +17,9 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences settings = getSharedPreferences("PrefsFile", MODE_PRIVATE);
-        String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do
-        Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
+     /*   SharedPreferences settings = getSharedPreferences("PrefsFile", MODE_PRIVATE);
+        String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do */
+        Vocabulary vocab = new Vocabulary(this.getApplicationContext()); // cut , language.toUpperCase()
         //Context context = this.getApplicationContext();
         int nAns = 3; // 3 for now, could be 2 or 4 or whatever
         //int imRes[] = {R.id.button1, R.id.button2, R.id.button3}; // TODO: Get these programatically
