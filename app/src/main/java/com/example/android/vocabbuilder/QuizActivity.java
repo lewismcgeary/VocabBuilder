@@ -1,23 +1,24 @@
 package com.example.android.vocabbuilder;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 /**
- * Created by Lewis on 01/07/15.
+ * This sets up a new vocabulary, samples words, and launches QuestionActivity
  */
 public class QuizActivity extends AppCompatActivity {
-    static String language;
     static int questionCount;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (language == null){
-        language = getIntent().getStringExtra("language");}
+        SharedPreferences settings = getSharedPreferences("PrefsFile", MODE_PRIVATE);
+        String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do
         Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
         //Context context = this.getApplicationContext();
         int nAns = 3; // 3 for now, could be 2 or 4 or whatever
@@ -26,7 +27,7 @@ public class QuizActivity extends AppCompatActivity {
         int correct = rn.nextInt(nAns);
 
 
-        ArrayList<Word> Answers = new ArrayList<Word>(vocab.getn(nAns));
+        ArrayList<Word> Answers = new ArrayList<>(vocab.getn(nAns)); // <Word> to <>
         //Word Answers[] = vocab.getn(nAns);
         //ArrayList<Word> answersArray = new ArrayList<Word>(Arrays.asList(Answers));
         if (questionCount<10){
@@ -36,7 +37,6 @@ public class QuizActivity extends AppCompatActivity {
         intent.putExtra("correct", correct);
         startActivity(intent);}
         else{
-            language = null;
             questionCount = 0;
             Intent intent = new Intent(this, LanguageSelectorActivity.class);
             startActivity(intent);

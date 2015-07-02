@@ -19,8 +19,9 @@ public class LanguageSelectorActivity extends AppCompatActivity {
         setContentView(R.layout.language_selector_activity);
         Context context;
         context = this.getApplicationContext();
-        SharedPreferences settings = getPreferences(MODE_PRIVATE);
-        String currentLocale = Locale.getDefault().getLanguage().substring(0,2);
+        SharedPreferences settings = getSharedPreferences("PrefsFile", MODE_PRIVATE);
+        String currentLocale = "en"; // initialise it as non-NULL
+        currentLocale = Locale.getDefault().getLanguage().substring(0,2);
         String lang = settings.getString("language", currentLocale);
         // Swap so that last used or current locale is at top of the list
         String locales[]= {"en", "ru", "es", "fr"};
@@ -43,7 +44,7 @@ public class LanguageSelectorActivity extends AppCompatActivity {
         // Get the language from the button tag
         String langRequested = view.getTag().toString();
 
-        SharedPreferences settings = getPreferences(MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences("PrefsFile", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("language", langRequested);
         // Commit the edits!
@@ -52,7 +53,6 @@ public class LanguageSelectorActivity extends AppCompatActivity {
         //Locale newloc = new Locale(langRequested,"");
         //Locale.setDefault(newloc);
         Intent intent = new Intent(this, QuizActivity.class);
-        intent.putExtra("language", langRequested);
         startActivity(intent);
     }
 }
