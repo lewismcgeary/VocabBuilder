@@ -21,6 +21,7 @@ public class QuestionActivity extends AppCompatActivity{
     // TODO: A Question could have a method to select from Vocabulary
     // TODO: A Question could create several Answer Objects to use
     MediaPlayer correctSound;
+    MediaPlayer incorrectSound;
     MediaPlayer promptSound;
 
 
@@ -34,9 +35,10 @@ public class QuestionActivity extends AppCompatActivity{
 
         int correct = getIntent().getIntExtra("correct", 0);
         setContentView(R.layout.question_activity);
-        correctSound = MediaPlayer.create(this, R.raw.correct);
         promptSound = MediaPlayer.create(this, Answers.get(correct).audioRes(context));
         promptSound.start();
+        correctSound = MediaPlayer.create(this, R.raw.yay); // TODO: make this audio variable?
+        incorrectSound = MediaPlayer.create(this, R.raw.uhoh); // TODO: make this audio variable
         TextView promptText = (TextView) findViewById(R.id.promptText);
         //Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
 
@@ -72,12 +74,14 @@ public class QuestionActivity extends AppCompatActivity{
             });
 
         } else {
+            incorrectSound.start();
             feedbackText.setText("Wrong");
         }
     }
     private void nextQuestion(){
         promptSound.release();
         correctSound.release();
+        incorrectSound.release();
         Intent intent = new Intent(this, QuizActivity.class);
         startActivity(intent);
     }
