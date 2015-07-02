@@ -23,7 +23,7 @@ public class Vocabulary extends AppCompatActivity{
 
     public Vocabulary(Context context){
         VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
-        SharedPreferences settings = getSharedPreferences("PrefsFile", MODE_PRIVATE);
+        SharedPreferences settings = context.getSharedPreferences("PrefsFile", MODE_PRIVATE);
         String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do
 
 
@@ -45,7 +45,7 @@ public class Vocabulary extends AppCompatActivity{
 
         int wordCount= myDbHelper.getWordCount();
 
-        vocabularyArrayList = myDbHelper.getWordsFromDataBase(language);
+        vocabularyArrayList = myDbHelper.getWordsFromDataBase(language.toUpperCase());
     }
 
 
