@@ -16,8 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Question" />
-        <activity android:name=".LanguageSelector" />
+        <activity android:name=".QuestionActivity" />
+        <activity android:name=".LanguageSelectorActivity" />
         <activity android:name=".QuizActivity" />
     </application>
 

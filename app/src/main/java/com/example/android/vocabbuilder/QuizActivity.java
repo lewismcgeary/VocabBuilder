@@ -31,14 +31,14 @@ public class QuizActivity extends AppCompatActivity {
         //ArrayList<Word> answersArray = new ArrayList<Word>(Arrays.asList(Answers));
         if (questionCount<10){
             questionCount++;
-        Intent intent = new Intent(this, Question.class);
+        Intent intent = new Intent(this, QuestionActivity.class);
         intent.putParcelableArrayListExtra("Answers", Answers);
         intent.putExtra("correct", correct);
         startActivity(intent);}
         else{
             language = null;
             questionCount = 0;
-            Intent intent = new Intent(this, LanguageSelector.class);
+            Intent intent = new Intent(this, LanguageSelectorActivity.class);
             startActivity(intent);
         }
     }

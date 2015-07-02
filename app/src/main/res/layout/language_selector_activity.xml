@@ -3,21 +3,9 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".LanguageSelectorActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0"
-        android:id="@+id/promptText"
-        android:textSize="48sp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1">
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -25,18 +13,20 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="2"
         android:scaleType="fitCenter"
+        android:padding="10dp"
         android:background="@android:color/transparent"
         android:tag="button1"
         android:id="@+id/button1"
-        android:onClick="checkAnswer"/>
+        android:onClick="setLanguage"/>
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="2"
         android:scaleType="fitCenter"
+        android:padding="10dp"
         android:background="@android:color/transparent"
-        android:onClick="checkAnswer"
+        android:onClick="setLanguage"
         android:tag="button2"
         android:id="@+id/button2"/>
     <ImageButton
@@ -45,15 +35,20 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="2"
         android:scaleType="fitCenter"
+        android:padding="10dp"
         android:background="@android:color/transparent"
         android:tag="button3"
         android:id="@+id/button3"
-        android:onClick="checkAnswer"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/feedbackText"/>
-    </LinearLayout>
-
+        android:onClick="setLanguage"/>
+    <ImageButton
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2"
+        android:scaleType="fitCenter"
+        android:padding="10dp"
+        android:background="@android:color/transparent"
+        android:tag="button3"
+        android:id="@+id/button4"
+        android:onClick="setLanguage"/>
 </LinearLayout>

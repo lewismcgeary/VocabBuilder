@@ -10,12 +10,12 @@ import android.widget.ImageButton;
 
 import java.util.Locale;
 
-public class LanguageSelector extends AppCompatActivity {
+public class LanguageSelectorActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.language_selector);
+        setContentView(R.layout.language_selector_activity);
         Context context;
         context = this.getApplicationContext();
 

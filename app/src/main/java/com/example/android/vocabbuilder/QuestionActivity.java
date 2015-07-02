@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * This is our main question class. It gets words from Vocabulary, selects one to use as prompt
  * and checks if the player has selected it.
  */
-public class Question extends AppCompatActivity{
+public class QuestionActivity extends AppCompatActivity{
     // TODO: A Question will have several possible Answers,
     // TODO: only one is the correct answer
     // TODO: A Question could have a method to select from Vocabulary
@@ -32,7 +32,7 @@ public class Question extends AppCompatActivity{
         ArrayList<Word> Answers = getIntent().getParcelableArrayListExtra("Answers");
 
         int correct = getIntent().getIntExtra("correct", 0);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.question_activity);
         correctSound = MediaPlayer.create(this, R.raw.correct);
         TextView promptText = (TextView) findViewById(R.id.promptText);
         //Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
