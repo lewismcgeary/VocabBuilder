@@ -30,7 +30,8 @@
         android:background="@android:color/transparent"
         android:tag="button1"
         android:id="@+id/button1"
-        android:onClick="checkAnswer"/>
+        android:onClick="checkAnswer"
+        />
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
