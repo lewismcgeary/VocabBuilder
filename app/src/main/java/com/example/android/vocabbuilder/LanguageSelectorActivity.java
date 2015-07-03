@@ -1,8 +1,6 @@
 package com.example.android.vocabbuilder;
 
 
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,15 +31,13 @@ public class LanguageSelectorActivity extends AppCompatActivity {
         // Swap so that last used or current locale is at top of the list
         String locales[] = {"en", "ru", "es", "fr"};
         int j = 0;
-        try {
-            for (int i = 0; i < locales.length; i++) {
-                if (lang.equalsIgnoreCase(locales[i])) j = i;
-            }
-            String temp = locales[0];
-            locales[0] = locales[j];
-            locales[j] = temp;
-        }catch(NullPointerException e) { // just skip it then
+        for (int i = 0; i < locales.length; i++) {
+            //noinspection ConstantConditions
+            if (lang.equalsIgnoreCase(locales[i])) j = i;
         }
+        String temp = locales[0];
+        locales[0] = locales[j];
+        locales[j] = temp;
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3, R.id.button4};
         for(int i =0; i < locales.length; i++) {
             ImageButton b = (ImageButton) findViewById(imRes[i]);

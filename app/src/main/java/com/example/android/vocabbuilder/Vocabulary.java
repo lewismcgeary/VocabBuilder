@@ -45,6 +45,7 @@ public class Vocabulary extends AppCompatActivity{
 
         int wordCount= myDbHelper.getWordCount();
 
+        //noinspection ConstantConditions
         vocabularyArrayList = myDbHelper.getWordsFromDataBase(language.toUpperCase());
         myDbHelper.close();
     }
