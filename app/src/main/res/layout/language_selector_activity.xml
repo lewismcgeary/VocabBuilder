@@ -15,9 +15,7 @@
         android:scaleType="fitCenter"
         android:padding="10dp"
         android:background="@android:color/transparent"
-        android:tag="button1"
-        android:id="@+id/button1"
-        android:onClick="setLanguage"/>
+        android:id="@+id/button1"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,8 +28,6 @@
         android:scaleType="fitCenter"
         android:padding="10dp"
         android:background="@android:color/transparent"
-        android:onClick="setLanguage"
-        android:tag="button2"
         android:id="@+id/button2"/>
     <ImageButton
         android:layout_width="200dp"
@@ -41,9 +37,7 @@
         android:scaleType="fitCenter"
         android:padding="10dp"
         android:background="@android:color/transparent"
-        android:tag="button3"
-        android:id="@+id/button3"
-        android:onClick="setLanguage"/>
+        android:id="@+id/button3"/>
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -52,8 +46,6 @@
         android:scaleType="fitCenter"
         android:padding="10dp"
         android:background="@android:color/transparent"
-        android:tag="button3"
-        android:id="@+id/button4"
-        android:onClick="setLanguage"/>
+        android:id="@+id/button4"/>
     </LinearLayout>
 </LinearLayout>
