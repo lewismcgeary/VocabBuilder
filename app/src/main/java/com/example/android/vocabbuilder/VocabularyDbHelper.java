@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Lewis on 24/06/15.
@@ -133,8 +132,8 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
         // return count
         return countReturned;
     }
-    public List<Word> getWordsFromDataBase(String language) {
-        List<Word> wordList = new ArrayList<>();
+    public ArrayList<Word> getWordsFromDataBase(String language) {
+        ArrayList<Word> wordList = new ArrayList<>();
         String wordQuery = "SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = \"" + language + "\"";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(wordQuery, null);

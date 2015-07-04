@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -38,8 +39,14 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         setContentView(R.layout.quiz_activity);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) actionBar.hide();
-        loadSounds();
-        nextFragment(questionCounter);
+        //experimental for async
+        Vocabulary vocab = new Vocabulary(this);
+        ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
+        LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
+        loadSoundsAsynchronously.myCtx=getApplicationContext();
+        Context context = getApplicationContext();
+        loadSoundsAsynchronously.execute(AllAnswers);
+        //experimental for async
 
     }
 
@@ -60,7 +67,36 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         outState.putParcelableArrayList("Answers", currentQuestionsAnswers);
         outState.putInt("CorrectAnswer", currentCorrectAnswer);
     }
+private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
 
+    private Context myCtx;
+
+    public LoadSoundsTask(Context ctx){
+        // Now set context
+        this.myCtx = ctx;
+    }
+    @Override
+    protected HashMap doInBackground(ArrayList<Word>... arrayList) {
+        ArrayList<Word> AllAnswers = new ArrayList<Word>();
+        AllAnswers = arrayList[0];
+        HashMap<String, Integer> asyncSoundMap = new HashMap<>();
+        quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        for(int i=0; i<AllAnswers.size(); i++){
+            asyncSoundMap.put(AllAnswers.get(i).getWordText(), quizSounds.load(myCtx, AllAnswers.get(i).audioRes(myCtx), 1));
+        }
+        asyncSoundMap.put("correctSound", quizSounds.load(myCtx, R.raw.yay, 1));
+        asyncSoundMap.put("incorrectSound", quizSounds.load(myCtx, R.raw.click, 1));
+        return asyncSoundMap;
+    }
+
+
+    protected void onPostExecute(HashMap resultingHashmap) {
+        super.onPostExecute(null);
+        soundMap = resultingHashmap;
+        nextFragment(questionCounter);
+
+    }
+}
     public void loadSounds(){
         Context context = this;
         Vocabulary vocab = new Vocabulary(this);
@@ -118,7 +154,10 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
         ArrayList<Word> Answers = new ArrayList<>(vocab.getn(nAns));
         currentQuestionsAnswers = Answers;
-        quizSounds.play(soundMap.get(Answers.get(correct).getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
+
+                quizSounds.play(soundMap.get(Answers.get(correct).getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
+
+
         if (questionNumber<10){
             QuestionFragment nextQuestion = QuestionFragment.newInstance(Answers, correct);
             FragmentManager fragmentManager = getFragmentManager();

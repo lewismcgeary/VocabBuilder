@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Lewis on 23/06/15.
  */
 public class Vocabulary extends AppCompatActivity{
-    public List<Word> getVocabularyArrayList() {
+    public ArrayList<Word> getVocabularyArrayList() {
         return vocabularyArrayList;
     }
 
@@ -23,7 +23,7 @@ public class Vocabulary extends AppCompatActivity{
     // TODO: variables: language
     //
     // Sqlite database query SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = "EN"
-    List<Word> vocabularyArrayList = new ArrayList<Word>();
+    ArrayList<Word> vocabularyArrayList = new ArrayList<Word>();
 
     public Vocabulary(Context context){
         VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
