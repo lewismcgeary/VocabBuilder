@@ -25,19 +25,12 @@ import java.util.ArrayList;
 public class QuestionFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private static final String QUESTION_COUNT = "questionCount";
     private static final String ANSWERS_ARRAY = "answersArray";
     private static final String CORRECT_INT = "correct";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private String displayText;
     private ArrayList<Word> Answers;
     private int correct;
-    private int questionCount;
 
     private OnFragmentInteractionListener mListener;
 
@@ -55,7 +48,6 @@ public class QuestionFragment extends Fragment {
         Bundle args = new Bundle();
         args.putParcelableArrayList(ANSWERS_ARRAY, answers);
         args.putInt(CORRECT_INT, correct);
-       // args.putInt(QUESTION_COUNT, questionCounter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,7 +60,6 @@ public class QuestionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            questionCount = getArguments().getInt(QUESTION_COUNT);
             correct = getArguments().getInt(CORRECT_INT);
             Answers = getArguments().getParcelableArrayList(ANSWERS_ARRAY);
 
@@ -83,14 +74,7 @@ public class QuestionFragment extends Fragment {
         View view =  inflater.inflate(R.layout.question_activity, container, false);
         Context context = getActivity();
         Button promptText = (Button) view.findViewById(R.id.promptText);
-        //Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
-
-        //int nAns = 3; // 3 for now, could be 2 or 4 or whatever
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3}; // TODO: Get these programatically
-        //Random rn = new Random();
-        //int correct = rn.nextInt(nAns);
-        //Word Answers[] = vocab.getn(nAns);
-        String correctAnswer = Answers.get(correct).getWordText();
         promptText.setText(Answers.get(correct).getWordText());
         for (int i = 0; i < Answers.size(); i++) {
             ImageButton butto = (ImageButton) view.findViewById(imRes[i]);
@@ -169,7 +153,6 @@ public class QuestionFragment extends Fragment {
         // TODO: Update argument type and name
 
         void onFragmentInteraction(View view);
-        void onAnswerSelected(View view);
         void correctAnswerSelected(View view);
         void wrongAnswerSelected(View view);
         void replayPromptSound(View view);
