@@ -1,15 +1,16 @@
 package com.example.android.vocabbuilder;
 
-import android.support.v7.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -90,6 +91,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         Random rn = new Random();
         float soundSpeed = (rn.nextInt(2)+8)/10.0f;
         quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
+        getWindow().getDecorView().setBackgroundColor(Color.GREEN);
         questionCounter++;
         Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
         handler.postDelayed(new Runnable() {

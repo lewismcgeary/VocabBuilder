@@ -70,6 +70,7 @@ public class QuestionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        getActivity().getWindow().getDecorView().setBackgroundColor(0xFFCCFFCC); // TODO: don't hardcode this
         View view =  inflater.inflate(R.layout.question_fragment, container, false);
         Context context = getActivity();
         Button promptText = (Button) view.findViewById(R.id.promptText);
