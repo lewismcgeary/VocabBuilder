@@ -39,7 +39,7 @@ public class QuestionActivity extends AppCompatActivity{
         promptSound = MediaPlayer.create(this, Answers.get(correct).audioRes(context));
         promptSound.start();
         correctSound = MediaPlayer.create(this, R.raw.yay); // TODO: make this audio variable?
-        incorrectSound = MediaPlayer.create(this, R.raw.uhoh); // TODO: make this audio variable
+        incorrectSound = MediaPlayer.create(this, R.raw.click); // TODO: make this audio variable
         Button promptText = (Button) findViewById(R.id.promptText);
         //Vocabulary vocab = new Vocabulary(this.getApplicationContext(), language.toUpperCase());
 
