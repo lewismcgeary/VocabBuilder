@@ -1,5 +1,6 @@
 package com.example.android.vocabbuilder;
 
+import android.support.v7.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -25,7 +26,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     static int questionCounter = 0;
     static ArrayList<Word> currentQuestionsAnswers;
     static int currentCorrectAnswer;
-    // This can be upgraded to Sounpool.Builder in a few months
+    // This can be upgraded to Soundpool.Builder in a few months
     @SuppressWarnings("deprecation")
     SoundPool quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
     HashMap<String, Integer> soundMap = new HashMap<>();
@@ -34,6 +35,9 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_activity);
+        setContentView(R.layout.quiz_activity_with_fragments);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null) actionBar.hide();
         loadSounds();
         nextFragment(questionCounter);
 
