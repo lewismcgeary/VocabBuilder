@@ -104,6 +104,7 @@ public class QuestionFragment extends Fragment {
             if(i == correct) {butto.setTag("correct");} else {butto.setTag("wrong");}
         }
 
+
         promptText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -121,6 +122,7 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -66,7 +66,7 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
 
         }catch(SQLiteException e){
 
-            //database does't exist yet.
+            //database doesn't exist yet.
 
         }
 

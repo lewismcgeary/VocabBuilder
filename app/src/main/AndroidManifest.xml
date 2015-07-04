@@ -22,7 +22,8 @@
         <activity android:name=".LanguageSelectorActivity" />
         <activity android:name=".QuizActivity"
             android:noHistory="true" />
-        <activity android:name=".QuizActivityWithFragments"/>
+        <activity android:name=".QuizActivityWithFragments"
+          android:configChanges="orientation|screenSize"/>
 
     </application>
 
