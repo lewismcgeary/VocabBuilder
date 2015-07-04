@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LanguageSelectorActivity" />
+        <activity android:name=".LanguageSelectorActivity"
+            android:launchMode="singleTop"/>
         <activity android:name=".QuizActivity"
           android:configChanges="orientation|screenSize"/>
 
