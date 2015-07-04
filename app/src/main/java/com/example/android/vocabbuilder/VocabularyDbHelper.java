@@ -34,7 +34,7 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
 
     public void createDataBase() throws IOException{
 
-        boolean dbExist = false;
+        boolean dbExist = this.checkDataBase();
 
         if(dbExist){
             //do nothing - database already exist

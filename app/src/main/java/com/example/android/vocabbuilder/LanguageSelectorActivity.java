@@ -27,13 +27,17 @@ public class LanguageSelectorActivity extends AppCompatActivity implements OnTou
     // but it's more kid-friendly than onClick
     @Override
     public boolean onTouch(View view, MotionEvent event){
+        switch(event.getAction()){
+            case
+            MotionEvent.ACTION_DOWN:
+                String langRequested = view.getTag().toString();
+                setLanguage(langRequested);
 
-        String langRequested = view.getTag().toString();
-        setLanguage(langRequested);
+                startQuizActivity();
 
-        startQuizActivity();
-
-        return true;
+                return true;
+        }
+        return false;
     }
 
     public void setButtons(String locales[]){

@@ -95,18 +95,26 @@ public class QuestionFragment extends Fragment {
         for (int i = 0; i < Answers.size(); i++) {
             ImageButton butto = (ImageButton) view.findViewById(imRes[i]);
             butto.setImageResource(Answers.get(i).imageRes(context));
+            butto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onButtonPressed(view);
+                }
+            });
             if(i == correct) {butto.setTag("correct");} else {butto.setTag("wrong");}
         }
 
-        promptText.setOnClickListener(
-                new View.OnClickListener() {
+        promptText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mListener.onFragmentInteraction(view);
+                        replayPromptSound(view);
                     }
                 });
         return view;
 
+
+    }
+    public void replayPromptSound(View view){
 
     }
 
@@ -119,9 +127,11 @@ public class QuestionFragment extends Fragment {
 
 
     public void onButtonPressed(View view) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(view);
-        }
+       if(view.getTag()=="correct") {
+           if (mListener != null) {
+               mListener.onFragmentInteraction(view);
+           }
+       }
     }
 
     @Override
@@ -153,11 +163,7 @@ public class QuestionFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(View view);
-    }
-    public void checkAnswer(View view){
-        String buttonClicked = "successful click";
 
+        void onFragmentInteraction(View view);
     }
-
 }

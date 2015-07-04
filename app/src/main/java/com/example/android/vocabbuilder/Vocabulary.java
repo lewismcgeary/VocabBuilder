@@ -13,6 +13,10 @@ import java.util.List;
  * Created by Lewis on 23/06/15.
  */
 public class Vocabulary extends AppCompatActivity{
+    public List<Word> getVocabularyArrayList() {
+        return vocabularyArrayList;
+    }
+
     // TODO: Vocabulary will be a list of words from the R.raw.vocabulary database
     // TODO: There needs to be a way to select a certain number of the words
     // TODO: as answers and create objects to include in a Question
@@ -49,7 +53,9 @@ public class Vocabulary extends AppCompatActivity{
         vocabularyArrayList = myDbHelper.getWordsFromDataBase(language.toUpperCase());
         myDbHelper.close();
     }
-
+public int getWordCount(){
+    return vocabularyArrayList.size();
+}
 
 public ArrayList<Word> getn(int n) {     // returns n randomly-selected unique words from the total set
     Collections.shuffle(vocabularyArrayList);

@@ -2,12 +2,17 @@ package com.example.android.vocabbuilder;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -16,11 +21,27 @@ import java.util.Random;
 public class QuizActivityWithFragments extends AppCompatActivity implements QuestionFragment.OnFragmentInteractionListener {
     String displayMe = "initial";
     static int questionCounter = 0;
+
+    SoundPool quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+    HashMap<String, Integer> soundMap = new HashMap<String, Integer>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_activity_with_fragments);
+        loadSounds();
         nextFragment(questionCounter);
+
+    }
+    public void loadSounds(){
+        Context context = this;
+        Vocabulary vocab = new Vocabulary(this);
+        int numberOfSounds = vocab.getWordCount();
+        List<Word> AllAnswers = vocab.getVocabularyArrayList();
+        for(int i=0; i<AllAnswers.size(); i++){
+            soundMap.put(AllAnswers.get(i).getWordText(), quizSounds.load(context, AllAnswers.get(i).audioRes(context), 1));
+        }
+        int soundId = soundMap.get(AllAnswers.get(5).getWordText());
+        quizSounds.play(soundMap.get(AllAnswers.get(5).getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
     }
 
     @Override
@@ -39,6 +60,7 @@ public class QuizActivityWithFragments extends AppCompatActivity implements Ques
 
 
         ArrayList<Word> Answers = new ArrayList<>(vocab.getn(nAns)); // <Word> to <>
+
         //Word Answers[] = vocab.getn(nAns);
         //ArrayList<Word> answersArray = new ArrayList<Word>(Arrays.asList(Answers));
         if (questionCounter<10){
