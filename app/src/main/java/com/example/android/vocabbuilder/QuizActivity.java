@@ -33,7 +33,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.quiz_activity_with_fragments);
+        setContentView(R.layout.quiz_activity);
         loadSounds();
         nextFragment(questionCounter);
 
@@ -42,7 +42,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        setContentView(R.layout.quiz_activity_with_fragments);
+        setContentView(R.layout.quiz_activity);
         QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, currentCorrectAnswer);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
