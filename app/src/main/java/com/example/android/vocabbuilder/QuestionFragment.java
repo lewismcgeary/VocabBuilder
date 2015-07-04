@@ -85,6 +85,8 @@ public class QuestionFragment extends Fragment {
                     if(view.getTag()=="correct") {
                         mListener.correctAnswerSelected(view);
                     }else{
+                        view.setClickable(false);
+                        view.setAlpha(0.3f);
                         mListener.wrongAnswerSelected(view);
 
                     }
