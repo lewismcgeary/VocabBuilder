@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -76,8 +77,15 @@ public class QuizActivityWithFragments extends AppCompatActivity implements Ques
         for(int i=0; i<AllAnswers.size(); i++){
             soundMap.put(AllAnswers.get(i).getWordText(), quizSounds.load(context, AllAnswers.get(i).audioRes(context), 1));
         }
-        int soundId = soundMap.get(AllAnswers.get(5).getWordText());
-        quizSounds.play(soundMap.get(AllAnswers.get(5).getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
+    soundMap.put("correctSound", quizSounds.load(context, R.raw.yay, 1));
+        soundMap.put("incorrectSound", quizSounds.load(context, R.raw.click, 1));
+    }
+
+    @Override
+    public void replayPromptSound(View view){
+        Random rn = new Random();
+        float soundSpeed = (rn.nextInt(3)+9)/10.0f;
+        quizSounds.play(soundMap.get(currentQuestionsAnswers.get(currentCorrectAnswer).getWordText()), 1.0f, 1.0f, 1, 0, soundSpeed);
     }
 
     @Override
@@ -85,6 +93,33 @@ public class QuizActivityWithFragments extends AppCompatActivity implements Ques
         questionCounter++;
         nextFragment(questionCounter);
     }
+
+    @Override
+    public void onAnswerSelected(View view) {
+
+    }
+
+    @Override
+    public void correctAnswerSelected(View view) {
+        Random rn = new Random();
+        float soundSpeed = (rn.nextInt(2)+8)/10.0f;
+        quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
+        questionCounter++;
+        Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                nextFragment(questionCounter);
+            }
+        }, 2000);
+    }
+
+
+
+    @Override
+    public void wrongAnswerSelected(View view) {
+        quizSounds.play(soundMap.get("incorrectSound"), 1.0f, 1.0f, 1, 0, 1.0f);
+    }
+
 
     public void nextFragment(int questionNumber){
         Vocabulary vocab = new Vocabulary(this.getApplicationContext()); // cut , language.toUpperCase()
@@ -97,6 +132,7 @@ public class QuizActivityWithFragments extends AppCompatActivity implements Ques
 
         ArrayList<Word> Answers = new ArrayList<>(vocab.getn(nAns)); // <Word> to <>
         currentQuestionsAnswers = Answers;
+        quizSounds.play(soundMap.get(Answers.get(correct).getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
         //Word Answers[] = vocab.getn(nAns);
         //ArrayList<Word> answersArray = new ArrayList<Word>(Arrays.asList(Answers));
         if (questionNumber<10){

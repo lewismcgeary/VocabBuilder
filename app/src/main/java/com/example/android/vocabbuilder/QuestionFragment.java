@@ -98,7 +98,12 @@ public class QuestionFragment extends Fragment {
             butto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onButtonPressed(view);
+                    if(view.getTag()=="correct") {
+                        mListener.correctAnswerSelected(view);
+                    }else{
+                        mListener.wrongAnswerSelected(view);
+
+                    }
                 }
             });
             if(i == correct) {butto.setTag("correct");} else {butto.setTag("wrong");}
@@ -108,16 +113,14 @@ public class QuestionFragment extends Fragment {
         promptText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        replayPromptSound(view);
+                        mListener.replayPromptSound(view);
                     }
                 });
         return view;
 
 
     }
-    public void replayPromptSound(View view){
 
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -129,11 +132,10 @@ public class QuestionFragment extends Fragment {
 
 
     public void onButtonPressed(View view) {
-       if(view.getTag()=="correct") {
            if (mListener != null) {
                mListener.onFragmentInteraction(view);
            }
-       }
+
     }
 
     @Override
@@ -167,5 +169,10 @@ public class QuestionFragment extends Fragment {
         // TODO: Update argument type and name
 
         void onFragmentInteraction(View view);
+        void onAnswerSelected(View view);
+        void correctAnswerSelected(View view);
+        void wrongAnswerSelected(View view);
+        void replayPromptSound(View view);
     }
+
 }
