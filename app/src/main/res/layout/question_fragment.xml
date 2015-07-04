@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <Button
+        style="@style/buttonprompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -14,11 +15,13 @@
         android:textAllCaps="false"
         android:id="@+id/promptText"
         android:textSize="48sp"
+        android:layout_marginBottom="10dp"
+        android:text="Elephant"
         android:onClick="sayPrompt"/>
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
-
+        android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="2"
         android:scaleType="fitCenter"
@@ -29,6 +32,7 @@
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="2"
         android:scaleType="fitCenter"
@@ -39,6 +43,7 @@
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="2"
         android:scaleType="fitCenter"
