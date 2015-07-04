@@ -35,7 +35,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_activity);
-        setContentView(R.layout.quiz_activity_with_fragments);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) actionBar.hide();
         loadSounds();
