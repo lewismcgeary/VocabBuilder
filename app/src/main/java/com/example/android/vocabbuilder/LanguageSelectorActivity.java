@@ -89,7 +89,7 @@ public class LanguageSelectorActivity extends AppCompatActivity implements OnTou
     }
 
     public void startQuizActivity(){
-        Intent intent = new Intent(this, QuizActivityWithFragments.class);
+        Intent intent = new Intent(this, QuizActivity.class);
         startActivity(intent);
 
     }
