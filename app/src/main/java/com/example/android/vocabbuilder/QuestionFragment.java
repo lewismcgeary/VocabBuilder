@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -71,7 +70,7 @@ public class QuestionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.question_activity, container, false);
+        View view =  inflater.inflate(R.layout.question_fragment, container, false);
         Context context = getActivity();
         Button promptText = (Button) view.findViewById(R.id.promptText);
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3}; // TODO: Get these programatically
