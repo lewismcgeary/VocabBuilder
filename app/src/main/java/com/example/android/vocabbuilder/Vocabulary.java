@@ -4,16 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by Lewis on 23/06/15.
  */
 public class Vocabulary extends AppCompatActivity{
-    public List<Word> getVocabularyArrayList() {
+    public ArrayList<Word> getVocabularyArrayList() {
         return vocabularyArrayList;
     }
 
@@ -23,7 +21,7 @@ public class Vocabulary extends AppCompatActivity{
     // TODO: variables: language
     //
     // Sqlite database query SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = "EN"
-    List<Word> vocabularyArrayList = new ArrayList<Word>();
+    ArrayList<Word> vocabularyArrayList = new ArrayList<Word>();
 
     public Vocabulary(Context context){
         VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
@@ -31,8 +29,8 @@ public class Vocabulary extends AppCompatActivity{
         String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do
 
 
-
-
+/*
+        // TODO: move createDataBase to app startup
         try {
 
             myDbHelper.createDataBase();
@@ -42,12 +40,12 @@ public class Vocabulary extends AppCompatActivity{
             throw new Error("Unable to create database");
 
         }
-
+*/
 
 
         myDbHelper.openDataBase();
 
-        int wordCount= myDbHelper.getWordCount();
+
 
         //noinspection ConstantConditions
         vocabularyArrayList = myDbHelper.getWordsFromDataBase(language.toUpperCase());

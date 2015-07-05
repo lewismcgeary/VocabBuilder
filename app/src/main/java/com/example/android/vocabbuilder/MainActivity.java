@@ -6,11 +6,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // TODO: make createDataBase async
+        VocabularyDbHelper myDbHelper = new VocabularyDbHelper(this);
+
+        try {
+
+            myDbHelper.createDataBase();
+
+        } catch (IOException ioe) {
+
+            throw new Error("Unable to create database");
+
+        }
         Intent intent = new Intent(this, LanguageSelectorActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
