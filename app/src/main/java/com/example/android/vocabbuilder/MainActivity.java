@@ -17,6 +17,18 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.splash_screen);
 
+        // TODO: make createDataBase async
+        VocabularyDbHelper myDbHelper = new VocabularyDbHelper(this);
+
+        try {
+
+            myDbHelper.createDataBase();
+
+        } catch (IOException ioe) {
+
+            throw new Error("Unable to create database");
+
+        }
         // little pause for our splashscreen
         int TIMEOUT = 2500;
         new Handler().postDelayed(new Runnable() {
@@ -38,21 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }, 2500);
-        // TODO: make createDataBase async
-        VocabularyDbHelper myDbHelper = new VocabularyDbHelper(this);
-
-        try {
-
-            myDbHelper.createDataBase();
-
-        } catch (IOException ioe) {
-
-            throw new Error("Unable to create database");
-
-        }
-        /*Intent intent = new Intent(this, LanguageSelectorActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);*/
     }
 
     @Override
