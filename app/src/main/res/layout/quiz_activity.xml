@@ -7,27 +7,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="220dp"
     android:layout_height="50dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:id="@+id/progress_frame">
     <ImageView
         android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/star_full"/>
+        android:layout_height="30dp" />
     <ImageView
         android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/star_full"/>
+        android:layout_height="30dp" />
     <ImageView
-    android:layout_width="30dp"
-    android:layout_height="30dp"
-    android:src="@drawable/star_full"/>
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
     <ImageView
-    android:layout_width="30dp"
-    android:layout_height="30dp"
-    android:src="@drawable/star_empty"/>
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
     <ImageView
-    android:layout_width="30dp"
-    android:layout_height="30dp"
-    android:src="@drawable/star_empty"/>
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
     </LinearLayout>
     <FrameLayout
     android:layout_width="match_parent"

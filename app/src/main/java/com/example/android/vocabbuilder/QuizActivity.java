@@ -11,9 +11,12 @@ import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +47,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
         LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
         loadSoundsAsynchronously.execute(AllAnswers);
+        displayProgress(1,5);
         //experimental for async
 
     }
@@ -168,5 +172,20 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
             Intent intent = new Intent(this, LanguageSelectorActivity.class);
             startActivity(intent);
         }
+    }
+    private void displayProgress(int full, int empty){
+        // when loading, call like displayProgress(0,n), when playing displayProgress(n,total)
+        LinearLayout layout = (LinearLayout) findViewById(R.id.progress_frame);
+        int count = layout.getChildCount();
+        ImageView v = null;
+        for(int i = 0; i < count; i++){
+            v = (ImageView) layout.getChildAt(i);
+            if(i < full) {
+                v.setImageResource(R.drawable.star_full);
+            } else if(i < empty) {
+                v.setImageResource(R.drawable.star_empty);
+            }
+        }
+
     }
 }
