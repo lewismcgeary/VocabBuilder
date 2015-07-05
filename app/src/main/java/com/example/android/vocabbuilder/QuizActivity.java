@@ -117,6 +117,8 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
 
                 displayProgress(0, numberOfQuestionsLoaded);
+                numberOfQuestionsLoaded++;
+
             }
         });
 
@@ -139,7 +141,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
             });
 
         }
-        for(int i=0; i<AllAnswers.size(); i++){
+        for(int i=0; i<AllAnswers.size(); i++) {
             soundMap.put(AllAnswers.get(i).getWordText(), quizSounds.load(context, AllAnswers.get(i).audioRes(context), 1));
         }
 
@@ -213,7 +215,6 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
         }
     }
     private void displayProgress(int full, int empty){
-        numberOfQuestionsLoaded++;
         // when loading, call like displayProgress(0,n), when playing displayProgress(n,total)
         LinearLayout layout = (LinearLayout) findViewById(R.id.progress_frame);
         int count = layout.getChildCount();
