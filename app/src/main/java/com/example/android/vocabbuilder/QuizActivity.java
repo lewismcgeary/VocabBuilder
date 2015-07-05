@@ -43,8 +43,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         Vocabulary vocab = new Vocabulary(this);
         ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
         LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
-        loadSoundsAsynchronously.myCtx=getApplicationContext();
-        Context context = getApplicationContext();
         loadSoundsAsynchronously.execute(AllAnswers);
         //experimental for async
 
@@ -77,8 +75,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
     }
     @Override
     protected HashMap doInBackground(ArrayList<Word>... arrayList) {
-        ArrayList<Word> AllAnswers = new ArrayList<Word>();
-        AllAnswers = arrayList[0];
+        ArrayList<Word> AllAnswers =  arrayList[0];
         HashMap<String, Integer> asyncSoundMap = new HashMap<>();
         quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
         for(int i=0; i<AllAnswers.size(); i++){
