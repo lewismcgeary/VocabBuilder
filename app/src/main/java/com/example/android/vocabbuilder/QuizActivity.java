@@ -11,6 +11,7 @@ import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -45,20 +46,13 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         setContentView(R.layout.quiz_activity);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) actionBar.hide();
-
-
-
         //experimental for async
         Vocabulary vocab = new Vocabulary(this);
         ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
         LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
         loadSoundsAsynchronously.execute(AllAnswers);
-        //nextFragment(questionCounter);
-
+        displayProgress(1,5);
         //experimental for async
-
-        //loadSounds();
-        //can listener for all sounds be set here?
 
     }
 
@@ -83,7 +77,6 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
 
     private Context myCtx;
     private HashMap<String, Integer> asyncSoundMap = new HashMap<>();
-
 
     public LoadSoundsTask(Context ctx){
         // Now set context
@@ -177,6 +170,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
         quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
         getWindow().getDecorView().setBackgroundColor(Color.GREEN); // TODO: don't hardcode this
         questionCounter++;
+        displayProgress(questionCounter,totalQuestions);
         Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -232,6 +226,8 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
                 v.setImageResource(R.drawable.star_full);
             } else if(i < empty) {
                 v.setImageResource(R.drawable.star_empty);
+            } else {
+                v.setImageResource(android.R.color.transparent);
             }
         }
         if(empty==13){
