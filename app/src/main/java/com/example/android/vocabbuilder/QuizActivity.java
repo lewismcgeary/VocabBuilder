@@ -58,6 +58,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         setContentView(R.layout.quiz_activity);
+        displayProgress(questionCounter,totalQuestions);
         QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, currentCorrectAnswer);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
