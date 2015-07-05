@@ -11,7 +11,6 @@ import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -51,7 +50,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
         LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
         loadSoundsAsynchronously.execute(AllAnswers);
-        displayProgress(1,5);
         //experimental for async
 
     }
