@@ -116,8 +116,11 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
             @Override
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
 
-                displayProgress(0, numberOfQuestionsLoaded);
+                displayProgress(0, (int)Math.floor(numberOfQuestionsLoaded*totalQuestions/13));
                 numberOfQuestionsLoaded++;
+                if (numberOfQuestionsLoaded==13){
+                    nextFragment(questionCounter);
+                }
 
             }
         });
@@ -229,9 +232,5 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
                 v.setImageResource(android.R.color.transparent);
             }
         }
-        if(empty==13){
-            nextFragment(questionCounter);
-        }
-
     }
 }
