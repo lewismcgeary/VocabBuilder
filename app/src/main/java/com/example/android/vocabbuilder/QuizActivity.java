@@ -47,9 +47,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
         LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
         loadSoundsAsynchronously.execute(AllAnswers);
-        displayProgress(1,5);
         //experimental for async
-
     }
 
     @Override
@@ -184,6 +182,8 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
                 v.setImageResource(R.drawable.star_full);
             } else if(i < empty) {
                 v.setImageResource(R.drawable.star_empty);
+            } else {
+                v.setImageResource(android.R.color.transparent);
             }
         }
 
