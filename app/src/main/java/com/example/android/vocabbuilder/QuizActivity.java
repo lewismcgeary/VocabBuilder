@@ -11,7 +11,6 @@ import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,19 +35,30 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     SoundPool quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
     HashMap<String, Integer> soundMap = new HashMap<>();
 
+    //Integer numberOfQuestionsLoaded;
+    int totalQuestions = 7;
+    int numberOfQuestionsLoaded=0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_activity);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) actionBar.hide();
+
+
+
         //experimental for async
         Vocabulary vocab = new Vocabulary(this);
         ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
         LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
         loadSoundsAsynchronously.execute(AllAnswers);
-        displayProgress(1,5);
+        //nextFragment(questionCounter);
+
         //experimental for async
+
+        //loadSounds();
+        //can listener for all sounds be set here?
 
     }
 
@@ -69,9 +79,11 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         outState.putParcelableArrayList("Answers", currentQuestionsAnswers);
         outState.putInt("CorrectAnswer", currentCorrectAnswer);
     }
-private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
+private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap>{
 
     private Context myCtx;
+    private HashMap<String, Integer> asyncSoundMap = new HashMap<>();
+
 
     public LoadSoundsTask(Context ctx){
         // Now set context
@@ -82,19 +94,41 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
         ArrayList<Word> AllAnswers =  arrayList[0];
         HashMap<String, Integer> asyncSoundMap = new HashMap<>();
         quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
-        for(int i=0; i<AllAnswers.size(); i++){
-            asyncSoundMap.put(AllAnswers.get(i).getWordText(), quizSounds.load(myCtx, AllAnswers.get(i).audioRes(myCtx), 1));
-        }
         asyncSoundMap.put("correctSound", quizSounds.load(myCtx, R.raw.yay, 1));
         asyncSoundMap.put("incorrectSound", quizSounds.load(myCtx, R.raw.click, 1));
+        for(int i=0; i<(AllAnswers.size()-1); i++){
+
+            int currentSound = AllAnswers.get(i).audioRes(myCtx);
+            String wordText = AllAnswers.get(i).getWordText();
+            final int progress = i;
+            asyncSoundMap.put(AllAnswers.get(i).getWordText(), quizSounds.load(myCtx, currentSound, 1));
+            publishProgress();
+
+        }
+
         return asyncSoundMap;
     }
 
 
+    @Override
     protected void onPostExecute(HashMap resultingHashmap) {
-        super.onPostExecute(null);
+        super.onPostExecute(resultingHashmap);
         soundMap = resultingHashmap;
-        nextFragment(questionCounter);
+        //nextFragment(questionCounter);
+
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
+
+                displayProgress(0, numberOfQuestionsLoaded);
+            }
+        });
+
 
     }
 }
@@ -103,8 +137,21 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
         Vocabulary vocab = new Vocabulary(this);
         List<Word> AllAnswers = vocab.getVocabularyArrayList();
         for(int i=0; i<AllAnswers.size(); i++){
+            int currentSoundId = AllAnswers.get(i).audioRes(context);
+            final int progress = i;
+            soundMap.put(AllAnswers.get(i).getWordText(), quizSounds.load(context, AllAnswers.get(i).audioRes(context), 1));
+            quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                @Override
+                public void onLoadComplete(SoundPool quizSounds, int currentSoundId, int status) {
+                    displayProgress(0, currentSoundId);
+                }
+            });
+
+        }
+        for(int i=0; i<AllAnswers.size(); i++){
             soundMap.put(AllAnswers.get(i).getWordText(), quizSounds.load(context, AllAnswers.get(i).audioRes(context), 1));
         }
+
     soundMap.put("correctSound", quizSounds.load(context, R.raw.yay, 1));
         soundMap.put("incorrectSound", quizSounds.load(context, R.raw.click, 1));
     }
@@ -159,7 +206,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
                 quizSounds.play(soundMap.get(Answers.get(correct).getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
 
 
-        if (questionNumber<10){
+        if (questionNumber<totalQuestions){
             QuestionFragment nextQuestion = QuestionFragment.newInstance(Answers, correct);
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -174,6 +221,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
         }
     }
     private void displayProgress(int full, int empty){
+        numberOfQuestionsLoaded++;
         // when loading, call like displayProgress(0,n), when playing displayProgress(n,total)
         LinearLayout layout = (LinearLayout) findViewById(R.id.progress_frame);
         int count = layout.getChildCount();
@@ -185,6 +233,9 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
             } else if(i < empty) {
                 v.setImageResource(R.drawable.star_empty);
             }
+        }
+        if(empty==13){
+            nextFragment(questionCounter);
         }
 
     }
