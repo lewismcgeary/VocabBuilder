@@ -88,7 +88,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
         quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
         asyncSoundMap.put("correctSound", quizSounds.load(myCtx, R.raw.yay, 1));
         asyncSoundMap.put("incorrectSound", quizSounds.load(myCtx, R.raw.click, 1));
-        for(int i=0; i<(AllAnswers.size()-1); i++){
+        for(int i=0; i<(AllAnswers.size()); i++){
 
             int currentSound = AllAnswers.get(i).audioRes(myCtx);
             String wordText = AllAnswers.get(i).getWordText();
@@ -119,7 +119,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
 
                 displayProgress(0, (int)Math.floor(numberOfQuestionsLoaded*totalQuestions/13));
                 numberOfQuestionsLoaded++;
-                if (numberOfQuestionsLoaded==13){
+                if (numberOfQuestionsLoaded==12){
                     nextFragment(questionCounter);
                 }
 
