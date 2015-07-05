@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-<FrameLayout
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="220dp"
+    android:layout_height="50dp"
+    android:orientation="horizontal">
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/star_full"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/star_full"/>
+    <ImageView
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:src="@drawable/star_full"/>
+    <ImageView
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:src="@drawable/star_empty"/>
+    <ImageView
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:src="@drawable/star_empty"/>
+    </LinearLayout>
+    <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
