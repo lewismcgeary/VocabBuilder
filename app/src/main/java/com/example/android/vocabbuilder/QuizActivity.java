@@ -29,6 +29,7 @@ import java.util.Random;
  */
 public class QuizActivity extends AppCompatActivity implements QuestionFragment.OnFragmentInteractionListener {
     static int questionCounter = 0;
+    int totalQuestions = 7;
     static ArrayList<Word> currentQuestionsAnswers;
     static int currentCorrectAnswer;
     // This can be upgraded to Soundpool.Builder in a few months
@@ -48,6 +49,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
         loadSoundsAsynchronously.execute(AllAnswers);
         //experimental for async
+        displayProgress(0,totalQuestions);
     }
 
     @Override
@@ -128,6 +130,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
         quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
         getWindow().getDecorView().setBackgroundColor(Color.GREEN); // TODO: don't hardcode this
         questionCounter++;
+        displayProgress(questionCounter,totalQuestions);
         Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -157,7 +160,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
                 quizSounds.play(soundMap.get(Answers.get(correct).getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
 
 
-        if (questionNumber<10){
+        if (questionNumber<totalQuestions){
             QuestionFragment nextQuestion = QuestionFragment.newInstance(Answers, correct);
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
