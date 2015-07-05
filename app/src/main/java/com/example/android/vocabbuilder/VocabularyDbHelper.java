@@ -122,16 +122,7 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
         }
         return mInstance;
     }
-    public int getWordCount() {
-        String countQuery = "SELECT  * FROM " + "'vocabulary'";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-        int countReturned = cursor.getCount();
-        cursor.close();
 
-        // return count
-        return countReturned;
-    }
     public ArrayList<Word> getWordsFromDataBase(String language) {
         ArrayList<Word> wordList = new ArrayList<>();
         String wordQuery = "SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = \"" + language + "\"";
@@ -141,14 +132,10 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Word word = new Word(cursor.getString(0), cursor.getString(1), cursor.getString(2));
-                //word.setImageLocation(cursor.getString(0));
-                //word.setWordText(cursor.getString(1));
-                //word.setAudioLocation(cursor.getString(2));
-                // Adding contact to list
                 wordList.add(word);
             } while (cursor.moveToNext());
         }
-
+        cursor.close();
         // return contact list
         return wordList;
 
