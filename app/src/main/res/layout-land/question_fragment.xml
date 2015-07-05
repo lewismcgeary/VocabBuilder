@@ -53,11 +53,5 @@
         android:tag="button3"
         android:id="@+id/button3"
         android:onClick="checkAnswer"/>
-
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/feedbackText"/>
-</LinearLayout>
+ </LinearLayout>
