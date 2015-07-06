@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <color name="green">#CCFFCC</color>
     <color name="darkgreen">#99FF99</color>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/green</item>
         <item name="android:colorBackground">@color/green</item>
     </style>
