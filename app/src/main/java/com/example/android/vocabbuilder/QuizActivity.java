@@ -34,6 +34,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     @SuppressWarnings("deprecation")
     SoundPool quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
     HashMap<String, Integer> soundMap = new HashMap<>();
+    Vocabulary vocab;
 
     //Integer numberOfQuestionsLoaded;
     int totalQuestions = 7;
@@ -46,7 +47,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) actionBar.hide();
         //experimental for async
-        Vocabulary vocab = new Vocabulary(this);
+        vocab = new Vocabulary(this);
         ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
         LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
         loadSoundsAsynchronously.execute(AllAnswers);
@@ -192,7 +193,6 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
 
 
     public void nextFragment(int questionNumber){
-        Vocabulary vocab = new Vocabulary(this.getApplicationContext());
         int nAns = 3; // 3 for now, could be 2 or 4 or whatever
         Random rn = new Random();
         int correct = rn.nextInt(nAns);
