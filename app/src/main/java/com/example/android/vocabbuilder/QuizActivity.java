@@ -184,18 +184,26 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
     }
     private void displayProgress(int full, int empty){
         // when loading, call like displayProgress(0,n), when playing displayProgress(n,total)
+        // This will display a hard maximum number of stars defined by the number of kids in quiz_activity.xml
+        // And a soft minimum defined by totalQuestions
         LinearLayout layout = (LinearLayout) findViewById(R.id.progress_frame);
         int count = layout.getChildCount();
+        for(int i = count-1; i >= totalQuestions; i--){
+            layout.removeViewAt(i);
+        }
         ImageView v = null;
-        for(int i = 0; i < count; i++){
-            v = (ImageView) layout.getChildAt(i);
+        for(int i = 0; i < totalQuestions; i++){
+            try {
+                v = (ImageView) layout.getChildAt(i);
+
             if(i < full) {
-                v.setImageResource(R.drawable.star_full);
-            } else if(i < empty) {
-                v.setImageResource(R.drawable.star_empty);
-            } else {
-                v.setImageResource(android.R.color.transparent);
-            }
+                    v.setImageResource(R.drawable.star_full);
+                } else if(i < empty) {
+                    v.setImageResource(R.drawable.star_empty);
+                } else {
+                    v.setImageResource(android.R.color.transparent);
+                }
+            } catch(NullPointerException e) {break;}
         }
     }
 }

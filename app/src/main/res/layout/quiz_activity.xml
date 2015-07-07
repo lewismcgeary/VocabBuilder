@@ -37,6 +37,18 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginLeft="4dp"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="4dp"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="4dp"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="4dp"/>
     </LinearLayout>
     <FrameLayout
     android:layout_width="match_parent"
