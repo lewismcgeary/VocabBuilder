@@ -27,29 +27,7 @@ public class Vocabulary extends AppCompatActivity{
         VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
         SharedPreferences settings = context.getSharedPreferences("PrefsFile", MODE_PRIVATE);
         String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do
-
-
-/*
-        // TODO: move createDataBase to app startup
-        try {
-
-            myDbHelper.createDataBase();
-
-        } catch (IOException ioe) {
-
-            throw new Error("Unable to create database");
-
-        }
-*/
-
-
-        myDbHelper.openDataBase();
-
-
-
-        //noinspection ConstantConditions
         vocabularyArrayList = myDbHelper.getWordsFromDataBase(language.toUpperCase());
-        myDbHelper.close();
     }
 public int getWordCount(){
     return vocabularyArrayList.size();

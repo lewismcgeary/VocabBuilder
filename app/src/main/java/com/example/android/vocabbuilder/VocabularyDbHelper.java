@@ -125,6 +125,7 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
 
     public ArrayList<Word> getWordsFromDataBase(String language) {
         ArrayList<Word> wordList = new ArrayList<>();
+        this.openDataBase();
         String wordQuery = "SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = \"" + language + "\"";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(wordQuery, null);
@@ -136,6 +137,7 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         cursor.close();
+        this.close();
         // return contact list
         return wordList;
 
