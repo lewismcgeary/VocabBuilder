@@ -36,11 +36,12 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     SoundPool quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
     HashMap<String, Integer> soundMap = new HashMap<>();
     Vocabulary vocab;
-
+    Word[][] quiz;
     //Integer numberOfQuestionsLoaded;
     int totalQuestions = 7;
+    int nChoices = 3;
     int numberOfQuestionsLoaded=0;
-
+    int[] answers;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +49,30 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) actionBar.hide();
         vocab = new Vocabulary(this);
-        ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
+        ArrayList<Word> AllAnswers = new ArrayList<>();// vocab.getVocabularyArrayList();
+/* moved from QuizMaster.java
+ */
+        quiz = new Word[totalQuestions][nChoices];
+        answers = new int[totalQuestions];
+        Random rn = new Random();
+
+        // place them into quiz[][] (and select random answers
+        for (int i = 0; i < totalQuestions ; i++){
+            ArrayList q = vocab.getn(nChoices);
+            for(int j = 0; j < nChoices; j++){
+                quiz[i][j] = (Word) q.get(j);
+            }
+            answers[i] = rn.nextInt(nChoices);
+            AllAnswers.add(quiz[i][answers[i]]);
+        }
 
         quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
 
-                displayProgress(0, (int)Math.floor(numberOfQuestionsLoaded*totalQuestions/13));
+                displayProgress(0, (int)Math.floor(numberOfQuestionsLoaded));
                 numberOfQuestionsLoaded++;
-                if (numberOfQuestionsLoaded==14){ // TODO : Once only sounds required by each quiz are loaded, change this to include variable
+                if (numberOfQuestionsLoaded==totalQuestions+2){ // TODO : Once only sounds required by each quiz are loaded, change this to include variable
                     moveProgressBarToTop();
                     //nextFragment(questionCounter);
                 }

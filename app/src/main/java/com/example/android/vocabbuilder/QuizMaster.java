@@ -36,7 +36,7 @@ public class QuizMaster {
     }
 
     // This initialises a new quiz and is called every time we start a
-    public void newQuiz(Context context, int nQ, int qSize){
+    private void newQuiz(Context context, int nQ, int qSize){
         // get all the words from Vocabulary
         counter = 0;
         qmcontext = context;
