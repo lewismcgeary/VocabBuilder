@@ -23,6 +23,14 @@ public class LanguageSelectorActivity extends AppCompatActivity implements OnTou
 
         setButtons(getLocales());
     }
+
+    // when activity restarts from back button, rerun setup so new preferred flag is default
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setButtons(getLocales());
+    }
+
     // implement an onTouch() function, we don't care about the event
     // but it's more kid-friendly than onClick
     @Override

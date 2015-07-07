@@ -47,13 +47,14 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         if(actionBar != null) actionBar.hide();
         vocab = new Vocabulary(this);
         ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
+
         quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
 
                 displayProgress(0, (int)Math.floor(numberOfQuestionsLoaded*totalQuestions/13));
                 numberOfQuestionsLoaded++;
-                if (numberOfQuestionsLoaded==14){
+                if (numberOfQuestionsLoaded==14){ // TODO : Once only sounds required by each quiz are loaded, change this to include variable
                     nextFragment(questionCounter);
                 }
 
