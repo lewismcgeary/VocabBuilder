@@ -2,7 +2,6 @@ package com.example.android.vocabbuilder;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +9,7 @@ import java.util.Collections;
 /**
  * Created by Lewis on 23/06/15.
  */
-public class Vocabulary extends AppCompatActivity{
+public class Vocabulary{
     public ArrayList<Word> getVocabularyArrayList() {
         return vocabularyArrayList;
     }
@@ -25,7 +24,7 @@ public class Vocabulary extends AppCompatActivity{
 
     public Vocabulary(Context context){
         VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
-        SharedPreferences settings = context.getSharedPreferences("PrefsFile", MODE_PRIVATE);
+        SharedPreferences settings = context.getSharedPreferences("PrefsFile", Context.MODE_PRIVATE);
         String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do
         vocabularyArrayList = myDbHelper.getWordsFromDataBase(language.toUpperCase());
     }
