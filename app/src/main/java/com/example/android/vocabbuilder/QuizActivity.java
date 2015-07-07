@@ -246,7 +246,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
             }
         });*/
         ObjectAnimator moveProgressBarToTop = ObjectAnimator.ofFloat(layout, "Y", 0);
-        moveProgressBarToTop.setDuration(300);
+        moveProgressBarToTop.setDuration(600);
         moveProgressBarToTop.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
