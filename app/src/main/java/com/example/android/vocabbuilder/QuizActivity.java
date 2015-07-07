@@ -1,5 +1,7 @@
 package com.example.android.vocabbuilder;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -55,7 +57,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 displayProgress(0, (int)Math.floor(numberOfQuestionsLoaded*totalQuestions/13));
                 numberOfQuestionsLoaded++;
                 if (numberOfQuestionsLoaded==14){ // TODO : Once only sounds required by each quiz are loaded, change this to include variable
-                    nextFragment(questionCounter);
+                    moveProgressBarToTop();
+                    //nextFragment(questionCounter);
                 }
 
             }
@@ -69,6 +72,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         setContentView(R.layout.quiz_activity);
+        LinearLayout progressBar = (LinearLayout) findViewById(R.id.progress_frame);
+        progressBar.setY(0f);
         displayProgress(questionCounter,totalQuestions);
         QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, currentCorrectAnswer);
         FragmentManager fragmentManager = getFragmentManager();
@@ -205,5 +210,50 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
                 }
             } catch(NullPointerException e) {break;}
         }
+    }
+    private void moveProgressBarToTop() {
+         LinearLayout layout = (LinearLayout) findViewById(R.id.progress_frame);
+        /*Animation moveProgressBarToTop = AnimationUtils.loadAnimation(this, R.anim.move_progress_bar_to_top);
+        moveProgressBarToTop.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                layout.setY(0f);
+                nextFragment(questionCounter);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });*/
+        ObjectAnimator moveProgressBarToTop = ObjectAnimator.ofFloat(layout, "Y", 0);
+        moveProgressBarToTop.setDuration(300);
+        moveProgressBarToTop.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                nextFragment(questionCounter);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        moveProgressBarToTop.start();
     }
 }
