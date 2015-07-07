@@ -8,7 +8,7 @@
         android:layout_centerInParent="true"
         android:src="@drawable/logo" />
 
-    <TextView
+    <!-- <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -16,5 +16,5 @@
         android:textColor="#0055FF"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:text="Follow us! \@appy_talk" />
+        android:text="Follow us! \@appy_talk" /> -->
 </RelativeLayout>
