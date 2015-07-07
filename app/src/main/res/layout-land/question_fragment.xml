@@ -15,6 +15,7 @@
         android:textAllCaps="false"
         android:id="@+id/promptText"
         android:textSize="48sp"
+        android:layout_marginBottom="10dp"
         android:onClick="sayPrompt"/>
     <LinearLayout
         android:layout_width="match_parent"
