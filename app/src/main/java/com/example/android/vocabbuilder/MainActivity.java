@@ -1,6 +1,8 @@
 package com.example.android.vocabbuilder;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -16,19 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.splash_screen);
+        CreateDatabaseTask createDatabaseTask = new CreateDatabaseTask();
+        createDatabaseTask.execute(this);
 
-        // TODO: make createDataBase async
-        VocabularyDbHelper myDbHelper = new VocabularyDbHelper(this);
-
-        try {
-
-            myDbHelper.createDataBase();
-
-        } catch (IOException ioe) {
-
-            throw new Error("Unable to create database");
-
-        }
         // little pause for our splashscreen
         int TIMEOUT = 2500;
         new Handler().postDelayed(new Runnable() {
@@ -50,6 +42,25 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }, 2500);
+    }
+
+    private class CreateDatabaseTask extends AsyncTask <Context, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Context... context) {
+            VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context[0]);
+
+            try {
+
+                myDbHelper.createDataBase();
+
+            } catch (IOException ioe) {
+
+                throw new Error("Unable to create database");
+
+            }
+            return null;
+        }
     }
 
     @Override
