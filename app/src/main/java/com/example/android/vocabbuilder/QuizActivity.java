@@ -29,18 +29,19 @@ import java.util.Random;
  */
 public class QuizActivity extends AppCompatActivity implements QuestionFragment.OnFragmentInteractionListener {
     static int questionCounter = 0;
-    static ArrayList<Word> currentQuestionsAnswers;
+    ArrayList<Word> currentQuestionsAnswers =new ArrayList<>();
     static int currentCorrectAnswer;
     // This can be upgraded to Soundpool.Builder in a few months
     @SuppressWarnings("deprecation")
     SoundPool quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
     HashMap<String, Integer> soundMap = new HashMap<>();
     Vocabulary vocab;
-
+    Word[][] quiz;
     //Integer numberOfQuestionsLoaded;
     int totalQuestions = 7;
+    int nChoices = 3;
     int numberOfQuestionsLoaded=0;
-
+    int[] answers;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,17 +49,32 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) actionBar.hide();
         vocab = new Vocabulary(this);
-        ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
+        ArrayList<Word> AllAnswers = new ArrayList<>();// vocab.getVocabularyArrayList();
+/* moved from QuizMaster.java
+ */
+        quiz = new Word[totalQuestions][nChoices];
+        answers = new int[totalQuestions];
+        Random rn = new Random();
+
+        // place them into quiz[][] (and select random answers
+        for (int i = 0; i < totalQuestions ; i++){
+            ArrayList q = vocab.getn(nChoices);
+            for(int j = 0; j < nChoices; j++){
+                quiz[i][j] = (Word) q.get(j);
+            }
+            answers[i] = rn.nextInt(nChoices);
+            AllAnswers.add(quiz[i][answers[i]]);
+        }
 
         quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
 
-                displayProgress(0, (int)Math.floor(numberOfQuestionsLoaded*totalQuestions/13));
+                displayProgress(0, (int)Math.floor(numberOfQuestionsLoaded));
                 numberOfQuestionsLoaded++;
-                if (numberOfQuestionsLoaded==14){ // TODO : Once only sounds required by each quiz are loaded, change this to include variable
+                if (numberOfQuestionsLoaded==totalQuestions+2){ // TODO : Once only sounds required by each quiz are loaded, change this to include variable
                     moveProgressBarToTop();
-                    //nextFragment(questionCounter);
+                    //nextFragment();
                 }
 
             }
@@ -133,7 +149,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
     @Override
     public void onFragmentInteraction(View view) {
         questionCounter++;
-        nextFragment(questionCounter);
+        nextFragment();
     }
 
 
@@ -148,7 +164,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
         Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
         handler.postDelayed(new Runnable() {
             public void run() {
-                nextFragment(questionCounter);
+                nextFragment();
             }
         }, 2000);
     }
@@ -161,20 +177,18 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
     }
 
 
-    public void nextFragment(int questionNumber){
-        int nAns = 3; // 3 for now, could be 2 or 4 or whatever
-        Random rn = new Random();
-        int correct = rn.nextInt(nAns);
-        currentCorrectAnswer = correct;
+    public void nextFragment(){
+        if (questionCounter<totalQuestions){
+            currentCorrectAnswer = answers[questionCounter];
+            Word[] Answers = quiz[questionCounter];
 
-        ArrayList<Word> Answers = new ArrayList<>(vocab.getn(nAns));
-        currentQuestionsAnswers = Answers;
+            currentQuestionsAnswers.clear();
+            for(int i = 0; i< nChoices; i++) {
+                currentQuestionsAnswers.add(Answers[i]);
+            }
+            quizSounds.play(soundMap.get(Answers[currentCorrectAnswer].getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
 
-                quizSounds.play(soundMap.get(Answers.get(correct).getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
-
-
-        if (questionNumber<totalQuestions){
-            QuestionFragment nextQuestion = QuestionFragment.newInstance(Answers, correct);
+            QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, answers[questionCounter]);
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.question_frame, nextQuestion);
@@ -223,7 +237,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
             @Override
             public void onAnimationEnd(Animation animation) {
                 layout.setY(0f);
-                nextFragment(questionCounter);
+                nextFragment();
             }
 
             @Override
@@ -241,7 +255,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                nextFragment(questionCounter);
+                nextFragment();
             }
 
             @Override

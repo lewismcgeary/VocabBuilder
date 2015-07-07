@@ -13,43 +13,53 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="4dp"/>
+        android:layout_marginLeft="4dp"
+        android:layout_gravity="center_horizontal"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="4dp"/>
+        android:layout_marginLeft="4dp"
+        android:layout_gravity="center_horizontal"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="4dp"/>
+        android:layout_marginLeft="4dp"
+        android:layout_gravity="center_horizontal"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="4dp"/>
+        android:layout_marginLeft="4dp"
+        android:layout_gravity="center_horizontal"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="4dp"/>
+        android:layout_marginLeft="4dp"
+        android:layout_gravity="center_horizontal"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="4dp"/>
+        android:layout_marginLeft="4dp"
+        android:layout_gravity="center_horizontal"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="4dp"/>
+        android:layout_marginLeft="4dp"
+        android:layout_gravity="center_horizontal"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="4dp"/>
+        android:layout_marginLeft="4dp"
+        android:layout_gravity="center_horizontal"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="4dp"/>
+        android:layout_marginLeft="4dp"
+        android:layout_gravity="center_horizontal"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="4dp"/>
+        android:layout_marginLeft="4dp"
+        android:layout_gravity="center_horizontal"/>
     </LinearLayout>
     <FrameLayout
     android:layout_width="match_parent"
