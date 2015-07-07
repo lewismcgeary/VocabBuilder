@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -46,12 +45,22 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         setContentView(R.layout.quiz_activity);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) actionBar.hide();
-        //experimental for async
         vocab = new Vocabulary(this);
         ArrayList<Word> AllAnswers = vocab.getVocabularyArrayList();
+        quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
+
+                displayProgress(0, (int)Math.floor(numberOfQuestionsLoaded*totalQuestions/13));
+                numberOfQuestionsLoaded++;
+                if (numberOfQuestionsLoaded==14){
+                    nextFragment(questionCounter);
+                }
+
+            }
+        });
         LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
         loadSoundsAsynchronously.execute(AllAnswers);
-        //experimental for async
 
     }
 
@@ -73,32 +82,28 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         outState.putParcelableArrayList("Answers", currentQuestionsAnswers);
         outState.putInt("CorrectAnswer", currentCorrectAnswer);
     }
-private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap>{
+private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
 
     private Context myCtx;
-    private HashMap<String, Integer> asyncSoundMap = new HashMap<>();
 
     public LoadSoundsTask(Context ctx){
-        // Now set context
+        // set context
         this.myCtx = ctx;
     }
     @Override
     protected HashMap doInBackground(ArrayList<Word>... arrayList) {
         ArrayList<Word> AllAnswers =  arrayList[0];
         HashMap<String, Integer> asyncSoundMap = new HashMap<>();
-        quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
-        asyncSoundMap.put("correctSound", quizSounds.load(myCtx, R.raw.yay, 1));
-        asyncSoundMap.put("incorrectSound", quizSounds.load(myCtx, R.raw.click, 1));
+        // load sound files for current vocabulary into the quizSounds pool
+        // hashmap matches each word to the soundId
         for(int i=0; i<(AllAnswers.size()); i++){
-
             int currentSound = AllAnswers.get(i).audioRes(myCtx);
             String wordText = AllAnswers.get(i).getWordText();
-            final int progress = i;
-            asyncSoundMap.put(AllAnswers.get(i).getWordText(), quizSounds.load(myCtx, currentSound, 1));
-            publishProgress();
+            asyncSoundMap.put(wordText, quizSounds.load(myCtx, currentSound, 1));
 
         }
-
+        asyncSoundMap.put("correctSound", quizSounds.load(myCtx, R.raw.yay, 1));
+        asyncSoundMap.put("incorrectSound", quizSounds.load(myCtx, R.raw.click, 1));
         return asyncSoundMap;
     }
 
@@ -107,52 +112,10 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Integer, HashMap
     protected void onPostExecute(HashMap resultingHashmap) {
         super.onPostExecute(resultingHashmap);
         soundMap = resultingHashmap;
-        //nextFragment(questionCounter);
-
-    }
-
-    @Override
-    protected void onProgressUpdate(Integer... values) {
-        super.onProgressUpdate(values);
-        quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
-
-                displayProgress(0, (int)Math.floor(numberOfQuestionsLoaded*totalQuestions/13));
-                numberOfQuestionsLoaded++;
-                if (numberOfQuestionsLoaded==12){
-                    nextFragment(questionCounter);
-                }
-
-            }
-        });
-
 
     }
 }
-    public void loadSounds(){
-        Context context = this;
-        Vocabulary vocab = new Vocabulary(this);
-        List<Word> AllAnswers = vocab.getVocabularyArrayList();
-        for(int i=0; i<AllAnswers.size(); i++){
-            int currentSoundId = AllAnswers.get(i).audioRes(context);
-            final int progress = i;
-            soundMap.put(AllAnswers.get(i).getWordText(), quizSounds.load(context, AllAnswers.get(i).audioRes(context), 1));
-            quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-                @Override
-                public void onLoadComplete(SoundPool quizSounds, int currentSoundId, int status) {
-                    displayProgress(0, currentSoundId);
-                }
-            });
 
-        }
-        for(int i=0; i<AllAnswers.size(); i++) {
-            soundMap.put(AllAnswers.get(i).getWordText(), quizSounds.load(context, AllAnswers.get(i).audioRes(context), 1));
-        }
-
-    soundMap.put("correctSound", quizSounds.load(context, R.raw.yay, 1));
-        soundMap.put("incorrectSound", quizSounds.load(context, R.raw.click, 1));
-    }
 
     @Override
     public void replayPromptSound(View view){
