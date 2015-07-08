@@ -90,9 +90,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        setContentView(R.layout.quiz_activity);
-        LinearLayout progressBar = (LinearLayout) findViewById(R.id.progress_frame);
-        progressBar.setY(0f);
+        moveProgressBarToTop();
         displayProgress(questionCounter,totalQuestions);
         QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, currentCorrectAnswer);
         FragmentManager fragmentManager = getFragmentManager();
