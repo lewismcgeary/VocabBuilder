@@ -207,8 +207,11 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     public void newQuestion(){
         displayQuestion();
         Word[] Answers = quiz[questionCounter];
-        quizSounds.play(soundMap.get(Answers[currentCorrectAnswer].getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
-
+        try {
+            quizSounds.play(soundMap.get(Answers[currentCorrectAnswer].getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
+        } catch (NullPointerException e) {
+            // do nothing, this should be the end of the quiz
+        }
     }
     public void displayQuestion(){
         enableOrientation();
@@ -229,9 +232,9 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         else{
             questionCounter = 0;
             quizSounds.release();
-            this.finish();
             Intent intent = new Intent(this, LanguageSelectorActivity.class);
             startActivity(intent);
+            this.finish();
         }
     }
     private void displayProgress(int full, int empty){
