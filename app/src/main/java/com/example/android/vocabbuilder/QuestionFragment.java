@@ -37,9 +37,9 @@ public class QuestionFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment QuestionFragment.
+     * @ p a r a m  p a r a m 1 Parameter 1.
+     * @ p a r a m  p a r a m 2 Parameter 2.
+     * @ r e t u r n A new instance of fragment QuestionFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static QuestionFragment newInstance(ArrayList answers, int correct) {
@@ -79,29 +79,30 @@ public class QuestionFragment extends Fragment {
         for (int i = 0; i < Answers.size(); i++) {
             ImageButton butto = (ImageButton) view.findViewById(imRes[i]);
             butto.setImageResource(Answers.get(i).imageRes(context));
+            if(butto.getTag()=="grey") {
+                butto.setClickable(false);
+                butto.setAlpha(0.3f);
+            }
             butto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(view.getTag()=="correct") {
                         mListener.correctAnswerSelected(view);
                     }else{
-                        view.setClickable(false);
-                        view.setAlpha(0.3f);
                         mListener.wrongAnswerSelected(view);
-
                     }
                 }
             });
-            if(i == correct) {butto.setTag("correct");} else {butto.setTag("wrong");}
+            if(i == correct) {butto.setTag("correct");}// else {butto.setTag("wrong");}
         }
 
 
         promptText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mListener.replayPromptSound(view);
-                    }
-                });
+            @Override
+            public void onClick(View view) {
+                mListener.replayPromptSound(view);
+            }
+        });
         return view;
 
 
@@ -118,9 +119,9 @@ public class QuestionFragment extends Fragment {
 
 
     public void onButtonPressed(View view) {
-           if (mListener != null) {
-               mListener.onFragmentInteraction(view);
-           }
+        if (mListener != null) {
+            mListener.onFragmentInteraction(view);
+        }
 
     }
 

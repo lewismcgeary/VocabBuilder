@@ -174,6 +174,9 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
 
     @Override
     public void wrongAnswerSelected(View view) {
+        view.setTag("grey");
+        view.setClickable(false);
+        view.setAlpha(0.3f);
         quizSounds.play(soundMap.get("incorrectSound"), 1.0f, 1.0f, 1, 0, 1.0f);
     }
 
