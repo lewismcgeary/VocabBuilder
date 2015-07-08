@@ -29,9 +29,9 @@ import java.util.Random;
  */
 public class QuizActivity extends AppCompatActivity implements QuestionFragment.OnFragmentInteractionListener {
 
-    static int questionCounter = 0;
+    int questionCounter = 0;
     ArrayList<Word> currentQuestionsAnswers =new ArrayList<>();
-    static int currentCorrectAnswer;
+    int currentCorrectAnswer;
     // This can be upgraded to Soundpool.Builder in a few months
     @SuppressWarnings("deprecation")
     SoundPool quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
