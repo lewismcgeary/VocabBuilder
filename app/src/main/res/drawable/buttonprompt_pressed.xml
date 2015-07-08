@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
         android:drawable="@drawable/button_flat"
-        android:bottom="6px"
-        android:right="5px"
+        android:bottom="2px"
+        android:right="1px"
         />
 </layer-list>
