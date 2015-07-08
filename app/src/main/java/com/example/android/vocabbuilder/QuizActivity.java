@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
@@ -83,7 +82,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 numberOfSoundsLoaded++;
                 if (numberOfSoundsLoaded ==totalQuestions+numberOfSoundEffects){
                     moveProgressBarToTop();
-                    //nextFragment();
+                    //displayQuestion();
                 }
 
             }
@@ -96,7 +95,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        moveProgressBarToTop();
+        keepProgressBarAtTop();
         displayProgress(questionCounter,totalQuestions);
         QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, currentCorrectAnswer, tried);
         FragmentManager fragmentManager = getFragmentManager();
@@ -156,7 +155,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     @Override
     public void onFragmentInteraction(View view) {
         questionCounter++;
-        nextFragment();
+        displayQuestion();
     }
 
 
@@ -189,7 +188,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
         handler.postDelayed(new Runnable() {
             public void run() {
-                nextFragment();
+                newQuestion();
             }
         }, 2000);
         for(int i = 0; i<nChoices; i++) tried[i] = false; // reset tried[]
@@ -205,8 +204,13 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         quizSounds.play(soundMap.get("incorrectSound"), 1.0f, 1.0f, 1, 0, 1.0f);
     }
 
+    public void newQuestion(){
+        displayQuestion();
+        Word[] Answers = quiz[questionCounter];
+        quizSounds.play(soundMap.get(Answers[currentCorrectAnswer].getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
 
-    public void nextFragment(){
+    }
+    public void displayQuestion(){
         enableOrientation();
         if (questionCounter<totalQuestions){
             currentCorrectAnswer = answers[questionCounter];
@@ -216,7 +220,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             for(int i = 0; i< nChoices; i++) {
                 currentQuestionsAnswers.add(Answers[i]);
             }
-            quizSounds.play(soundMap.get(Answers[currentCorrectAnswer].getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
 
             QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, answers[questionCounter], tried);
             FragmentManager fragmentManager = getFragmentManager();
@@ -267,7 +270,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             @Override
             public void onAnimationEnd(Animation animation) {
                 layout.setY(0f);
-                nextFragment();
+                displayQuestion();
             }
 
             @Override
@@ -285,7 +288,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                nextFragment();
+                newQuestion();
             }
 
             @Override
@@ -321,5 +324,32 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     }
     void enableOrientation(){
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+    private void keepProgressBarAtTop(){
+        LinearLayout layout = (LinearLayout) findViewById(R.id.progress_frame);
+        ObjectAnimator moveProgressBarToTop = ObjectAnimator.ofFloat(layout, "Y", 0);
+        moveProgressBarToTop.setDuration(600);
+        moveProgressBarToTop.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        moveProgressBarToTop.start();
     }
 }
