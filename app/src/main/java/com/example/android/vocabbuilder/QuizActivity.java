@@ -14,7 +14,6 @@ import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Surface;
 import android.view.View;
@@ -47,6 +46,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     int nChoices = 3;
     int numberOfSoundsLoaded =0;
     int numberOfSoundEffects = 2; // YAY! and *click*
+    ArrayList<Word> AllAnswers;
     int[] answers;
     boolean[] tried = new boolean[nChoices];
 
@@ -54,12 +54,12 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_activity);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) actionBar.hide();
+      /*  ActionBar actionBar = getSupportActionBar();     // We should be actionbarless now
+        if(actionBar != null) actionBar.hide(); */         // if no bugs DELETE this
+     /**********NOW ASYNC*******************************
         vocab = new Vocabulary(this);
-        ArrayList<Word> AllAnswers = new ArrayList<>();// vocab.getVocabularyArrayList();
-/* moved from QuizMaster.java
- */
+        // vocab.getVocabularyArrayList();
+        // moved from QuizMaster.java
         quiz = new Word[totalQuestions][nChoices];
         answers = new int[totalQuestions];
         Random rn = new Random();
@@ -72,8 +72,12 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             }
             answers[i] = rn.nextInt(nChoices);
             AllAnswers.add(quiz[i][answers[i]]);
-        }
+        } ***************END NOW ASYNC************************************************/
+        LoadQuizTask loadquizasynchronously = new LoadQuizTask(this);
+        loadquizasynchronously.execute();
+
         disableOrientation(); // Because it crashes the sound-loading progress stars
+
         quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
@@ -87,9 +91,10 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
             }
         });
+/************************************ MOVED TO postExecute of LoadQuizTask
         LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
         loadSoundsAsynchronously.execute(AllAnswers);
-
+****************************************/
     }
 
     @Override
@@ -109,6 +114,44 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList("Answers", currentQuestionsAnswers);
         outState.putInt("CorrectAnswer", currentCorrectAnswer);
+    }
+
+    private class LoadQuizTask extends AsyncTask<Void, Void, Vocabulary> {
+        private Context myCtx;
+
+        public LoadQuizTask(Context ctx){
+            this.myCtx = ctx;
+        }
+
+        @Override
+        protected Vocabulary doInBackground(Void ... nope) {
+            vocab = new Vocabulary(myCtx);
+        return vocab;
+        }
+
+        @Override
+        protected void onPostExecute(Vocabulary vocab) {
+            ArrayList<Word> myAnswers = new ArrayList<>();
+            quiz = new Word[totalQuestions][nChoices];
+            answers = new int[totalQuestions];
+            Random rn = new Random();
+
+            // place them into quiz[][] (and select random answers
+            for (int i = 0; i < totalQuestions ; i++){
+                ArrayList q = vocab.getn(nChoices);
+                for(int j = 0; j < nChoices; j++){
+                    quiz[i][j] = (Word) q.get(j);
+                }
+                answers[i] = rn.nextInt(nChoices);
+                myAnswers.add(quiz[i][answers[i]]);
+            }
+            AllAnswers = myAnswers;
+            LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(myCtx);
+            loadSoundsAsynchronously.execute(AllAnswers);
+
+
+        }
+
     }
     private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
 
