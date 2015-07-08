@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -16,6 +17,7 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
+import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -72,7 +74,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             answers[i] = rn.nextInt(nChoices);
             AllAnswers.add(quiz[i][answers[i]]);
         }
-
+        disableOrientation(); // Because it crashes the sound-loading progress stars
         quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
@@ -205,6 +207,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
 
     public void nextFragment(){
+        enableOrientation();
         if (questionCounter<totalQuestions){
             currentCorrectAnswer = answers[questionCounter];
             Word[] Answers = quiz[questionCounter];
@@ -296,5 +299,27 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             }
         });
         moveProgressBarToTop.start();
+    }
+    void disableOrientation(){
+        int rotation = getWindowManager().getDefaultDisplay().getRotation();
+
+        switch(rotation) {
+            case Surface.ROTATION_180:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                break;
+            case Surface.ROTATION_270:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                break;
+            case  Surface.ROTATION_0:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                break;
+            case Surface.ROTATION_90:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                break;
+        }
+
+    }
+    void enableOrientation(){
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 }
