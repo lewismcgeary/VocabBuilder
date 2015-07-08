@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".LanguageSelectorActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/flag_frame">
 
     <ImageButton
         android:layout_width="match_parent"
@@ -19,33 +20,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <ImageButton
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="2"
-        android:scaleType="fitCenter"
-        android:padding="10dp"
-        android:background="@android:color/transparent"
-        android:id="@+id/button2"/>
-    <ImageButton
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="2"
-        android:scaleType="fitCenter"
-        android:padding="10dp"
-        android:background="@android:color/transparent"
-        android:id="@+id/button3"/>
-    <ImageButton
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="2"
-        android:scaleType="fitCenter"
-        android:padding="10dp"
-        android:background="@android:color/transparent"
-        android:id="@+id/button4"/>
+        android:orientation="horizontal"
+        android:id="@+id/miniflag_frame">
+        <ImageButton
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="2"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/button2"/>
+        <ImageButton
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="2"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/button3"/>
+        <ImageButton
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="2"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/button4"/>
     </LinearLayout>
 </LinearLayout>

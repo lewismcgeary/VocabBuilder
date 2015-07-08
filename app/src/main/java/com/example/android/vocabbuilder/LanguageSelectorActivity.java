@@ -12,6 +12,8 @@ import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.Locale;
 
@@ -55,10 +57,26 @@ public class LanguageSelectorActivity extends AppCompatActivity implements OnTou
         Context context;
         context = this.getApplicationContext();
         Animation zoomIn = AnimationUtils.loadAnimation(this, R.anim.language_select);
-
+/* old style
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3, R.id.button4};
         for(int i =0; i < locales.length; i++) {
             ImageButton b = (ImageButton) findViewById(imRes[i]);
+            b.setImageResource(context.getResources().getIdentifier(locales[i], "drawable", context.getPackageName()));
+            b.setTag(locales[i]);
+            b.setOnTouchListener(this);
+            b.startAnimation(zoomIn);
+        }
+        */
+        /* new style */
+        ImageButton b = null;
+        LinearLayout layout = (LinearLayout) findViewById(R.id.flag_frame);
+        LinearLayout sublayout = (LinearLayout) findViewById(R.id.miniflag_frame);
+        for(int i =0; i < locales.length; i++) {
+            if(i==0){  // big flag
+            b = (ImageButton) layout.getChildAt(i);
+            } else {  // little flags
+                b = (ImageButton) sublayout.getChildAt(i-1);
+            }
             b.setImageResource(context.getResources().getIdentifier(locales[i], "drawable", context.getPackageName()));
             b.setTag(locales[i]);
             b.setOnTouchListener(this);
