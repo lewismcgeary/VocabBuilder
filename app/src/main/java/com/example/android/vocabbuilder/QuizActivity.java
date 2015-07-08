@@ -28,6 +28,7 @@ import java.util.Random;
  * Created by Lewis on 02/07/15.
  */
 public class QuizActivity extends AppCompatActivity implements QuestionFragment.OnFragmentInteractionListener {
+
     static int questionCounter = 0;
     ArrayList<Word> currentQuestionsAnswers =new ArrayList<>();
     static int currentCorrectAnswer;
@@ -37,11 +38,13 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     HashMap<String, Integer> soundMap = new HashMap<>();
     Vocabulary vocab;
     Word[][] quiz;
-    //Integer numberOfQuestionsLoaded;
+    //Integer numberOfSoundsLoaded;
     int totalQuestions = 7;
     int nChoices = 3;
-    int numberOfQuestionsLoaded=0;
+    int numberOfSoundsLoaded =0;
+    int numberOfSoundEffects = 2; // YAY! and *click*
     int[] answers;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,9 +73,9 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             @Override
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
 
-                displayProgress(0, (int)Math.floor(numberOfQuestionsLoaded));
-                numberOfQuestionsLoaded++;
-                if (numberOfQuestionsLoaded==totalQuestions+2){ // TODO : Once only sounds required by each quiz are loaded, change this to include variable
+                displayProgress(0, (int)Math.floor(numberOfSoundsLoaded));
+                numberOfSoundsLoaded++;
+                if (numberOfSoundsLoaded ==totalQuestions+numberOfSoundEffects){
                     moveProgressBarToTop();
                     //nextFragment();
                 }
