@@ -26,11 +26,11 @@ public class QuestionFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ANSWERS_ARRAY = "answersArray";
     private static final String CORRECT_INT = "correct";
-
+    private static final String TRIED_BOOL = "tried";
     // TODO: Rename and change types of parameters
     private ArrayList<Word> Answers;
     private int correct;
-
+    private boolean[] tried;
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -42,11 +42,12 @@ public class QuestionFragment extends Fragment {
      * @ r e t u r n A new instance of fragment QuestionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static QuestionFragment newInstance(ArrayList answers, int correct) {
+    public static QuestionFragment newInstance(ArrayList answers, int correct, boolean[] tried) {
         QuestionFragment fragment = new QuestionFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ANSWERS_ARRAY, answers);
         args.putInt(CORRECT_INT, correct);
+        args.putBooleanArray(TRIED_BOOL,tried);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,8 +62,7 @@ public class QuestionFragment extends Fragment {
         if (getArguments() != null) {
             correct = getArguments().getInt(CORRECT_INT);
             Answers = getArguments().getParcelableArrayList(ANSWERS_ARRAY);
-
-
+            tried = getArguments().getBooleanArray(TRIED_BOOL);
         }
     }
 
@@ -79,7 +79,7 @@ public class QuestionFragment extends Fragment {
         for (int i = 0; i < Answers.size(); i++) {
             ImageButton butto = (ImageButton) view.findViewById(imRes[i]);
             butto.setImageResource(Answers.get(i).imageRes(context));
-            if(butto.getTag()=="grey") {
+            if(tried[i]) {
                 butto.setClickable(false);
                 butto.setAlpha(0.3f);
             }
@@ -93,7 +93,7 @@ public class QuestionFragment extends Fragment {
                     }
                 }
             });
-            if(i == correct) {butto.setTag("correct");}// else {butto.setTag("wrong");}
+            if(i == correct) {butto.setTag("correct");} else {butto.setTag(Integer.toString(i));} // eg. if answer 2 is correct,tags  "0", "correct", "2"
         }
 
 

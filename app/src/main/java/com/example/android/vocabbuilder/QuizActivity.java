@@ -44,6 +44,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     int numberOfSoundsLoaded =0;
     int numberOfSoundEffects = 2; // YAY! and *click*
     int[] answers;
+    boolean[] tried = new boolean[nChoices];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         super.onConfigurationChanged(newConfig);
         moveProgressBarToTop();
         displayProgress(questionCounter,totalQuestions);
-        QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, currentCorrectAnswer);
+        QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, currentCorrectAnswer, tried);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.question_frame, nextQuestion);
@@ -174,7 +175,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
 
     @Override
     public void wrongAnswerSelected(View view) {
-        view.setTag("grey");
+        tried[Integer.parseInt((String) view.getTag())] = true;
         view.setClickable(false);
         view.setAlpha(0.3f);
         quizSounds.play(soundMap.get("incorrectSound"), 1.0f, 1.0f, 1, 0, 1.0f);
@@ -192,7 +193,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
             }
             quizSounds.play(soundMap.get(Answers[currentCorrectAnswer].getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
 
-            QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, answers[questionCounter]);
+            QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, answers[questionCounter], tried);
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.question_frame, nextQuestion);
