@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:drawable="@drawable/button_shadow"/>
-    <item
-        android:drawable="@drawable/button_flat"
-        android:bottom="6px"
-        android:right="5px"
-        />
-</layer-list>
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid
+        android:color="#EAFFEA" />
+    <padding android:left="16dp"
+        android:top="10dp"
+        android:right="16dp"
+        android:bottom="10dp" />
+    <stroke
+        android:width="3dip"
+        android:color="#0C8200" />
+    <corners android:radius= "16dp" />
+</shape>
