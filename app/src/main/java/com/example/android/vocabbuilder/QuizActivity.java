@@ -164,9 +164,15 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         // nothing more to click in this question
         LinearLayout cont = (LinearLayout) view.getParent();
         int count = cont.getChildCount();
-        Button prompt = (Button) cont.getChildAt(0);
-        prompt.setEnabled(false);
-        for(int i = 1; i<count; i++){
+        int skip;
+        if(count == nChoices){ // horizontal layout
+            skip = 0;
+        } else { //vertical layout
+            Button prompt = (Button) cont.getChildAt(0);
+            prompt.setEnabled(false);
+            skip = 1;
+        }
+        for(int i = skip; i<count; i++){
             ImageButton b = (ImageButton) cont.getChildAt(i);
             b.setEnabled(false);
         }
