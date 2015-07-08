@@ -79,7 +79,7 @@ public class QuestionFragment extends Fragment {
         for (int i = 0; i < Answers.size(); i++) {
             ImageButton butto = (ImageButton) view.findViewById(imRes[i]);
             butto.setImageResource(Answers.get(i).imageRes(context));
-            if(tried[i]) {
+            if(tried[i] && i != correct) {
                 butto.setClickable(false);
                 butto.setAlpha(0.3f);
             }

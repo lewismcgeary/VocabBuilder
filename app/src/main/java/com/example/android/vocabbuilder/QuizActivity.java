@@ -15,7 +15,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -106,39 +109,39 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         outState.putParcelableArrayList("Answers", currentQuestionsAnswers);
         outState.putInt("CorrectAnswer", currentCorrectAnswer);
     }
-private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
+    private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
 
-    private Context myCtx;
+        private Context myCtx;
 
-    public LoadSoundsTask(Context ctx){
-        // set context
-        this.myCtx = ctx;
-    }
-    @Override
-    protected HashMap doInBackground(ArrayList<Word>... arrayList) {
-        ArrayList<Word> AllAnswers =  arrayList[0];
-        HashMap<String, Integer> asyncSoundMap = new HashMap<>();
-        // load sound files for current vocabulary into the quizSounds pool
-        // hashmap matches each word to the soundId
-        for(int i=0; i<(AllAnswers.size()); i++){
-            int currentSound = AllAnswers.get(i).audioRes(myCtx);
-            String wordText = AllAnswers.get(i).getWordText();
-            asyncSoundMap.put(wordText, quizSounds.load(myCtx, currentSound, 1));
+        public LoadSoundsTask(Context ctx){
+            // set context
+            this.myCtx = ctx;
+        }
+        @Override
+        protected HashMap doInBackground(ArrayList<Word>... arrayList) {
+            ArrayList<Word> AllAnswers =  arrayList[0];
+            HashMap<String, Integer> asyncSoundMap = new HashMap<>();
+            // load sound files for current vocabulary into the quizSounds pool
+            // hashmap matches each word to the soundId
+            for(int i=0; i<(AllAnswers.size()); i++){
+                int currentSound = AllAnswers.get(i).audioRes(myCtx);
+                String wordText = AllAnswers.get(i).getWordText();
+                asyncSoundMap.put(wordText, quizSounds.load(myCtx, currentSound, 1));
+
+            }
+            asyncSoundMap.put("correctSound", quizSounds.load(myCtx, R.raw.yay, 1));
+            asyncSoundMap.put("incorrectSound", quizSounds.load(myCtx, R.raw.click, 1));
+            return asyncSoundMap;
+        }
+
+
+        @Override
+        protected void onPostExecute(HashMap resultingHashmap) {
+            super.onPostExecute(resultingHashmap);
+            soundMap = resultingHashmap;
 
         }
-        asyncSoundMap.put("correctSound", quizSounds.load(myCtx, R.raw.yay, 1));
-        asyncSoundMap.put("incorrectSound", quizSounds.load(myCtx, R.raw.click, 1));
-        return asyncSoundMap;
     }
-
-
-    @Override
-    protected void onPostExecute(HashMap resultingHashmap) {
-        super.onPostExecute(resultingHashmap);
-        soundMap = resultingHashmap;
-
-    }
-}
 
 
     @Override
@@ -157,12 +160,23 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
 
     @Override
     public void correctAnswerSelected(View view) {
+        // get all siblings, and disable clickiness
+        // nothing more to click in this question
+        LinearLayout cont = (LinearLayout) view.getParent();
+        int count = cont.getChildCount();
+        Button prompt = (Button) cont.getChildAt(0);
+        prompt.setEnabled(false);
+        for(int i = 1; i<count; i++){
+            ImageButton b = (ImageButton) cont.getChildAt(i);
+            b.setEnabled(false);
+        }
+        for(int i = 0; i<nChoices; i++) tried[i] = true; // until the end of this function
         Random rn = new Random();
         float soundSpeed = (rn.nextInt(2)+8)/10.0f;
         quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
         getWindow().getDecorView().setBackgroundColor(Color.GREEN); // TODO: don't hardcode this
         questionCounter++;
-        for(int i = 0; i<nChoices; i++) tried[i] = false; // reset tried[]
+
         displayProgress(questionCounter,totalQuestions);
         Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
         handler.postDelayed(new Runnable() {
@@ -170,6 +184,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
                 nextFragment();
             }
         }, 2000);
+        for(int i = 0; i<nChoices; i++) tried[i] = false; // reset tried[]
     }
 
 
@@ -221,7 +236,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
             try {
                 v = (ImageView) layout.getChildAt(i);
 
-            if(i < full) {
+                if(i < full) {
                     v.setImageResource(R.drawable.star_full);
                 } else if(i < empty) {
                     v.setImageResource(R.drawable.star_empty);
@@ -232,7 +247,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
         }
     }
     private void moveProgressBarToTop() {
-         LinearLayout layout = (LinearLayout) findViewById(R.id.progress_frame);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.progress_frame);
         /*Animation moveProgressBarToTop = AnimationUtils.loadAnimation(this, R.anim.move_progress_bar_to_top);
         moveProgressBarToTop.setAnimationListener(new Animation.AnimationListener() {
             @Override
