@@ -162,6 +162,7 @@ private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
         quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
         getWindow().getDecorView().setBackgroundColor(Color.GREEN); // TODO: don't hardcode this
         questionCounter++;
+        for(int i = 0; i<nChoices; i++) tried[i] = false; // reset tried[]
         displayProgress(questionCounter,totalQuestions);
         Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
         handler.postDelayed(new Runnable() {
