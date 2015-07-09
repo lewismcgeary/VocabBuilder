@@ -4,6 +4,7 @@ package com.example.android.vocabbuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -77,13 +78,15 @@ public class LanguageSelectorActivity extends AppCompatActivity implements OnTou
 
     public String[] getLocales(){
 // Return a an array of all our supported locales with system or (preferably) last used first
+        Resources res = getResources();
+        String[] locales = res.getStringArray(R.array.locales_array);
         SharedPreferences settings = getSharedPreferences("PrefsFile", MODE_PRIVATE);
         //noinspection
         String currentLocale = Locale.getDefault().getLanguage().substring(0, 2);
         String lang = settings.getString("language", currentLocale);
 
         // Swap so that last used or current locale is at top of the list
-        String locales[] = {"en", "ru", "es", "fr"};
+        // String locales[] = {"en", "ru", "es", "fr"};
         int j = 0;
         for (int i = 0; i < locales.length; i++) {
             //noinspection ConstantConditions
