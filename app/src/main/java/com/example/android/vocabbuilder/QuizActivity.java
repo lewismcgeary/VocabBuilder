@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.AsyncTask;
@@ -363,6 +364,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         totalQuestions = res.getInteger(R.integer.numberOfQuestions);
         nChoices = res.getInteger(R.integer.numberOfChoices);
         tried = new boolean[nChoices];
-        numberOfSoundEffects = res.getInteger(R.integer.numberOfSoundEffects); // YAY! and *click*
+        numberOfSoundEffects = res.getInteger(R.integer.numberOfSoundEffects);} // YAY! and *click*
     }
-}
+
