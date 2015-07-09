@@ -46,4 +46,13 @@ ArrayList<Question> quiz;
     public int getQuestionNumber(){
         return currentQuestion;
     }
+
+    // We need to know all the answers so that we can load sounds in advance
+    public ArrayList<Word> getAllAnswers(){
+        ArrayList<Word> mylist = new ArrayList<>();
+        for(Question question: quiz){
+            mylist.add(question.getWords().get(question.getAnswer()));
+        }
+        return mylist;
+    }
 }
