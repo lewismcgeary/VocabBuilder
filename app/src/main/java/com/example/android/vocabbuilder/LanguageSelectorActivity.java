@@ -51,24 +51,15 @@ public class LanguageSelectorActivity extends AppCompatActivity implements OnTou
     }
 
     public void setButtons(String locales[]){
+        // See language_selector_activity.xml
         // Set the icons and tags for our buttons according to the locales[] Array
         // Also add an onTouchListener (see above) and start the Animation
         setContentView(R.layout.language_selector_activity);
         Context context;
         context = this.getApplicationContext();
         Animation zoomIn = AnimationUtils.loadAnimation(this, R.anim.language_select);
-/* old style
-        int imRes[] = {R.id.button1, R.id.button2, R.id.button3, R.id.button4};
-        for(int i =0; i < locales.length; i++) {
-            ImageButton b = (ImageButton) findViewById(imRes[i]);
-            b.setImageResource(context.getResources().getIdentifier(locales[i], "drawable", context.getPackageName()));
-            b.setTag(locales[i]);
-            b.setOnTouchListener(this);
-            b.startAnimation(zoomIn);
-        }
-        */
-        /* new style */
-        ImageButton b = null;
+
+        ImageButton b;
         LinearLayout layout = (LinearLayout) findViewById(R.id.flag_frame);
         LinearLayout sublayout = (LinearLayout) findViewById(R.id.miniflag_frame);
         for(int i =0; i < locales.length; i++) {
