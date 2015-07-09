@@ -9,8 +9,8 @@
         <item>fr</item>
         <item>ru</item>
     </string-array>
-    <color name="successcolor">green</color>
-    <color name="backgroundcolor">lightgreen</color>
+    <color name="successcolor">@color/green</color>
+    <color name="backgroundcolor">@color/lightgreen</color>
     <color name="prompttextcolor">#FF555555</color>
 
 </resources>

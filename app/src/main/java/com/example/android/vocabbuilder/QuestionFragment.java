@@ -3,6 +3,7 @@ package com.example.android.vocabbuilder;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,7 +73,8 @@ public class QuestionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getActivity().getWindow().getDecorView().setBackgroundColor(0xFFCCFFCC); // TODO: don't hardcode this
+        Resources res = getResources();
+        getActivity().getWindow().getDecorView().setBackgroundColor(res.getColor(R.color.backgroundcolor));
         View view =  inflater.inflate(R.layout.question_fragment, container, false);
         Context context = getActivity();
         Button promptText = (Button) view.findViewById(R.id.promptText);

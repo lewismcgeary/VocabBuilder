@@ -8,10 +8,10 @@ import android.os.Parcelable;
  * Created by Lewis on 22/06/15.
  */
 public class Word implements Parcelable{
-    // TODO: The Word class will need to have an associated String version,
-    // TODO: audio version and image file.
-    // TODO: The paths will come from R.raw.vocabulary.sqlite
-    // TODO:
+    /**
+     *Creates an object containing the text of a word and the locations of corresponding image &
+     * audio files
+    */
     public static final Parcelable.Creator<Word> CREATOR = new Parcelable.Creator<Word>() {
 
         public Word createFromParcel(Parcel in) {
