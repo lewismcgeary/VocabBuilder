@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -41,7 +42,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     HashMap<String, Integer> soundMap = new HashMap<>();
     Vocabulary vocab;
     Word[][] quiz;
-    //Integer numberOfSoundsLoaded;
     int totalQuestions = 7;
     int nChoices = 3;
     int numberOfSoundsLoaded =0;
@@ -54,29 +54,10 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_activity);
-      /*  ActionBar actionBar = getSupportActionBar();     // We should be actionbarless now
-        if(actionBar != null) actionBar.hide(); */         // if no bugs DELETE this
-     /**********NOW ASYNC*******************************
-        vocab = new Vocabulary(this);
-        // vocab.getVocabularyArrayList();
-        // moved from QuizMaster.java
-        quiz = new Word[totalQuestions][nChoices];
-        answers = new int[totalQuestions];
-        Random rn = new Random();
+        disableOrientation(); // Because it crashes the sound-loading progress stars
 
-        // place them into quiz[][] (and select random answers
-        for (int i = 0; i < totalQuestions ; i++){
-            ArrayList q = vocab.getn(nChoices);
-            for(int j = 0; j < nChoices; j++){
-                quiz[i][j] = (Word) q.get(j);
-            }
-            answers[i] = rn.nextInt(nChoices);
-            AllAnswers.add(quiz[i][answers[i]]);
-        } ***************END NOW ASYNC************************************************/
         LoadQuizTask loadquizasynchronously = new LoadQuizTask(this);
         loadquizasynchronously.execute();
-
-        disableOrientation(); // Because it crashes the sound-loading progress stars
 
         quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
@@ -91,10 +72,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
             }
         });
-/************************************ MOVED TO postExecute of LoadQuizTask
-        LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(this);
-        loadSoundsAsynchronously.execute(AllAnswers);
-****************************************/
     }
 
     @Override
@@ -145,7 +122,9 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 answers[i] = rn.nextInt(nChoices);
                 myAnswers.add(quiz[i][answers[i]]);
             }
+
             AllAnswers = myAnswers;
+
             LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(myCtx);
             loadSoundsAsynchronously.execute(AllAnswers);
 
@@ -153,6 +132,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         }
 
     }
+
     private class LoadSoundsTask extends AsyncTask<ArrayList<Word>, Void, HashMap>{
 
         private Context myCtx;
@@ -263,9 +243,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             Word[] Answers = quiz[questionCounter];
 
             currentQuestionsAnswers.clear();
-            for(int i = 0; i< nChoices; i++) {
-                currentQuestionsAnswers.add(Answers[i]);
-            }
+            currentQuestionsAnswers.addAll(Arrays.asList(Answers));
 
             QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, answers[questionCounter], tried);
             FragmentManager fragmentManager = getFragmentManager();
@@ -289,7 +267,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         for(int i = count-1; i >= totalQuestions; i--){
             layout.removeViewAt(i);
         }
-        ImageView v = null;
+        ImageView v;
         for(int i = 0; i < totalQuestions; i++){
             try {
                 v = (ImageView) layout.getChildAt(i);
@@ -306,24 +284,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     }
     private void moveProgressBarToTop() {
         LinearLayout layout = (LinearLayout) findViewById(R.id.progress_frame);
-        /*Animation moveProgressBarToTop = AnimationUtils.loadAnimation(this, R.anim.move_progress_bar_to_top);
-        moveProgressBarToTop.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                layout.setY(0f);
-                displayQuestion();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });*/
         ObjectAnimator moveProgressBarToTop = ObjectAnimator.ofFloat(layout, "Y", 0);
         moveProgressBarToTop.setDuration(600);
         moveProgressBarToTop.addListener(new Animator.AnimatorListener() {
