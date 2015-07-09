@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.AsyncTask;
@@ -200,8 +199,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         Random rn = new Random();
         float soundSpeed = (rn.nextInt(2)+8)/10.0f;
         quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
-        Resources res = getResources();
-        getWindow().getDecorView().setBackgroundColor(res.getColor(R.color.successcolor));
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.successcolor));
         questionCounter++;
 
         displayProgress(questionCounter,totalQuestions);
