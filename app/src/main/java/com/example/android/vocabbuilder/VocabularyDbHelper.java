@@ -167,7 +167,6 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
     }
 
     // If you change the database schema, you must increment the database version.
-    // TODO: enable database to be read into an array
 
 
 

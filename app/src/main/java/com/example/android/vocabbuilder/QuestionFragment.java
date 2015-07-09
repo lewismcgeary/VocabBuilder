@@ -22,26 +22,28 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class QuestionFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // the fragment initialization parameters
     private static final String ANSWERS_ARRAY = "answersArray";
     private static final String CORRECT_INT = "correct";
     private static final String TRIED_BOOL = "tried";
-    // TODO: Rename and change types of parameters
     private ArrayList<Word> Answers;
     private int correct;
     private boolean[] tried;
     private OnFragmentInteractionListener mListener;
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Displays a question consisting of a Button showing a word and a number of Image Buttons.
+     * If the Image Button which matches the word is pressed then the Question is shown as correctly
+     * answered and a new one displayed. If a wrong answer is selected then that option is disabled
+     * and the user can try again until the correct answer is given.
+     * The text button can be pressed to play an audio file of the word.
      *
-     * @ p a r a m  p a r a m 1 Parameter 1.
-     * @ p a r a m  p a r a m 2 Parameter 2.
-     * @ r e t u r n A new instance of fragment QuestionFragment.
+     * @param answers       an arraylist of Word objects to display as potential answers
+     * @param correct       an int specifying which of the potential answers is correct
+     * @param tried         a boolean array specifying if each answer has already been
+     *                      tried or not
+     * @return A new instance of fragment QuestionFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static QuestionFragment newInstance(ArrayList answers, int correct, boolean[] tried) {
         QuestionFragment fragment = new QuestionFragment();
         Bundle args = new Bundle();
@@ -75,7 +77,9 @@ public class QuestionFragment extends Fragment {
         Context context = getActivity();
         Button promptText = (Button) view.findViewById(R.id.promptText);
         int imRes[] = {R.id.button1, R.id.button2, R.id.button3}; // TODO: Get these programatically
+        // set button to display the required word
         promptText.setText(Answers.get(correct).getWordText());
+        // Set up the answer buttons with appropriate images and tag correct answer with "correct"
         for (int i = 0; i < Answers.size(); i++) {
             ImageButton butto = (ImageButton) view.findViewById(imRes[i]);
             butto.setImageResource(Answers.get(i).imageRes(context));
@@ -89,6 +93,8 @@ public class QuestionFragment extends Fragment {
                     }
                 }
             });
+            // If fragment has been restarted, previously tried wrong answers will be faded and
+            // button will be disabled
             if(tried[i] && i != correct) {
                 butto.setClickable(false);
                 butto.setAlpha(0.3f);
@@ -115,15 +121,7 @@ public class QuestionFragment extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
 
-
-    public void onButtonPressed(View view) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(view);
-        }
-
-    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -143,19 +141,10 @@ public class QuestionFragment extends Fragment {
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * This interface is implemented by QuizActivity to allow communication to be received from this
+     * fragment
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-
-        void onFragmentInteraction(View view);
         void correctAnswerSelected(View view);
         void wrongAnswerSelected(View view);
         void replayPromptSound(View view);
