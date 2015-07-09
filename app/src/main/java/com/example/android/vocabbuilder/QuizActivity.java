@@ -204,6 +204,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
     @Override
     public void correctAnswerSelected(View view) {
+        //disable orientation change while 'success' screen shows. is re-enabled by next question
+        disableOrientation();
         // get all siblings, and disable clickiness
         // nothing more to click in this question
         LinearLayout cont = (LinearLayout) view.getParent();
