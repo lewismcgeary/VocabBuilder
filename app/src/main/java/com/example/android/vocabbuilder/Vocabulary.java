@@ -7,37 +7,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by Lewis on 23/06/15.
+ * Class to create and contain arraylist of Word objects based on a database query
  */
 public class Vocabulary{
-    public ArrayList<Word> getVocabularyArrayList() {
-        return vocabularyArrayList;
-    }
 
-    // TODO: Vocabulary will be a list of words from the R.raw.vocabulary database
-    // TODO: There needs to be a way to select a certain number of the words
-    // TODO: as answers and create objects to include in a Question
-    // TODO: variables: language
-    //
-    // Sqlite database query SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = "EN"
-    ArrayList<Word> vocabularyArrayList = new ArrayList<Word>();
+    private ArrayList<Word> vocabularyArrayList = new ArrayList<>();
 
+    // When new Vocabulary object is created, add Word objects to vocabularyArrayList.
+    // Word objects are based on available entries for the selected language in vocabulary.sqlite
+    // database
     public Vocabulary(Context context){
         VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
         SharedPreferences settings = context.getSharedPreferences("PrefsFile", Context.MODE_PRIVATE);
         String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do
+        //noinspection
         vocabularyArrayList = myDbHelper.getWordsFromDataBase(language.toUpperCase());
     }
-public int getWordCount(){
-    return vocabularyArrayList.size();
-}
 
-public ArrayList<Word> getn(int n) {     // returns n randomly-selected unique words from the total set
+    // returns n randomly-selected unique words from the total set
+public ArrayList<Word> getRandomWords(int n) {
+    // shuffle order of vocabulary words
     Collections.shuffle(vocabularyArrayList);
-    //Word[] words = new Word[n];
     ArrayList<Word> words = new ArrayList<>();
+    // add selected number of words to arraylist
     for (int i = 0; i < n; i++){
-        //words[i] = vocabularyArrayList.get(i);
         words.add(vocabularyArrayList.get(i));
     }
     return words;

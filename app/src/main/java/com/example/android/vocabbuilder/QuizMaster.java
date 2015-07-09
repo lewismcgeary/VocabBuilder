@@ -2,10 +2,7 @@ package com.example.android.vocabbuilder;
 
 import android.content.Context;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -49,7 +46,7 @@ public class QuizMaster {
 
         // place them into quiz[][] (and select random answers
         for (int i = 0; i < nQuestions ; i++){
-            ArrayList q = vocab.getn(questionSize);
+            ArrayList q = vocab.getRandomWords(questionSize);
             for(int j = 0; j < questionSize; j++){
                 quiz[i][j] = (Word) q.get(j);
             }

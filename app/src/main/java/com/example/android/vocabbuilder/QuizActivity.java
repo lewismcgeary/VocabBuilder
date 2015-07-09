@@ -66,7 +66,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
         // place them into quiz[][] (and select random answers
         for (int i = 0; i < totalQuestions ; i++){
-            ArrayList q = vocab.getn(nChoices);
+            ArrayList q = vocab.getRandomWords(nChoices);
             for(int j = 0; j < nChoices; j++){
                 quiz[i][j] = (Word) q.get(j);
             }
@@ -82,9 +82,9 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             @Override
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
 
-                displayProgress(0, (int)Math.floor(numberOfSoundsLoaded));
+                displayProgress(0, (int) Math.floor(numberOfSoundsLoaded));
                 numberOfSoundsLoaded++;
-                if (numberOfSoundsLoaded ==totalQuestions+numberOfSoundEffects){
+                if (numberOfSoundsLoaded == totalQuestions + numberOfSoundEffects) {
                     moveProgressBarToTop();
                     //displayQuestion();
                 }
@@ -138,7 +138,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
             // place them into quiz[][] (and select random answers
             for (int i = 0; i < totalQuestions ; i++){
-                ArrayList q = vocab.getn(nChoices);
+                ArrayList q = vocab.getRandomWords(nChoices);
                 for(int j = 0; j < nChoices; j++){
                     quiz[i][j] = (Word) q.get(j);
                 }
@@ -195,11 +195,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         quizSounds.play(soundMap.get(currentQuestionsAnswers.get(currentCorrectAnswer).getWordText()), 1.0f, 1.0f, 1, 0, soundSpeed);
     }
 
-    @Override
-    public void onFragmentInteraction(View view) {
-        questionCounter++;
-        displayQuestion();
-    }
 
 
     @Override
