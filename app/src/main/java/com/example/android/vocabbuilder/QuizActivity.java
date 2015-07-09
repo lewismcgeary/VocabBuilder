@@ -205,8 +205,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         Random rn = new Random();
         float soundSpeed = (rn.nextInt(2)+8)/10.0f;
         quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
-        Resources res = getResources();
-        getWindow().getDecorView().setBackgroundColor(res.getColor(R.color.successcolor));
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.successcolor));
         questionCounter++;
 
         displayProgress(questionCounter,totalQuestions);
@@ -365,6 +364,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         totalQuestions = res.getInteger(R.integer.numberOfQuestions);
         nChoices = res.getInteger(R.integer.numberOfChoices);
         tried = new boolean[nChoices];
-        numberOfSoundEffects = res.getInteger(R.integer.numberOfSoundEffects); // YAY! and *click*
+        numberOfSoundEffects = res.getInteger(R.integer.numberOfSoundEffects);} // YAY! and *click*
     }
-}
+

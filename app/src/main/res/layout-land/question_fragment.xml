@@ -19,14 +19,14 @@
         android:onClick="sayPrompt"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:orientation="horizontal"
         android:layout_weight="1">
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
 
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
         android:layout_weight="2"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
@@ -37,7 +37,7 @@
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
         android:layout_weight="2"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
@@ -47,7 +47,7 @@
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
         android:layout_weight="2"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
