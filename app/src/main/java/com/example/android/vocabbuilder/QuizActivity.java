@@ -32,27 +32,33 @@ import java.util.Random;
  * Created by Lewis on 02/07/15.
  */
 public class QuizActivity extends AppCompatActivity implements QuestionFragment.OnFragmentInteractionListener {
+// Application variables defined in appconfig.xml and set with initializeVariables()
+    int totalQuestions;
+    int nChoices;
+    int numberOfSoundEffects;
 
-    int questionCounter = 0;
-    ArrayList<Word> currentQuestionsAnswers =new ArrayList<>();
-    int currentCorrectAnswer;
+    // Soundloader for our quiz
     // This can be upgraded to Soundpool.Builder in a few months
     @SuppressWarnings("deprecation")
     SoundPool quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
     HashMap<String, Integer> soundMap = new HashMap<>();
-    Vocabulary vocab;
-    Word[][] quiz;
-    int totalQuestions = 7;
-    int nChoices = 3;
     int numberOfSoundsLoaded =0;
-    int numberOfSoundEffects = 2; // YAY! and *click*
-    ArrayList<Word> AllAnswers;
-    int[] answers;
-    boolean[] tried = new boolean[nChoices];
+
+    // Variables for managing the quiz
+    Vocabulary vocab;
+    Word[][] quiz; // an array containing all words in order
+    ArrayList<Word> AllAnswers; // an array containing all correct words (so that we can load the sounds)
+    int[] answers; // an array to tell us which of answer 0, 1, 2, or 3 etc is correct
+    boolean[] tried; // an array to tell us which of answer 0, 1, 2 etc has been tried so we can grey them out
+
+    int questionCounter = 0;
+    ArrayList<Word> currentQuestionsAnswers = new ArrayList<>();
+    int currentCorrectAnswer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initializeVariables();
         setContentView(R.layout.quiz_activity);
         disableOrientation(); // Because it crashes the sound-loading progress stars
         LoadQuizTask loadquizasynchronously = new LoadQuizTask(this);
@@ -61,7 +67,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
-
                 displayProgress(0, (int)Math.floor(numberOfSoundsLoaded));
                 numberOfSoundsLoaded++;
                 if (numberOfSoundsLoaded ==totalQuestions+numberOfSoundEffects){
@@ -354,5 +359,12 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             }
         });
         moveProgressBarToTop.start();
+    }
+    void initializeVariables(){
+        Resources res = getResources();
+        totalQuestions = res.getInteger(R.integer.numberOfQuestions);
+        nChoices = res.getInteger(R.integer.numberOfChoices);
+        tried = new boolean[nChoices];
+        numberOfSoundEffects = res.getInteger(R.integer.numberOfSoundEffects); // YAY! and *click*
     }
 }
