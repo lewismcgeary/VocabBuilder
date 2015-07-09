@@ -55,7 +55,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_activity);
         disableOrientation(); // Because it crashes the sound-loading progress stars
-
         LoadQuizTask loadquizasynchronously = new LoadQuizTask(this);
         loadquizasynchronously.execute();
 
