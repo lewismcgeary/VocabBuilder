@@ -1,4 +1,4 @@
-package com.example.android.vocabbuilder;
+package com.gmail.appytalkteam.appytalkcore;
 
 
 import android.content.Context;
@@ -13,7 +13,6 @@ import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.Locale;
