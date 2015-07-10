@@ -44,16 +44,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     HashMap<String, Integer> soundMap = new HashMap<>();
     int numberOfSoundsLoaded =0;
 
-    // Variables for managing the quiz
-    Vocabulary vocab;
-    Word[][] quiz; // an array containing all words in order
-    ArrayList<Word> AllAnswers; // an array containing all correct words (so that we can load the sounds)
-    int[] answers; // an array to tell us which of answer 0, 1, 2, or 3 etc is correct
-    boolean[] tried; // an array to tell us which of answer 0, 1, 2 etc has been tried so we can grey them out
-
-    int questionCounter = 0;
-    ArrayList<Word> currentQuestionsAnswers = new ArrayList<>();
-    int currentCorrectAnswer;
+    // Variable for managing the quiz
+    Quiz quiz;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,8 +74,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         keepProgressBarAtTop();
-        displayProgress(questionCounter,totalQuestions);
-        QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, currentCorrectAnswer, tried);
+        displayProgress(quiz.getQuestionNumber(), totalQuestions);
+        QuestionFragment nextQuestion = QuestionFragment.newInstance(quiz.getCurrentQuestion());
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.question_frame, nextQuestion);
@@ -93,8 +85,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList("Answers", currentQuestionsAnswers);
-        outState.putInt("CorrectAnswer", currentCorrectAnswer);
+        outState.putParcelableArrayList("Answers", quiz.getCurrentQuestion().getWords());
+        outState.putInt("CorrectAnswer", quiz.getCurrentQuestion().getAnswer());
     }
 
     private class LoadQuizTask extends AsyncTask<Void, Void, Vocabulary> {
@@ -106,28 +98,14 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
         @Override
         protected Vocabulary doInBackground(Void ... nope) {
-            vocab = new Vocabulary(myCtx);
+            Vocabulary vocab = new Vocabulary(myCtx);
         return vocab;
         }
 
         @Override
         protected void onPostExecute(Vocabulary vocab) {
-            ArrayList<Word> myAnswers = new ArrayList<>();
-            quiz = new Word[totalQuestions][nChoices];
-            answers = new int[totalQuestions];
-            Random rn = new Random();
-
-            // place them into quiz[][] (and select random answers
-            for (int i = 0; i < totalQuestions ; i++){
-                ArrayList q = vocab.getRandomWords(nChoices);
-                for(int j = 0; j < nChoices; j++){
-                    quiz[i][j] = (Word) q.get(j);
-                }
-                answers[i] = rn.nextInt(nChoices);
-                myAnswers.add(quiz[i][answers[i]]);
-            }
-
-            AllAnswers = myAnswers;
+            quiz = new Quiz(myCtx,vocab);
+            ArrayList<Word> AllAnswers = quiz.getAllAnswers();
 
             LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(myCtx);
             loadSoundsAsynchronously.execute(AllAnswers);
@@ -176,13 +154,15 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     public void replayPromptSound(View view){
         Random rn = new Random();
         float soundSpeed = (rn.nextInt(3)+9) / 10.0f;
-        quizSounds.play(soundMap.get(currentQuestionsAnswers.get(currentCorrectAnswer).getWordText()), 1.0f, 1.0f, 1, 0, soundSpeed);
+        Word answer = quiz.getCurrentQuestion().getWords().get(quiz.getCurrentQuestion().getAnswer());
+        quizSounds.play(soundMap.get(answer.getWordText()), 1.0f, 1.0f, 1, 0, soundSpeed);
     }
 
 
 
     @Override
     public void correctAnswerSelected(View view) {
+        Question currentQ = quiz.getCurrentQuestion();
         //disable orientation change while 'success' screen shows. is re-enabled by next question
         disableOrientation();
         // get all siblings, and disable clickiness
@@ -201,28 +181,31 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             ImageButton b = (ImageButton) cont.getChildAt(i);
             b.setEnabled(false);
         }
-        for(int i = 0; i<nChoices; i++) tried[i] = true; // until the end of this function
+        for(int i = 0; i<nChoices; i++) {
+//            tried[i] = true;
+            currentQ.setGuessed(i,true);
+        } // until the end of this function
         Random rn = new Random();
         float soundSpeed = (rn.nextInt(2)+8)/10.0f;
         quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.successcolor));
-        questionCounter++;
+        quiz.incrementQuestionNumber();
 
-        displayProgress(questionCounter,totalQuestions);
+        displayProgress(quiz.getQuestionNumber(), totalQuestions);
         Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
         handler.postDelayed(new Runnable() {
             public void run() {
                 newQuestion();
             }
         }, 2000);
-        for(int i = 0; i<nChoices; i++) tried[i] = false; // reset tried[]
     }
 
 
 
     @Override
     public void wrongAnswerSelected(View view) {
-        tried[Integer.parseInt((String) view.getTag())] = true;
+        Question currentQ = quiz.getCurrentQuestion();
+        currentQ.setGuessed(Integer.parseInt((String) view.getTag()), true); //[Integer.parseInt((String) view.getTag())] = true;
         view.setClickable(false);
         view.setAlpha(0.3f);
         quizSounds.play(soundMap.get("incorrectSound"), 1.0f, 1.0f, 1, 0, 1.0f);
@@ -230,29 +213,23 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
     public void newQuestion(){
         displayQuestion();
-        Word[] Answers = quiz[questionCounter];
+        int correctAnswer = quiz.getCurrentQuestion().getAnswer();
+        Word Answer = quiz.getCurrentQuestion().getWords().get(correctAnswer);
         try {
-            quizSounds.play(soundMap.get(Answers[currentCorrectAnswer].getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
+            quizSounds.play(soundMap.get(Answer.getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
         } catch (NullPointerException e) {
             // do nothing, this should be the end of the quiz
         }
     }
     public void displayQuestion(){
         enableOrientation();
-        if (questionCounter<totalQuestions){
-            currentCorrectAnswer = answers[questionCounter];
-            Word[] Answers = quiz[questionCounter];
-
-            currentQuestionsAnswers.clear();
-            currentQuestionsAnswers.addAll(Arrays.asList(Answers));
-
-            QuestionFragment nextQuestion = QuestionFragment.newInstance(currentQuestionsAnswers, answers[questionCounter], tried);
+        if (quiz.getQuestionNumber() < totalQuestions){
+            QuestionFragment nextQuestion = QuestionFragment.newInstance(quiz.getCurrentQuestion());
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.question_frame, nextQuestion);
             fragmentTransaction.commit();}
         else{
-            questionCounter = 0;
             quizSounds.release();
             Intent intent = new Intent(this, LanguageSelectorActivity.class);
             startActivity(intent);
@@ -363,7 +340,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         Resources res = getResources();
         totalQuestions = res.getInteger(R.integer.numberOfQuestions);
         nChoices = res.getInteger(R.integer.numberOfChoices);
-        tried = new boolean[nChoices];
+        // tried = new boolean[nChoices];
         numberOfSoundEffects = res.getInteger(R.integer.numberOfSoundEffects);} // YAY! and *click*
     }
 

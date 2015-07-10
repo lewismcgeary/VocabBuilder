@@ -37,5 +37,11 @@ public class Question {
     public boolean isGuessed(int i){
         return guessed[i];
     }
+    public void setGuessed(int i, boolean b){
+        guessed[i] = b;
+    }
+    public boolean[] guessed(){
+        return guessed;
+    }
 
 }

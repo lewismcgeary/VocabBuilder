@@ -39,18 +39,16 @@ public class QuestionFragment extends Fragment {
      * and the user can try again until the correct answer is given.
      * The text button can be pressed to play an audio file of the word.
      *
-     * @param answers       an arraylist of Word objects to display as potential answers
-     * @param correct       an int specifying which of the potential answers is correct
-     * @param tried         a boolean array specifying if each answer has already been
-     *                      tried or not
+     * @param theQ the current Question
      * @return A new instance of fragment QuestionFragment.
      */
-    public static QuestionFragment newInstance(ArrayList answers, int correct, boolean[] tried) {
+
+    public static QuestionFragment newInstance(Question theQ) {
         QuestionFragment fragment = new QuestionFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList(ANSWERS_ARRAY, answers);
-        args.putInt(CORRECT_INT, correct);
-        args.putBooleanArray(TRIED_BOOL,tried);
+        args.putParcelableArrayList(ANSWERS_ARRAY, theQ.getWords());
+        args.putInt(CORRECT_INT, theQ.getAnswer());
+        args.putBooleanArray(TRIED_BOOL,theQ.guessed());
         fragment.setArguments(args);
         return fragment;
     }
