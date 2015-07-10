@@ -1,4 +1,4 @@
-package com.example.android.vocabbuilder;
+package com.gmail.appytalkteam.appytalkcore;
 
 import android.content.Context;
 import android.content.res.Resources;

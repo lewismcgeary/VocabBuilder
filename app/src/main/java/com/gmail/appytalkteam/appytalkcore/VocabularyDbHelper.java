@@ -1,4 +1,4 @@
-package com.example.android.vocabbuilder;
+package com.gmail.appytalkteam.appytalkcore;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class VocabularyDbHelper extends SQLiteOpenHelper {
     private final Context myContext;
     private static final int DATABASE_VERSION = 1;
-    private static String DB_PATH = "/data/data/com.example.android.vocabbuilder/databases/";
+    private static String DB_PATH = "/data/data/com.gmail.appytalkteam.appytalkcore/databases/";
 
     private static final String DATABASE_NAME = "vocabulary.sqlite";
 
