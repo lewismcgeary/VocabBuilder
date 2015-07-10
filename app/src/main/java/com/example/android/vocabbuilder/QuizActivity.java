@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -189,9 +188,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         float soundSpeed = (rn.nextInt(2)+8)/10.0f;
         quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.successcolor));
-        quiz.incrementQuestionNumber();
 
-        displayProgress(quiz.getQuestionNumber(), totalQuestions);
+        displayProgress(quiz.getQuestionNumber() + 1, totalQuestions);
         Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -212,18 +210,28 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     public void newQuestion(){
-        displayQuestion();
-        int correctAnswer = quiz.getCurrentQuestion().getAnswer();
-        Word Answer = quiz.getCurrentQuestion().getWords().get(correctAnswer);
-        try {
-            quizSounds.play(soundMap.get(Answer.getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
-        } catch (NullPointerException e) {
-            // do nothing, this should be the end of the quiz
+
+        if (quiz.incrementQuestionNumber()){
+            displayQuestion();
+            int correctAnswer = quiz.getCurrentQuestion().getAnswer();
+            Word Answer = quiz.getCurrentQuestion().getWords().get(correctAnswer);
+            try {
+                quizSounds.play(soundMap.get(Answer.getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
+            } catch (NullPointerException e) {
+                // do nothing, this should be the end of the quiz
+            }
+        }
+        else {
+            quizSounds.release();
+            Intent intent = new Intent(this, LanguageSelectorActivity.class);
+            startActivity(intent);
+            this.finish();
         }
     }
     public void displayQuestion(){
         enableOrientation();
         if (quiz.getQuestionNumber() < totalQuestions){
+            int tester = quiz.getQuestionNumber();
             QuestionFragment nextQuestion = QuestionFragment.newInstance(quiz.getCurrentQuestion());
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -272,7 +280,14 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                newQuestion();
+                int correctAnswer = quiz.getCurrentQuestion().getAnswer();
+                Word Answer = quiz.getCurrentQuestion().getWords().get(correctAnswer);
+                try {
+                    quizSounds.play(soundMap.get(Answer.getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
+                } catch (NullPointerException e) {
+                    // do nothing, this should be the end of the quiz
+                }
+                displayQuestion();
             }
 
             @Override
