@@ -11,10 +11,15 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.ChangeBounds;
+import android.transition.Slide;
+import android.transition.TransitionSet;
 import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +35,7 @@ import java.util.Random;
  * Stays Alive through the quiz, feeds Word[]s to QuestionFragment
  * Created by Lewis on 02/07/15.
  */
-public class QuizActivity extends AppCompatActivity implements QuestionFragment.OnFragmentInteractionListener {
+public class QuizActivity extends AppCompatActivity implements QuestionFragment.OnFragmentInteractionListener, QuestionOutroFragment.OnFragmentInteractionListener {
 // Application variables defined in appconfig.xml and set with initializeVariables()
     int totalQuestions;
     int nChoices;
@@ -86,6 +91,11 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList("Answers", quiz.getCurrentQuestion().getWords());
         outState.putInt("CorrectAnswer", quiz.getCurrentQuestion().getAnswer());
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     private class LoadQuizTask extends AsyncTask<Void, Void, Vocabulary> {
@@ -190,6 +200,12 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.successcolor));
 
         displayProgress(quiz.getQuestionNumber() + 1, totalQuestions);
+
+        // experimental for new question outro state
+        Word correctAnswer = currentQ.getCorrectWord();
+        transitionToQuestionOutro(view, correctAnswer);
+        // experimental for new question outro state
+
         Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -198,6 +214,21 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         }, 2000);
     }
 
+    private void transitionToQuestionOutro(View view, Word correctAnswer){
+        QuestionOutroFragment questionOutroFragment = QuestionOutroFragment.newInstance(correctAnswer);
+        Slide slide = new Slide();
+        slide.setDuration(600);
+        TransitionSet imageTransition = new TransitionSet();
+        imageTransition.setDuration(600);
+        imageTransition.addTransition(new ChangeBounds());
+        questionOutroFragment.setSharedElementEnterTransition(imageTransition);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        ViewCompat.setTransitionName(view, "Correct Answer");
+        fragmentTransaction.addSharedElement(view, "Correct Answer");
+        fragmentTransaction.replace(R.id.question_frame, questionOutroFragment);
+        fragmentTransaction.commit();
+    }
 
 
     @Override
@@ -233,6 +264,9 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         if (quiz.getQuestionNumber() < totalQuestions){
             int tester = quiz.getQuestionNumber();
             QuestionFragment nextQuestion = QuestionFragment.newInstance(quiz.getCurrentQuestion());
+            Slide slide = new Slide();
+            slide.setDuration(600);
+            nextQuestion.setEnterTransition(slide);
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.question_frame, nextQuestion);
