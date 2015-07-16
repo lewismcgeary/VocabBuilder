@@ -143,6 +143,27 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
 
 
     }
+    // overloading this method to include Category
+    public ArrayList<Word> getWordsFromDataBase(String language, String category) {
+        ArrayList<Word> wordList = new ArrayList<>();
+        this.openDataBase();
+        String wordQuery = "SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = \"" + language + "\" AND Category = \"" + category + "\"";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(wordQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Word word = new Word(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                wordList.add(word);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        this.close();
+        // return contact list
+        return wordList;
+
+
+    }
     @Override
     public synchronized void close() {
 
