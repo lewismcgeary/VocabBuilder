@@ -43,5 +43,8 @@ public class Question {
     public boolean[] guessed(){
         return guessed;
     }
+    public Word getCorrectWord(){
+        return words.get(Answer);
+    }
 
 }
