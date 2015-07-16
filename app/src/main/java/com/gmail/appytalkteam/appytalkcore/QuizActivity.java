@@ -176,6 +176,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         disableOrientation();
         // get all siblings, and disable clickiness
         // nothing more to click in this question
+        /**
         LinearLayout cont = (LinearLayout) view.getParent();
         int count = cont.getChildCount();
         int skip;
@@ -193,7 +194,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         for(int i = 0; i<nChoices; i++) {
 //            tried[i] = true;
             currentQ.setGuessed(i,true);
-        } // until the end of this function
+        } // until the end of this function */
         Random rn = new Random();
         float soundSpeed = (rn.nextInt(2)+8)/10.0f;
         quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
