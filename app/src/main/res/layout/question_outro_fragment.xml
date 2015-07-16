@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:padding="@dimen/activity_horizontal_margin">
+    android:layout_height="match_parent" android:padding="@dimen/activity_horizontal_margin"
+    android:gravity="center_horizontal">
 
-    <ImageButton
-        android:transitionName="Correct Answer"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:scaleType="fitCenter"
-        android:background="@android:color/transparent"
-        android:id="@+id/correctAnswerImageButton"
-        android:clickable="false"
-        android:src="@drawable/elephant"/>
     <Button
         style="@style/buttonprompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:textAllCaps="false"
         android:id="@+id/correctAnswerTextButton"
         android:textSize="48sp"
         android:text="Elephant"
         android:clickable="false" />
 
-</RelativeLayout>
+    <ImageButton
+        android:transitionName="Correct Answer"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        android:id="@+id/correctAnswerImageButton"
+        android:clickable="false"
+        android:src="@drawable/elephant"/>
+
+
+</LinearLayout>
