@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 
@@ -27,8 +28,6 @@ public class QuestionOutroFragment extends Fragment {
     private static final String CORRECT_ANSWER = "correctAnswer";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private Word correctAnswer;
 
     private OnFragmentInteractionListener mListener;
@@ -58,8 +57,6 @@ public class QuestionOutroFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
             correctAnswer = getArguments().getParcelable(CORRECT_ANSWER);
         }
     }
@@ -69,8 +66,10 @@ public class QuestionOutroFragment extends Fragment {
                              Bundle savedInstanceState) {
         Context context = getActivity();
         View view =  inflater.inflate(R.layout.question_outro_fragment, container, false);
-        ImageButton correctAnswerButton = (ImageButton) view.findViewById(R.id.correctAnswerButton);
-        correctAnswerButton.setImageResource(correctAnswer.imageRes(context));
+        Button correctAnswerTextButton = (Button) view.findViewById(R.id.correctAnswerTextButton);
+        ImageButton correctAnswerImageButton = (ImageButton) view.findViewById(R.id.correctAnswerImageButton);
+        correctAnswerTextButton.setText(correctAnswer.getWordText());
+        correctAnswerImageButton.setImageResource(correctAnswer.imageRes(context));
         return view;
     }
 
