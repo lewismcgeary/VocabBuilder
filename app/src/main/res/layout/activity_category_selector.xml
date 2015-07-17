@@ -77,7 +77,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:text="Transport"/>
+            android:text="Transport"
+            />
     </LinearLayout>
 
 
