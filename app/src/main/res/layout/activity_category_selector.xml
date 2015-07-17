@@ -11,90 +11,117 @@
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:orientation="vertical">
-        <Button
+        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:text="Animals"
             android:tag="Animals"
-            android:onClick="startQuizActivity"/>
-        <Button
+            android:onClick="startQuizActivity"
+            android:src="@drawable/categoryanimals"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/category_icon_padding"/>
+        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:text="Body"
             android:tag="Body"
-            android:onClick="startQuizActivity"/>
-        <Button
+            android:onClick="startQuizActivity"
+            android:src="@drawable/categorybody"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/category_icon_padding"/>
+        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:text="Clothes"
             android:tag="Clothes"
-            android:onClick="startQuizActivity"/>
+            android:onClick="startQuizActivity"
+            android:src="@drawable/categoryclothes"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/category_icon_padding"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:orientation="vertical">
-        <Button
+        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:text="Colours"
             android:tag="Colours"
-            android:onClick="startQuizActivity"/>
-        <Button
+            android:onClick="startQuizActivity"
+            android:src="@drawable/categorycolours"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/category_icon_padding"/>
+        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:text="Food"
             android:tag="Food"
-            android:onClick="startQuizActivity"/>
-        <Button
+            android:onClick="startQuizActivity"
+            android:src="@drawable/categoryfood"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/category_icon_padding"/>
+        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:text="Nature"
             android:tag="Nature"
-            android:onClick="startQuizActivity"/>
+            android:onClick="startQuizActivity"
+            android:src="@drawable/categorynature"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/category_icon_padding"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:orientation="vertical">
-        <Button
+        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:text="Numbers"
             android:tag="Numbers"
-            android:onClick="startQuizActivity"/>
-        <Button
+            android:onClick="startQuizActivity"
+            android:src="@drawable/categorynumbers"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/category_icon_padding"/>
+        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:text="Things"
             android:tag="Things"
-            android:onClick="startQuizActivity"/>
-        <Button
+            android:onClick="startQuizActivity"
+            android:src="@drawable/categorythings"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/category_icon_padding"/>
+        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:text="Transport"
             android:tag="Transport"
-            android:onClick="startQuizActivity"/>
+            android:onClick="startQuizActivity"
+            android:src="@drawable/categorytransport"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/category_icon_padding"/>
     </LinearLayout>
 
 

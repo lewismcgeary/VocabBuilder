@@ -1,10 +1,5 @@
 package com.gmail.appytalkteam.appytalkcore;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
-import java.util.ArrayList;
-
 /**
  * This is supposed to implement semi-intelligent spaced repetition and dole out
  * words the user doesn't know so well
@@ -14,7 +9,7 @@ import java.util.ArrayList;
 // this class incorporates how well we know the word plus
 // The probability (which depends on how well we know it)
 public class Spacer {
-
+/**
     private class UserWord extends Word {
         public int score;
         public int box; // one to five
@@ -106,4 +101,5 @@ public class Spacer {
     public void syncDB(){
         // write the words we know and the words we don't to userwords.sqlite
     }
+ */
 }
