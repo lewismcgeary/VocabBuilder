@@ -17,7 +17,8 @@
         android:textSize="48sp"
         android:layout_marginBottom="10dp"
         android:text="Elephant"
-        android:onClick="sayPrompt"/>
+        android:onClick="sayPrompt"
+        android:transitionName="Answer Text"/>
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
