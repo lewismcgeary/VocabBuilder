@@ -37,4 +37,12 @@ public class UserWord extends Word {
         if(score<-1 & box > 1) box--;
         // if box = 5 or box = 1, we just... stay there, I guess
     }
+    public UserWord Word2User(Word wrd){
+        UserWord uwrd = new UserWord(wrd.wordText,wrd.imageLocation,wrd.audioLocation,wrd.category);
+        return uwrd;
+    }
+    public Word asWord(){
+        Word wrd = new Word(this.imageLocation,this.wordText,this.audioLocation,this.category);
+        return wrd;
+    }
 }

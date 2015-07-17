@@ -23,7 +23,7 @@ public class Vocabulary{
         String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do
         String category = settings.getString("category","Food");
         //noinspection
-        vocabularyArrayList = myDbHelper.getWordsFromDataBase(language.toUpperCase(), category);
+        vocabularyArrayList = myDbHelper.getWordsFromDataBase();// language.toUpperCase(), category);
     }
 
     // returns n randomly-selected unique words from the total set

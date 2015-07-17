@@ -123,8 +123,9 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
         return mInstance;
     }
 
-    public ArrayList<Word> getWordsFromDataBase(String language) {
+    public ArrayList<Word> getWordsFromDataBase() {
         ArrayList<Word> wordList = new ArrayList<>();
+        String language = myContext.getSharedPreferences("PrefsFile",Context.MODE_PRIVATE).getString("language","en");
         this.openDataBase();
         String wordQuery = "SELECT IMGFILE, NAME, AUDIO, Category FROM 'Vocabulary' WHERE LANG = \"" + language + "\"";
         SQLiteDatabase db = this.getReadableDatabase();
@@ -144,16 +145,17 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
 
     }
     // overloading the above method to include Category
-    public ArrayList<Word> getWordsFromDataBase(String language, String category) {
+    public ArrayList<Word> getWordsFromDataBase(String language) {
         ArrayList<Word> wordList = new ArrayList<>();
+        String category = myContext.getSharedPreferences("PrefsFile",Context.MODE_PRIVATE).getString("category","Food");
         this.openDataBase();
-        String wordQuery = "SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = \"" + language + "\" AND Category = \"" + category + "\"";
+        String wordQuery = "SELECT IMGFILE, NAME, AUDIO, Category FROM 'Vocabulary' WHERE LANG = \"" + language + "\" AND Category = \"" + category + "\"";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(wordQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
-                Word word = new Word(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                Word word = new Word(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
                 wordList.add(word);
             } while (cursor.moveToNext());
         }

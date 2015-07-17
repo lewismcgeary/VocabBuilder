@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This is supposed to implement semi-intelligent spaced repetition and dole out
@@ -14,20 +15,20 @@ import java.util.ArrayList;
 // this class incorporates how well we know the word plus
 // The probability (which depends on how well we know it)
 public class Spacer {
-
+    Context mcontext;
     ArrayList<UserWord> uservocab;
     ArrayList<UserWord> remainingvocab;
 
     public Spacer(Context context) {
         readVocab(context);
+        mcontext = context;
     }
 
     public void questionResult(Word word, int tries) {
         UserWord curword = findUserWord(word);
-        curword.setResult(2-tries); // if three tries, -1, two tries 0, one try 1
+        curword.setResult(2 - tries); // if three tries, -1, two tries 0, one try 1
         if(tries == 1) getNewWord();
         renormaliseProbabilities();
-        syncDB();
     }
 
     public UserWord findUserWord(Word wordRequested){
@@ -61,7 +62,25 @@ public class Spacer {
         remainingvocab.remove(0);
     }
 
-    public void syncDB(){
-        // write the words we know and the words we don't to userwords.sqlite
+    public ArrayList<Word> getRandomWords(int n) {
+        // return n words from uservocab
+        ArrayList<UserWord> filteredUserVocab = selectByCategory(uservocab);
+        ArrayList<Word> output = new ArrayList<>();
+        Collections.shuffle(filteredUserVocab);
+        for(int i=0;i<n;i++){
+            output.add(filteredUserVocab.get(i).asWord());
+        }
+        return output;
+    }
+
+    public ArrayList<UserWord> selectByCategory(ArrayList<UserWord> input){
+        ArrayList<UserWord> output = new ArrayList<>();
+        String currentcategory = mcontext.getSharedPreferences("PrefsFile",Context.MODE_PRIVATE).getString("category","Food");
+        for(UserWord uwrd: input){
+            if(uwrd.category.equals(currentcategory)){
+                output.add(uwrd);
+            }
+        }
+        return output;
     }
 }
