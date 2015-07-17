@@ -16,11 +16,10 @@ import java.util.ArrayList;
 public class Spacer {
 
     ArrayList<UserWord> uservocab;
-    ArrayList<Word> remainingvocab;
+    ArrayList<UserWord> remainingvocab;
 
     public Spacer(Context context) {
-        uservocab = readUserVocab(context);
-        remainingvocab = readRemainingVocab(context);
+        readVocab(context);
     }
 
     public void questionResult(Word word, int tries) {
@@ -33,9 +32,11 @@ public class Spacer {
 
     public UserWord findUserWord(Word wordRequested){
         // iterate through uservocab until the imageLocation matches
+        UserWord uWord = new UserWord("bum","bum","bum","bum");
         for(UserWord word: uservocab){
-            if(word.imageLocation.equals(wordRequested.imageLocation)) return word;
+            if(word.imageLocation.equals(wordRequested.imageLocation)) uWord = word;
         }
+        return uWord;
     }
 
     public void renormaliseProbabilities(){
@@ -49,34 +50,14 @@ public class Spacer {
         }
     }
 
-    private ArrayList<UserWord> readUserVocab(Context context) {
-        // get the words we've already learned from the database
-        if (file.exists("userwords.sqlite")) {
-
-        } else {
-            // if there is no database, create it here
-            return new ArrayList<UserWord>(); // empty!
-        }
-    }
-
-    private ArrayList<Word> readRemainingVocab(Context context){
-        // get the words we haven't yet learned from the database
-        ArrayList<Word> rvocab = new ArrayList<Word>();
-        if(fILe.exists("userwords.sqlite")){
-            // get words from there
-        } else {
-            VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
-            SharedPreferences settings = context.getSharedPreferences("PrefsFile", Context.MODE_PRIVATE);
-            String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do
-            String category = settings.getString("category", "colours"); // Should never have to default, but colours is OK if we do
-            //noinspection
-            rvocab = myDbHelper.getWordsFromDataBase(language.toUpperCase(), category);
-        }
-        return rvocab;
+    private void readVocab(Context context) {
+        SpacerDbHelper mydb = new SpacerDbHelper(context);
+        uservocab = mydb.getAllSeen();
+        remainingvocab = mydb.getAllUnseen();
     }
 
     public void getNewWord(){
-        uservocab.add(new UserWord(remainingvocab.get(0)));
+        uservocab.add(remainingvocab.get(0));
         remainingvocab.remove(0);
     }
 
