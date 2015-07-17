@@ -20,7 +20,7 @@
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
-
+        android:padding="10dp"
         android:layout_gravity="center_vertical"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
@@ -32,6 +32,7 @@
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:padding="10dp"
         android:layout_gravity="center_vertical"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
@@ -43,6 +44,7 @@
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:padding="10dp"
         android:layout_gravity="center_vertical"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
