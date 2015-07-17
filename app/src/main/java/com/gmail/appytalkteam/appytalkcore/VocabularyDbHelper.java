@@ -126,8 +126,9 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
     public ArrayList<Word> getWordsFromDataBase() {
         ArrayList<Word> wordList = new ArrayList<>();
         String language = myContext.getSharedPreferences("PrefsFile",Context.MODE_PRIVATE).getString("language","en");
+        String category = myContext.getSharedPreferences("PrefsFile",Context.MODE_PRIVATE).getString("category","Food");
         this.openDataBase();
-        String wordQuery = "SELECT IMGFILE, NAME, AUDIO, Category FROM 'Vocabulary' WHERE LANG = \"" + language + "\"";
+        String wordQuery = "SELECT IMGFILE, NAME, AUDIO, Category FROM 'Vocabulary' WHERE LANG = \"" + language.toUpperCase() + "\" AND Category = \"" + category + "\"";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(wordQuery, null);
 
@@ -149,7 +150,7 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
         ArrayList<Word> wordList = new ArrayList<>();
         String category = myContext.getSharedPreferences("PrefsFile",Context.MODE_PRIVATE).getString("category","Food");
         this.openDataBase();
-        String wordQuery = "SELECT IMGFILE, NAME, AUDIO, Category FROM 'Vocabulary' WHERE LANG = \"" + language + "\" AND Category = \"" + category + "\"";
+        String wordQuery = "SELECT IMGFILE, NAME, AUDIO, Category FROM 'Vocabulary' WHERE LANG = \"" + language.toUpperCase() + "\" AND Category = \"" + category + "\"";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(wordQuery, null);
 
