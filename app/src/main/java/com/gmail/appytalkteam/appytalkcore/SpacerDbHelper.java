@@ -51,8 +51,7 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
             String language = prefs.getString("language", "en");
-            String CREATE_CONTACTS_TABLE = "CREATE TABLE " +
-                    language +
+            String CREATE_CONTACTS_TABLE = "CREATE TABLE " + language +
                     "(" + KEY_IMG + " TEXT PRIMARY KEY," +
                     KEY_TEXT + " TEXT,"
                     + KEY_AUDIO + " TEXT" +
@@ -61,7 +60,17 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
                     KEY_BOX + " INTEGER" +
                     KEY_SEEN + " INTEGER" + ")";
             db.execSQL(CREATE_CONTACTS_TABLE);
+
+        // now to get all the words in the current language from the database
+            VocabularyDbHelper vdbh = new VocabularyDbHelper(mcontext);
+            ArrayList<Word> freshVocab = vdbh.getWordsFromDataBase();
+        for(Word wrd : freshVocab) {
+            UserWord uwrd = new UserWord(wrd.getWordText(),wrd.getImageLocation(),wrd.getAudioLocation(),wrd.getCategory());
+            addWord(uwrd);
+        }
+
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -104,7 +113,14 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                UserWord word = new UserWord(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),Integer.parseInt(cursor.getString(4)),Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(6)));
+                UserWord word = new UserWord(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        Integer.parseInt(cursor.getString(4)),
+                        Integer.parseInt(cursor.getString(5)),
+                        Integer.parseInt(cursor.getString(6)));
                 wordList.add(word);
             } while (cursor.moveToNext());
         }
@@ -124,7 +140,14 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                UserWord word = new UserWord(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),Integer.parseInt(cursor.getString(4)),Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(6)));
+                UserWord word = new UserWord(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        Integer.parseInt(cursor.getString(4)),
+                        Integer.parseInt(cursor.getString(5)),
+                        Integer.parseInt(cursor.getString(6)));
                 wordList.add(word);
             } while (cursor.moveToNext());
         }
@@ -144,7 +167,14 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                UserWord word = new UserWord(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),Integer.parseInt(cursor.getString(4)),Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(6)));
+                UserWord word = new UserWord(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        Integer.parseInt(cursor.getString(4)),
+                        Integer.parseInt(cursor.getString(5)),
+                        Integer.parseInt(cursor.getString(6)));
                 wordList.add(word);
             } while (cursor.moveToNext());
         }
