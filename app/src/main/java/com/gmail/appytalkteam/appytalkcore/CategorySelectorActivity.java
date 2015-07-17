@@ -1,6 +1,7 @@
 package com.gmail.appytalkteam.appytalkcore;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,8 +25,14 @@ public class CategorySelectorActivity extends AppCompatActivity {
     }
     public void startQuizActivity(View view){
         String category = view.getTag().toString();
+        SharedPreferences settings = getSharedPreferences("PrefsFile", MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("category", category);
+
+        // Commit the edits!
+        editor.commit();
+
         Intent intent = new Intent(this, QuizActivity.class);
-        intent.putExtra("category", category);
         startActivity(intent);
 
     }

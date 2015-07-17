@@ -39,7 +39,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     int totalQuestions;
     int nChoices;
     int numberOfSoundEffects;
-    String category;
+
     // Soundloader for our quiz
     // This can be upgraded to Soundpool.Builder in a few months
     @SuppressWarnings("deprecation")
@@ -58,8 +58,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         } else {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
         }
-        Bundle extras = getIntent().getExtras();
-        category = extras.getString("category");
+
         initializeVariables();
         setContentView(R.layout.quiz_activity);
         disableOrientation(); // Because it crashes the sound-loading progress stars
@@ -113,7 +112,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
         @Override
         protected Vocabulary doInBackground(Void ... nope) {
-            Vocabulary vocab = new Vocabulary(myCtx, category);
+            Vocabulary vocab = new Vocabulary(myCtx);
         return vocab;
         }
 
