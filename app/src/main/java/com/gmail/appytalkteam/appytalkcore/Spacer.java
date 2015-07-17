@@ -62,7 +62,7 @@ public class Spacer {
     private ArrayList<Word> readRemainingVocab(Context context){
         // get the words we haven't yet learned from the database
         ArrayList<Word> rvocab = new ArrayList<Word>();
-        if(file.exists("userwords.sqlite")){
+        if(fILe.exists("userwords.sqlite")){
             // get words from there
         } else {
             VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
