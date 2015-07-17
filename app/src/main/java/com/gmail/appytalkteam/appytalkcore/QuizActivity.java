@@ -13,6 +13,7 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewCompat;
@@ -52,6 +53,11 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        } else {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+        }
         Bundle extras = getIntent().getExtras();
         category = extras.getString("category");
         initializeVariables();
@@ -217,16 +223,22 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
     private void transitionToQuestionOutro(View view, Word correctAnswer){
         QuestionOutroFragment questionOutroFragment = QuestionOutroFragment.newInstance(correctAnswer);
-        Slide slide = new Slide();
-        slide.setDuration(600);
-        TransitionSet imageTransition = new TransitionSet();
-        imageTransition.setDuration(600);
-        imageTransition.addTransition(new ChangeBounds());
-        questionOutroFragment.setSharedElementEnterTransition(imageTransition);
+        // TODO: remove version check when API 21 is minimum supported
+        if (Build.VERSION.SDK_INT>=21) {
+            Slide slide = new Slide();
+            slide.setDuration(600);
+            TransitionSet imageTransition = new TransitionSet();
+            imageTransition.setDuration(600);
+            imageTransition.addTransition(new ChangeBounds());
+            questionOutroFragment.setSharedElementEnterTransition(imageTransition);
+        }
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ViewCompat.setTransitionName(view, "Correct Answer");
-        fragmentTransaction.addSharedElement(view, "Correct Answer");
+        // TODO: remove version check when API 21 is minimum supported
+        if (Build.VERSION.SDK_INT>=21) {
+            ViewCompat.setTransitionName(view, "Correct Answer");
+            fragmentTransaction.addSharedElement(view, "Correct Answer");
+        }
         fragmentTransaction.replace(R.id.question_frame, questionOutroFragment);
         fragmentTransaction.commit();
     }
@@ -265,9 +277,12 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         if (quiz.getQuestionNumber() < totalQuestions){
             int tester = quiz.getQuestionNumber();
             QuestionFragment nextQuestion = QuestionFragment.newInstance(quiz.getCurrentQuestion());
+            // TODO: remove version check when API 21 is minimum supported
+            if (Build.VERSION.SDK_INT>=21){
             Slide slide = new Slide();
             slide.setDuration(600);
             nextQuestion.setEnterTransition(slide);
+            }
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.question_frame, nextQuestion);
