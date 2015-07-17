@@ -17,12 +17,12 @@ public class Vocabulary{
     // When new Vocabulary object is created, add Word objects to vocabularyArrayList.
     // Word objects are based on available entries for the selected language in vocabulary.sqlite
     // database
-    public Vocabulary(Context context){
+    public Vocabulary(Context context, String category){
         VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context);
         SharedPreferences settings = context.getSharedPreferences("PrefsFile", Context.MODE_PRIVATE);
         String language = settings.getString("language", "en"); // Should never have to default, but en is OK if we do
         //noinspection
-        vocabularyArrayList = myDbHelper.getWordsFromDataBase(language.toUpperCase());
+        vocabularyArrayList = myDbHelper.getWordsFromDataBase(language.toUpperCase(), category);
     }
 
     // returns n randomly-selected unique words from the total set

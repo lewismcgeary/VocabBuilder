@@ -17,19 +17,24 @@
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:text="Animals"
-            />
+            android:tag="Animals"
+            android:onClick="startQuizActivity"/>
         <Button
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:text="Body"/>
+            android:text="Body"
+            android:tag="Body"
+            android:onClick="startQuizActivity"/>
         <Button
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:text="Clothes"/>
+            android:text="Clothes"
+            android:tag="Clothes"
+            android:onClick="startQuizActivity"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
@@ -41,19 +46,25 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:text="Colours"/>
+            android:text="Colours"
+            android:tag="Colours"
+            android:onClick="startQuizActivity"/>
         <Button
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:text="Food"/>
+            android:text="Food"
+            android:tag="Food"
+            android:onClick="startQuizActivity"/>
         <Button
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:text="Nature"/>
+            android:text="Nature"
+            android:tag="Nature"
+            android:onClick="startQuizActivity"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
@@ -65,20 +76,25 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:text="Numbers"/>
+            android:text="Numbers"
+            android:tag="Numbers"
+            android:onClick="startQuizActivity"/>
         <Button
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:text="Things"/>
+            android:text="Things"
+            android:tag="Things"
+            android:onClick="startQuizActivity"/>
         <Button
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:text="Transport"
-            />
+            android:tag="Transport"
+            android:onClick="startQuizActivity"/>
     </LinearLayout>
 
 

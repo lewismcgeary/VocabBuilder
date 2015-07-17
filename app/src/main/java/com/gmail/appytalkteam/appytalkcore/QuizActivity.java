@@ -22,8 +22,6 @@ import android.transition.Slide;
 import android.transition.TransitionSet;
 import android.view.Surface;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -40,7 +38,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     int totalQuestions;
     int nChoices;
     int numberOfSoundEffects;
-
+    String category;
     // Soundloader for our quiz
     // This can be upgraded to Soundpool.Builder in a few months
     @SuppressWarnings("deprecation")
@@ -54,6 +52,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+        category = extras.getString("category");
         initializeVariables();
         setContentView(R.layout.quiz_activity);
         disableOrientation(); // Because it crashes the sound-loading progress stars
@@ -107,7 +107,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
         @Override
         protected Vocabulary doInBackground(Void ... nope) {
-            Vocabulary vocab = new Vocabulary(myCtx);
+            Vocabulary vocab = new Vocabulary(myCtx, category);
         return vocab;
         }
 
