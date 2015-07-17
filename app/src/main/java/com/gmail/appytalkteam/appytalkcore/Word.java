@@ -52,6 +52,12 @@ public class Word implements Parcelable{
         dest.writeString(audioLocation);
         dest.writeString(category);
     }
+
+    // default constructor for no particular reason other than stopping errors
+    public Word(){
+        // empty!
+    }
+
     public Word(String image, String word, String audio){
         imageLocation=image;
         wordText=word;

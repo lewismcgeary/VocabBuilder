@@ -15,29 +15,6 @@ import java.util.ArrayList;
 // The probability (which depends on how well we know it)
 public class Spacer {
 
-    private class UserWord extends Word {
-        public int score;
-        public int box; // one to five
-        public double probability; // == 1/box but then normalised
-
-        public UserWord(String wordtext, String imagelocation, String audiolocation, String Category){
-            score = 0;
-            box = 1;
-            probability = 0.1;
-            wordText = wordtext;
-            imageLocation = imagelocation;
-            audioLocation = audiolocation;
-            category = Category;
-        }
-
-        public void setResult(int i){
-            score = score+i;
-            if(score>5 & box < 5) box++;
-            if(score<-1 & box > 1) box--;
-            // if box = 5 or box = 1, we just... stay there, I guess
-        }
-    }
-
     ArrayList<UserWord> uservocab;
     ArrayList<Word> remainingvocab;
 
