@@ -27,7 +27,17 @@ public class Question {
         guessed = new boolean[nOptions];
         for(int i = 0; i <nOptions; i++) guessed[i] = false;
     }
-
+    // category overload for Question
+    public Question(Context ctx, Vocabulary vocab, String category){
+        Random rn = new Random();
+        this.myCtx = ctx;
+        Resources res = myCtx.getResources();//Resources.getSystem();
+        int nOptions = res.getInteger(R.integer.numberOfChoices);
+        words = vocab.getRandomWords(nOptions, category);
+        Answer = rn.nextInt(nOptions);
+        guessed = new boolean[nOptions];
+        for(int i = 0; i <nOptions; i++) guessed[i] = false;
+    }
     public ArrayList<Word> getWords() {
         return words;
     }

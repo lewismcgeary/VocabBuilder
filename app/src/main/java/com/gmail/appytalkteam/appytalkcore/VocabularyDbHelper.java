@@ -126,13 +126,13 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
     public ArrayList<Word> getWordsFromDataBase(String language) {
         ArrayList<Word> wordList = new ArrayList<>();
         this.openDataBase();
-        String wordQuery = "SELECT IMGFILE, NAME, AUDIO FROM 'Vocabulary' WHERE LANG = \"" + language + "\"";
+        String wordQuery = "SELECT IMGFILE, NAME, AUDIO, Category FROM 'Vocabulary' WHERE LANG = \"" + language + "\"";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(wordQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
-                Word word = new Word(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                Word word = new Word(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
                 wordList.add(word);
             } while (cursor.moveToNext());
         }
@@ -143,7 +143,7 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
 
 
     }
-    // overloading this method to include Category
+    // overloading the above method to include Category
     public ArrayList<Word> getWordsFromDataBase(String language, String category) {
         ArrayList<Word> wordList = new ArrayList<>();
         this.openDataBase();

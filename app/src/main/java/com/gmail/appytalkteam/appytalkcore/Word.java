@@ -27,6 +27,7 @@ public class Word implements Parcelable{
     public String wordText;
     public String imageLocation;
     public String audioLocation;
+    public String category="None";
 
     public void setWordText(String wordText) {
         this.wordText = wordText;
@@ -40,25 +41,35 @@ public class Word implements Parcelable{
         this.audioLocation = audioLocation;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
     //
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(imageLocation);
         dest.writeString(wordText);
         dest.writeString(audioLocation);
+        dest.writeString(category);
     }
     public Word(String image, String word, String audio){
         imageLocation=image;
         wordText=word;
         audioLocation=audio;
     }
+    // overloading to get category in there
+    public Word(String image, String word, String audio, String Category){
+        imageLocation=image;
+        wordText=word;
+        audioLocation=audio;
+        category = Category;
+    }
+
     private Word(Parcel in){
         imageLocation = in.readString();
         wordText = in.readString();
         audioLocation = in.readString();
-
-
-
+        category = in.readString();
     }
 
     public int imageRes(Context context){
@@ -72,6 +83,7 @@ public class Word implements Parcelable{
     String getWordText(){
         return wordText;
     }
+    String getCategory() { return category;}
 
     String getImageLocation(){
         return imageLocation.replaceFirst("[.][^.]+$", "");

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,11 +14,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.Locale;
 
-public class LanguageSelectorActivity extends AppCompatActivity implements OnTouchListener {
+public class CategorySelectorActivity extends AppCompatActivity implements OnTouchListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +39,7 @@ public class LanguageSelectorActivity extends AppCompatActivity implements OnTou
     public boolean onTouch(View view, MotionEvent event){
         switch(event.getAction()){
             case
-            MotionEvent.ACTION_DOWN:
+                    MotionEvent.ACTION_DOWN:
                 String langRequested = view.getTag().toString();
                 setLanguage(langRequested);
 
@@ -66,7 +64,7 @@ public class LanguageSelectorActivity extends AppCompatActivity implements OnTou
         LinearLayout sublayout = (LinearLayout) findViewById(R.id.miniflag_frame);
         for(int i =0; i < locales.length; i++) {
             if(i==0){  // big flag
-            b = (ImageButton) layout.getChildAt(i);
+                b = (ImageButton) layout.getChildAt(i);
             } else {  // little flags
                 b = (ImageButton) sublayout.getChildAt(i-1);
             }
@@ -112,25 +110,6 @@ public class LanguageSelectorActivity extends AppCompatActivity implements OnTou
     public void startQuizActivity(){
         Intent intent = new Intent(this, QuizActivity.class);
         startActivity(intent);
-
-    }
-    private Boolean exit = false;
-    @Override
-    public void onBackPressed() {
-        if (exit) {
-            finish(); // finish activity
-        } else {
-            Toast.makeText(this, "Press Back again to Exit.",
-                    Toast.LENGTH_SHORT).show();
-            exit = true;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    exit = false;
-                }
-            }, 3 * 1000);
-
-        }
 
     }
 }
