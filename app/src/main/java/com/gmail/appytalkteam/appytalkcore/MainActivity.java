@@ -11,8 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.io.IOException;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -54,17 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Context... context) {
-            VocabularyDbHelper myDbHelper = new VocabularyDbHelper(context[0]);
+            VocabularyDbHelperWithAssetHelper myDbHelper = new VocabularyDbHelperWithAssetHelper(context[0]);
+             myDbHelper.createDataBase();
 
-            try {
-
-                myDbHelper.createDataBase();
-
-            } catch (IOException ioe) {
-
-                throw new Error("Unable to create database");
-
-            }
             return null;
         }
     }
