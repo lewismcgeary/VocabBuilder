@@ -1,7 +1,6 @@
 package com.gmail.appytalkteam.appytalkcore;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,14 +73,17 @@ public class Spacer {
         ArrayList<UserWord> filteredUserVocab = renormaliseProbabilities(selectByCategory(uservocab));
         ArrayList<Word> output = new ArrayList<>();
         Random rn = new Random();
-        float myVal = rn.nextFloat();
-        float probSum = (float) 0.0;
         Collections.shuffle(filteredUserVocab);
+
         for (int j = 0; j < n; j++) {
+            float myVal = rn.nextFloat();
+            float probSum = (float) 0.0;
             for (int i = 0; i < filteredUserVocab.size(); i++) {
                 probSum += filteredUserVocab.get(i).probability;
                 if (myVal <= probSum) {
                     output.add(filteredUserVocab.get(i).asWord());
+                    filteredUserVocab.remove(i);
+                    break;
                 }
             }
         }

@@ -3,7 +3,6 @@ package com.gmail.appytalkteam.appytalkcore;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -51,7 +50,7 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
             String language = prefs.getString("language", "en");
-            String CREATE_CONTACTS_TABLE = "CREATE TABLE " + language +
+            String CREATE_TABLE = "CREATE TABLE " + language +
                     "(" + KEY_IMG + " TEXT PRIMARY KEY," +
                     KEY_TEXT + " TEXT,"
                     + KEY_AUDIO + " TEXT" +
@@ -59,7 +58,7 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
                     KEY_SCORE + " INTEGER" +
                     KEY_BOX + " INTEGER" +
                     KEY_SEEN + " INTEGER" + ")";
-            db.execSQL(CREATE_CONTACTS_TABLE);
+            db.execSQL(CREATE_TABLE);
 
         // now to get all the words in the current language from the database
             VocabularyDbHelper vdbh = new VocabularyDbHelper(mcontext);
