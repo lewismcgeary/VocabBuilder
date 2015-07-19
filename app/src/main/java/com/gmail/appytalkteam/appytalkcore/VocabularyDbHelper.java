@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class VocabularyDbHelper extends SQLiteOpenHelper {
     private final Context myContext;
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static String DB_PATH = "/data/data/com.gmail.appytalkteam.appytalkcore/databases/";
 
     private static final String DATABASE_NAME = "vocabulary.sqlite";
