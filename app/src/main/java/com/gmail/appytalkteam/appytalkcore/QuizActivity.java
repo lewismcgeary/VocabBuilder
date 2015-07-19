@@ -237,6 +237,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         if (Build.VERSION.SDK_INT>=21) {
             ViewCompat.setTransitionName(view, "Correct Answer");
             fragmentTransaction.addSharedElement(view, "Correct Answer");
+        } else {
+            fragmentTransaction.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
         }
         fragmentTransaction.replace(R.id.question_frame, questionOutroFragment);
         fragmentTransaction.commit();
@@ -314,6 +316,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             if (Build.VERSION.SDK_INT>=21) {
                 ViewCompat.setTransitionName(findViewById(R.id.promptText), "Answer Text");
                 fragmentTransaction.addSharedElement(findViewById(R.id.promptText), "Answer Text");
+            } else {
+                fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.slide_off_to_left);
             }
             fragmentTransaction.replace(R.id.question_frame, nextQuestion);
             fragmentTransaction.commit();}
