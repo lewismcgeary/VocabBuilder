@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.ChangeBounds;
+import android.transition.ChangeImageTransform;
 import android.transition.Slide;
 import android.transition.TransitionSet;
 import android.view.Surface;
@@ -229,6 +230,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             TransitionSet imageTransition = new TransitionSet();
             imageTransition.setDuration(600);
             imageTransition.addTransition(new ChangeBounds());
+            imageTransition.addTransition(new ChangeImageTransform());
             questionOutroFragment.setSharedElementEnterTransition(imageTransition);
         }
         FragmentManager fragmentManager = getFragmentManager();
