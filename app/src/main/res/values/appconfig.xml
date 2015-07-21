@@ -3,6 +3,7 @@
    <integer name="numberOfQuestions">7</integer>
     <integer name="numberOfChoices">3</integer>
     <integer name="numberOfSoundEffects">2</integer>
+    <string name="locale">none</string>
     <string-array name="locales_array">
         <item>en</item>
         <item>es</item>

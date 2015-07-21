@@ -2,6 +2,8 @@ package com.gmail.appytalkteam.appytalkcore;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.splash_screen);
         CreateDatabaseTask createDatabaseTask = new CreateDatabaseTask();
         createDatabaseTask.execute(this);
-
         // little pause for our splashscreen
         int TIMEOUT = 2500;
         new Handler().postDelayed(new Runnable() {
@@ -36,16 +37,25 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
+                Resources res = getResources();
+                String locale = res.getString(R.string.locale);
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                Intent intent = new Intent(MainActivity.this, LanguageSelectorActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                if(locale.equals("none")){
+                    Intent intent = new Intent(MainActivity.this, LanguageSelectorActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
 
-                // close this activity
-                finish();
+                    // close this activity
+                    finish();
+                } else {
+                    setLanguage(locale);
+                    Intent intent = new Intent(MainActivity.this, CategorySelectorActivity.class);
+                    startActivity(intent);
+                }
             }
-        }, 2500);
+        }, TIMEOUT);
+
     }
 
     private class CreateDatabaseTask extends AsyncTask <Context, Void, Void>{
@@ -80,4 +90,13 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void setLanguage(String langRequested){
+        SharedPreferences settings = getSharedPreferences("PrefsFile", MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("language", langRequested);
+
+        // Commit the edits!
+        editor.commit();
+    }
+
 }
