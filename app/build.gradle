@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
-
     defaultConfig {
         applicationId "com.gmail.appytalkteam.appytalkcore"
         minSdkVersion 15
@@ -17,6 +16,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        russian {
+            applicationId 'com.gmail.appytalkteam.appytalkcore.ru'
+
+        }
+        english {
+            applicationId 'com.gmail.appytalkteam.appytalkcore.en'
+        }
+    }
 }
 
 dependencies {
@@ -25,5 +33,4 @@ dependencies {
     compile 'com.android.support:percent:22.2.0'
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
-
 }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class VocabularyDbHelper extends SQLiteOpenHelper {
     private final Context myContext;
     private static final int DATABASE_VERSION = 2;
-    private static String DB_PATH = "/data/data/com.gmail.appytalkteam.appytalkcore/databases/";
+    private static String DB_PATH;
 
     private static final String DATABASE_NAME = "vocabulary.sqlite";
 
@@ -29,6 +29,7 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
     public VocabularyDbHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.myContext = context;
+        DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
     }
 
     public void createDataBase() throws IOException{
