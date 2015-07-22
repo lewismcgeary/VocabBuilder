@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:padding="@dimen/activity_horizontal_margin"
-    android:gravity="center_horizontal">
+    android:layout_height="match_parent" >
 
     <Button
         style="@style/buttonprompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_marginTopPercent="1%"
         android:textAllCaps="false"
         android:id="@+id/correctAnswerTextButton"
         android:textSize="48sp"
         android:text="Elephant"
-        android:clickable="false" />
+        android:clickable="false"
+        android:layout_centerHorizontal="true"
+        />
 
     <ImageButton
         android:transitionName="Correct Answer"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_marginPercent="1%"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
         android:id="@+id/correctAnswerImageButton"
         android:clickable="false"
-        android:src="@drawable/elephant"/>
+        android:src="@drawable/elephant"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/correctAnswerTextButton"
+        />
 
 
-</LinearLayout>
+</android.support.percent.PercentRelativeLayout>
