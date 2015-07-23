@@ -19,10 +19,12 @@ android {
     productFlavors {
         russian {
             applicationId 'com.gmail.appytalkteam.appytalkcore.ru'
-
         }
         english {
             applicationId 'com.gmail.appytalkteam.appytalkcore.en'
+        }
+        global {
+            applicationId 'com.gmail.appytalkteam.appytalkcore.global'
         }
     }
 }
