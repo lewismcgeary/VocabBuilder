@@ -325,8 +325,13 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             fragmentTransaction.commit();}
         else{
             quizSounds.release();
-            Intent intent = new Intent(this, LanguageSelectorActivity.class);
-            startActivity(intent);
+            if(getResources().getString(R.string.locale).equals("global")) {
+                Intent intent = new Intent(this, LanguageSelectorActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(this, CategorySelectorActivity.class);
+                startActivity(intent);
+            }
             this.finish();
         }
     }
