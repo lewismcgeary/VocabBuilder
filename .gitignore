@@ -5,3 +5,10 @@
 .DS_Store
 /build
 /captures
+/buildsupport/Audio/README
+/Graphics/**/bitmap
+*.aup
+*.au
+*.mp3
+.R*
+*.Rproj
