@@ -36,7 +36,7 @@ import java.util.Random;
  * Created by Lewis on 02/07/15.
  */
 public class QuizActivity extends AppCompatActivity implements QuestionFragment.OnFragmentInteractionListener, QuestionOutroFragment.OnFragmentInteractionListener {
-// Application variables defined in appconfig.xml and set with initializeVariables()
+// Application variables defined in flavourconfig.xml and set with initializeVariables()
     int totalQuestions;
     int nChoices;
     int numberOfSoundEffects;
@@ -272,8 +272,13 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         }
         else {
             quizSounds.release();
-            Intent intent = new Intent(this, LanguageSelectorActivity.class);
-            startActivity(intent);
+            if(getResources().getString(R.string.locale).equals("global")) {
+                Intent intent = new Intent(this, LanguageSelectorActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(this, CategorySelectorActivity.class);
+                startActivity(intent);
+            }
             this.finish();
         }
     }
@@ -299,6 +304,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     }
     public void displayQuestion(){
         enableOrientation();
+        // TODO:if statement may be unnecessary as end of quiz is checked in newQuestion method
         if (quiz.getQuestionNumber() < totalQuestions){
             int tester = quiz.getQuestionNumber();
             QuestionFragment nextQuestion = QuestionFragment.newInstance(quiz.getCurrentQuestion());
@@ -325,8 +331,13 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             fragmentTransaction.commit();}
         else{
             quizSounds.release();
-            Intent intent = new Intent(this, LanguageSelectorActivity.class);
-            startActivity(intent);
+            if(getResources().getString(R.string.locale).equals("global")) {
+                Intent intent = new Intent(this, LanguageSelectorActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(this, CategorySelectorActivity.class);
+                startActivity(intent);
+            }
             this.finish();
         }
     }
