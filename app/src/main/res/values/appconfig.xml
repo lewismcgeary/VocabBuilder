@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <integer name="numberOfQuestions">7</integer>
+    <string name="app_name">Appy Talk</string>
+    <integer name="numberOfQuestions">7</integer>
     <integer name="numberOfChoices">3</integer>
     <integer name="numberOfSoundEffects">2</integer>
     <string name="locale">none</string>
