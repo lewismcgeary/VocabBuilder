@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 String locale = res.getString(R.string.locale);
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                if(locale.equals("none")){
+                if(locale.equals("global")){
                     Intent intent = new Intent(MainActivity.this, LanguageSelectorActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
