@@ -1,6 +1,6 @@
 ### Building our datafiles
 
-The main script is datamunger.R (so you need to install R with packages "downloader", "rsqlite", and "gnumeric"
+The main script is datamunger.R (so you need to install [R](https://cran.r-project.org/bin/macosx/) with packages "downloader", "rsqlite", and "gnumeric"
 
 wordsdb.ods contains the vocabulary and information used in datamunger.R
 
