@@ -1,0 +1,7 @@
+The sqlite database is complete, and there are corresponding images and audio files for every reference in there. 
+
+wordsdb.odb contains a formula which makes it slightly easier to enter all the filenames for new words, but then it should be saved as wordsdb.csv
+
+Delete the current vocabulary.sqlite, then run csv2sqlite.R to regenerate the DB.
+
+

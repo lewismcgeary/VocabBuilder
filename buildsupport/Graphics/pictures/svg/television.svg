@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 13.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 14948)  -->
+<svg
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:cc="http://web.resource.org/cc/"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:ns1="http://sozi.baierouge.fr"
+    id="Layer_1"
+    enable-background="new 0 0 432 360"
+    xml:space="preserve"
+    viewBox="0 0 432 360"
+    version="1.1"
+    y="0px"
+    x="0px"
+  >
+<radialGradient
+      id="SVGID_1_"
+      gradientUnits="userSpaceOnUse"
+      cy="283.62"
+      cx="214.09"
+      r="79.784"
+    >
+	<stop
+        style="stop-color:#FFFFFF"
+        offset="0"
+    />
+	<stop
+        style="stop-color:#000000"
+        offset="1"
+    />
+</radialGradient
+  >
+<path
+      d="m110.19 318.44h211.63s-35.62-17.205-105.81-17.205c-70.2 0-105.82 17.2-105.82 17.2z"
+      fill="url(#SVGID_1_)"
+  />
+<radialGradient
+      id="SVGID_2_"
+      gradientUnits="userSpaceOnUse"
+      cy="280.07"
+      cx="186.45"
+      gradientTransform="matrix(.6964 0 0 1 65.576 0)"
+      r="135.21"
+    >
+	<stop
+        style="stop-color:#FFFFFF"
+        offset="0"
+    />
+	<stop
+        style="stop-color:#000000"
+        offset="1"
+    />
+</radialGradient
+  >
+<path
+      d="m241.89 269.49h-51.783v38.146s12.584 2.11 25.892 2.11 25.891-2.11 25.891-2.11v-38.15z"
+      fill="url(#SVGID_2_)"
+  />
+<radialGradient
+      id="SVGID_3_"
+      gradientUnits="userSpaceOnUse"
+      cy="-95.898"
+      cx="-162.38"
+      r="466.2"
+    >
+	<stop
+        style="stop-color:#FFFFFF"
+        offset="0"
+    />
+	<stop
+        style="stop-color:#000000"
+        offset="1"
+    />
+</radialGradient
+  >
+<rect
+      y="33.652"
+      x="30.206"
+      height="237.61"
+      width="371.59"
+      fill="url(#SVGID_3_)"
+  />
+<radialGradient
+      id="SVGID_4_"
+      gradientUnits="userSpaceOnUse"
+      cy="32.737"
+      cx="25.344"
+      r="403.53"
+    >
+	<stop
+        style="stop-color:#FFFFFF"
+        offset="0"
+    />
+	<stop
+        style="stop-color:#000000"
+        offset="1"
+    />
+</radialGradient
+  >
+<rect
+      height="179.1"
+      width="318.4"
+      stroke="#000000"
+      y="58.476"
+      x="56.802"
+      stroke-width=".8866"
+      fill="url(#SVGID_4_)"
+  />
+<radialGradient
+      id="SVGID_5_"
+      gradientUnits="userSpaceOnUse"
+      cy="310.34"
+      cx="214.09"
+      r="76.748"
+    >
+	<stop
+        style="stop-color:#FFFFFF"
+        offset="0"
+    />
+	<stop
+        style="stop-color:#000000"
+        offset="1"
+    />
+</radialGradient
+  >
+<rect
+      y="318.44"
+      x="110.19"
+      height="7.906"
+      width="211.63"
+      fill="url(#SVGID_5_)"
+  />
+<circle
+      r="7.408"
+      cy="252.64"
+      stroke="#F2F2F2"
+      cx="216"
+      stroke-width=".777"
+      fill="#CCCCCC"
+  />
+<circle
+      cy="252.64"
+      cx="216"
+      r="4.651"
+      fill="#F2F2F2"
+  />
+<metadata
+    ><rdf:RDF
+      ><cc:Work
+        ><dc:format
+          >image/svg+xml</dc:format
+        ><dc:type
+            rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+        /><cc:license
+            rdf:resource="http://creativecommons.org/licenses/publicdomain/"
+        /><dc:publisher
+          ><cc:Agent
+              rdf:about="http://openclipart.org/"
+            ><dc:title
+              >Openclipart</dc:title
+            ></cc:Agent
+          ></dc:publisher
+        ><dc:title
+          >HDTV</dc:title
+        ><dc:date
+          >2011-05-10T06:16:15</dc:date
+        ><dc:description
+          >An illustration of a hi-def television.</dc:description
+        ><dc:source
+          >https://openclipart.org/detail/137809/hdtv-by-jgm104</dc:source
+        ><dc:creator
+          ><cc:Agent
+            ><dc:title
+              >jgm104</dc:title
+            ></cc:Agent
+          ></dc:creator
+        ><dc:subject
+          ><rdf:Bag
+            ><rdf:li
+              >definition</rdf:li
+            ><rdf:li
+              >drawing</rdf:li
+            ><rdf:li
+              >hdtv</rdf:li
+            ><rdf:li
+              >hi-def</rdf:li
+            ><rdf:li
+              >high</rdf:li
+            ><rdf:li
+              >high definition</rdf:li
+            ><rdf:li
+              >illustration</rdf:li
+            ><rdf:li
+              >television</rdf:li
+            ><rdf:li
+              >tv</rdf:li
+            ></rdf:Bag
+          ></dc:subject
+        ></cc:Work
+      ><cc:License
+          rdf:about="http://creativecommons.org/licenses/publicdomain/"
+        ><cc:permits
+            rdf:resource="http://creativecommons.org/ns#Reproduction"
+        /><cc:permits
+            rdf:resource="http://creativecommons.org/ns#Distribution"
+        /><cc:permits
+            rdf:resource="http://creativecommons.org/ns#DerivativeWorks"
+        /></cc:License
+      ></rdf:RDF
+    ></metadata
+  ></svg
+>

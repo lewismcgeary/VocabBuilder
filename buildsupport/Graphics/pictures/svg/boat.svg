@@ -1,0 +1,426 @@
+<?xml version="1.0"?>
+<svg
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:ns1="http://sozi.baierouge.fr"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    id="svg2"
+    viewBox="0 0 551.54 504.34"
+    version="1.0"
+    y="0"
+    x="0"
+  >
+  <g
+      id="layer1"
+      transform="matrix(.73891 0 0 .73891 -105.5 -22.313)"
+    >
+    <g
+        id="g2431"
+      >
+      <path
+          id="path2429"
+          d="m347.28 693.94c77.93-2.36-4.79-2.04-34.59 3.46-29.8 5.51-176.58 12.12-87.17 11.02 89.4-1.1 640.44 11.01 608.34-1.1-32.09-12.12-123.79-12.12-123.79-12.12l-362.79-1.26z"
+          fill-opacity=".41081"
+          fill="#000065"
+          fill-rule="evenodd"
+      />
+      <g
+          id="g2357"
+          transform="matrix(1.2324 0 0 1.2324 16.111 -7.0192)"
+        >
+        <path
+            id="path2293"
+            d="m496.97 276.53l96.85-105.21s50.1 113.55 68.47 172 38.4 126.91 38.4 126.91l-208.73 43.42 5.01-237.12z"
+            fill-rule="evenodd"
+            stroke="#000"
+            stroke-width="2.56"
+            fill="#fffff9"
+        />
+        <path
+            id="path2285"
+            d="m497.63 67.789l-13.36 485.94"
+            stroke="#000"
+            stroke-width="6.75"
+            fill="none"
+        />
+        <path
+            id="path2283"
+            d="m362.37 109.54l-23.38 437.51"
+            stroke="#000"
+            stroke-width="6.875"
+            fill="none"
+        />
+        <path
+            id="path2291"
+            d="m208.74 513.65s50.09-76.82 78.48-123.57c28.39-46.76 50.1-86.84 50.1-86.84v207.07s-40.08 1.67-70.14 5.01-58.44-1.67-58.44-1.67z"
+            fill-rule="evenodd"
+            stroke="#000"
+            stroke-width="2.56"
+            fill="#fffff9"
+        />
+        <path
+            id="path2281"
+            d="m214.9 530.37l-108.63-17.71"
+            stroke="#000"
+            stroke-width="7"
+            fill="none"
+        />
+        <path
+            id="path2275"
+            d="m198 528.09s186 12 246 10 114-6 138-4 112-18 92-6 28 10-38 16-162 14-210 10-142-12-172-16-56-10-56-10z"
+            fill-rule="evenodd"
+            stroke="#000"
+            stroke-width="2.75"
+            fill="#253b59"
+        />
+        <path
+            id="path2273"
+            d="m194 526.09l44 50s132-4 202 0 162-2 174-4 54-22 60-26 4-18 4-18-10 10-64 14-156 10-202 6-112-6-146-12-72-10-72-10z"
+            fill-rule="evenodd"
+            stroke="#000"
+            stroke-width="2.75"
+            fill="#d7e7ff"
+        />
+        <path
+            id="path2277"
+            d="m666.39 545.95s-20.71 13.02-36.75 20.35c-16.03 7.32-31.4 8.13-187.74 9.76-29.4 0-28.73-1.63-39.42-2.44 22.72-0.81 138.3 0 213.8-11.39 37.41-9.77 50.11-16.28 50.11-16.28z"
+            fill-opacity=".2973"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2279"
+            d="m207 535.91l31.88 36.61 63.76-1.18s-25.97 5.9-56.67-9.45-38.97-25.98-38.97-25.98z"
+            fill-opacity=".2"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2289"
+            d="m327.3 306.58s-85.17 83.5-113.55 106.88c-28.39 23.37-101.87 95.18-101.87 95.18s65.13-15.03 98.53-18.37c33.39-3.34 50.09-6.68 50.09-6.68l66.8-177.01z"
+            fill-rule="evenodd"
+            stroke="#000"
+            stroke-width="2.56"
+            fill="#fffff9"
+        />
+        <path
+            id="path2287"
+            d="m203.73 371.71s55.1-88.51 81.82-126.91c26.72-38.41 66.8-101.87 66.8-101.87s-13.36 61.79-16.7 93.52-3.34 76.81-3.34 76.81-31.73 6.68-63.46 20.04-65.12 38.41-65.12 38.41z"
+            fill-rule="evenodd"
+            stroke="#000"
+            stroke-width="2.56"
+            fill="#fffff9"
+        />
+        <path
+            id="path2295"
+            d="m357.36 319.94l101.86-93.51s10.02 43.42 13.36 81.82c3.34 38.41 13.36 195.38 13.36 195.38l-143.61 8.35 15.03-192.04z"
+            fill-rule="evenodd"
+            stroke="#000"
+            stroke-width="2.56"
+            fill="#fafaf3"
+        />
+        <path
+            id="path2327"
+            d="m344.79 510.3l14.17-188.93 99.19-92.1 14.17 82.65 14.17 191.29-141.7 7.09z"
+            fill-opacity=".043243"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2297"
+            d="m365.71 147.94s23.37 46.76 21.7 56.78-5.01 60.12-13.35 86.83c-8.35 26.72-18.37 35.07-18.37 35.07l10.02-178.68z"
+            fill-rule="evenodd"
+            stroke="#000"
+            stroke-width="2.56"
+            fill="#fffff9"
+        />
+        <path
+            id="path2299"
+            d="m500.97 91.167s23.38 50.093 43.41 61.783c20.04 11.69 38.41 21.71 38.41 21.71l-60.11 115.22s-16.7-53.43-20.04-76.81-3.34-40.08-3.34-40.08l1.67-81.823z"
+            fill-rule="evenodd"
+            stroke="#000"
+            stroke-width="2.56"
+            fill="#fffff9"
+        />
+        <path
+            id="path2301"
+            d="m106.87 508.64c3.34-11.69 98.53-138.6 98.53-138.6"
+            stroke="#000"
+            stroke-width="1px"
+            fill="none"
+        />
+        <path
+            id="path2303"
+            d="m365.71 137.92l123.57 71.81-106.88 23.38"
+            stroke="#000"
+            stroke-width="1px"
+            fill="none"
+        />
+        <path
+            id="path2305"
+            d="m385.74 211.4l108.55-133.59"
+            stroke="#000"
+            stroke-width="1px"
+            fill="none"
+        />
+        <path
+            id="path2307"
+            d="m184.03 490.32l73.94-5.18 65.4-155.41s-48.34 108.79-71.09 126.92-68.25 33.67-68.25 33.67z"
+            fill-opacity=".086486"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2309"
+            d="m231.44 515.02l101.54-4.72 2.36-177.12s-14.16 85.02-30.7 113.36c-16.53 28.33-73.2 68.48-73.2 68.48z"
+            fill-opacity=".086486"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2311"
+            d="m276.31 328.46s9.44-7.09 28.33-11.81c18.9-4.73 25.98-4.73 25.98-4.73s0-40.14 2.36-70.84 4.73-37.79 4.73-37.79-18.9 30.7-30.7 63.76c-11.81 33.07-30.7 61.41-30.7 61.41z"
+            fill-opacity=".086486"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2315"
+            d="m493.57 512.66l205.46-44.87-33.06-115.72-70.85-177.12s-35.43 170.04-54.32 219.63-47.23 118.08-47.23 118.08z"
+            fill-opacity=".086486"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2317"
+            d="m519.55 285.95s9.44-28.34 9.44-68.49-16.53-61.4 2.37-56.68c18.89 4.73 49.59 16.53 49.59 16.53l-61.4 108.64z"
+            fill-opacity=".086486"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2319"
+            d="m236.16 408.75s33.06-30.7 51.95-40.15c18.9-9.44 16.53-9.44 16.53-9.44l-18.89 49.59s-9.44-7.08-25.98-4.72c-16.53 2.36-23.61 4.72-23.61 4.72z"
+            fill-opacity=".28108"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2321"
+            d="m238.52 408.75l-127.53 101.55"
+            stroke-opacity=".48649"
+            stroke="#000"
+            stroke-width="1px"
+            fill="none"
+        />
+        <path
+            id="path2323"
+            d="m212.54 510.3s82.66-82.66 99.19-118.08 23.61-87.38 23.61-87.38v203.1l-92.1 7.08-30.7-4.72z"
+            fill-opacity=".16216"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2325"
+            d="m342.43 507.94s25.98-16.53 30.7-33.07c4.72-16.53-16.53-151.14-16.53-151.14s14.17 68.49 25.98 82.66c11.8 14.17 23.61-7.09 23.61-7.09l14.17-47.23s-2.36-37.78-9.44-59.04c-7.09-21.25-54.32 30.7-54.32 30.7l-14.17 184.21z"
+            fill-opacity=".75676"
+            fill="#fffff9"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2345"
+            d="m356.6 321.37l80.29-73.21s7.09-4.72-2.36 23.62-35.42 56.68-49.59 54.31l-28.34-4.72z"
+            fill-opacity=".17297"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2313"
+            d="m358.96 510.3l125.16-7.09-11.8-193.65-9.45-66.12s-23.62 35.42-44.87 101.55c-21.25 66.12-30.7 89.74-33.06 110.99-2.36 21.26-25.98 54.32-25.98 54.32z"
+            fill-opacity=".086486"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2329"
+            d="m493.57 489.04l49.59-125.16 40.15-160.59s-18.89 51.96-28.34 87.38c-9.44 35.42-16.53 77.93-16.53 77.93s-14.17 11.81-25.98 44.87c-11.8 33.07-18.89 75.57-18.89 75.57z"
+            fill-opacity=".081081"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2331"
+            d="m488.66 467.04l45.67-114.82 36.98-147.31s-17.4 47.66-26.1 80.16c-8.7 32.49-15.23 71.49-15.23 71.49s-13.05 10.83-23.92 41.16c-10.88 30.33-17.4 69.32-17.4 69.32z"
+            fill-opacity=".032432"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2333"
+            d="m552.61 500.85l146.42-33.06-44.87-144.06s16.53 63.77 4.72 94.47-106.27 82.65-106.27 82.65z"
+            fill-opacity=".081081"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2335"
+            d="m406.19 505.57l77.93-2.36-7.08-108.63s4.72 80.29-7.09 87.38c-11.8 7.08-63.76 23.61-63.76 23.61z"
+            fill-opacity=".081081"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2337"
+            d="m358.96 323.73s9.45-63.76 11.81-92.1 0-61.4 0-61.4 2.36 30.7 4.72 49.59c2.36 18.9 4.72 35.43 4.72 35.43s0 21.25-7.08 37.78-14.17 30.7-14.17 30.7z"
+            fill-opacity=".17838"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2339"
+            d="m484.12 512.66l221.99-44.87"
+            stroke="#000"
+            stroke-width="4.6"
+            fill="none"
+        />
+        <path
+            id="path2341"
+            d="m342.43 510.3l139.33-7.09"
+            stroke="#000"
+            stroke-width="3.7"
+            fill="none"
+        />
+        <path
+            id="path2343"
+            d="m337.71 507.94l-136.98 9.44"
+            stroke="#000"
+            stroke-width="3.1"
+            fill="none"
+        />
+        <path
+            id="path2347"
+            d="m524.27 293.03s9.45-30.7 35.42-59.04c25.98-28.34 42.51-35.42 42.51-35.42s-11.8-23.62-18.89-18.89c-7.08 4.72-59.04 113.35-59.04 113.35z"
+            fill-opacity=".17297"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2349"
+            d="m495.93 75.767l2.36-44.87"
+            stroke="#000"
+            stroke-width="1.4"
+            fill="none"
+        />
+        <path
+            id="path2351"
+            d="m582.03 42.705s-23.61-7.085-40.14-4.724c-16.53 2.362-40.15-4.723-40.15-4.723l-2.36 42.509s0-16.531 14.17-16.531 7.08 9.446 30.7-2.362c23.61-11.808 37.78-14.169 37.78-14.169z"
+            fill="#7799eb"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2353"
+            d="m511.55 31.981l11.81 25.978s7.08 7.085 11.8-2.362c4.73-9.446 0 4.723-7.08-4.723-7.09-9.446-16.53-18.893-16.53-18.893z"
+            fill-opacity=".21081"
+            fill-rule="evenodd"
+        />
+        <path
+            id="path2355"
+            d="m530.08 37.981h17.9s10.74 14.17-1.79 14.17-16.11-14.17-16.11-14.17z"
+            fill-opacity=".49189"
+            fill="#fff"
+            fill-rule="evenodd"
+        />
+      </g
+      >
+    </g
+    >
+  </g
+  >
+  <metadata
+    >
+    <rdf:RDF
+      >
+      <cc:Work
+        >
+        <dc:format
+          >image/svg+xml</dc:format
+        >
+        <dc:type
+            rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+        />
+        <cc:license
+            rdf:resource="http://creativecommons.org/licenses/publicdomain/"
+        />
+        <dc:publisher
+          >
+          <cc:Agent
+              rdf:about="http://openclipart.org/"
+            >
+            <dc:title
+              >Openclipart</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:publisher
+        >
+        <dc:title
+          >Boat 1</dc:title
+        >
+        <dc:date
+          >2009-04-10T16:34:30</dc:date
+        >
+        <dc:description
+          >Sailing boat/yacht by Jarno Vasamaa. From old OCAL site.</dc:description
+        >
+        <dc:source
+          >https://openclipart.org/detail/24418/Boat-1-by-Jarno</dc:source
+        >
+        <dc:creator
+          >
+          <cc:Agent
+            >
+            <dc:title
+              >Jarno</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:creator
+        >
+        <dc:subject
+          >
+          <rdf:Bag
+            >
+            <rdf:li
+              >boat</rdf:li
+            >
+            <rdf:li
+              >sail</rdf:li
+            >
+            <rdf:li
+              >sailing</rdf:li
+            >
+            <rdf:li
+              >schooner</rdf:li
+            >
+            <rdf:li
+              >ship</rdf:li
+            >
+            <rdf:li
+              >transportation</rdf:li
+            >
+            <rdf:li
+              >yacht</rdf:li
+            >
+          </rdf:Bag
+          >
+        </dc:subject
+        >
+      </cc:Work
+      >
+      <cc:License
+          rdf:about="http://creativecommons.org/licenses/publicdomain/"
+        >
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Reproduction"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Distribution"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#DerivativeWorks"
+        />
+      </cc:License
+      >
+    </rdf:RDF
+    >
+  </metadata
+  >
+</svg
+>
