@@ -36,7 +36,7 @@ import java.util.Random;
  * Created by Lewis on 02/07/15.
  */
 public class QuizActivity extends AppCompatActivity implements QuestionFragment.OnFragmentInteractionListener, QuestionOutroFragment.OnFragmentInteractionListener {
-// Application variables defined in appconfig.xml and set with initializeVariables()
+// Application variables defined in flavourconfig.xml and set with initializeVariables()
     int totalQuestions;
     int nChoices;
     int numberOfSoundEffects;

@@ -18,9 +18,21 @@ android {
     }
     productFlavors {
         russian {
+            copy {
+                from('src/global/res/raw'){
+                    include '*ru.mp3'
+                }
+                into 'src/russian/res/raw'
+            }
             applicationId 'com.gmail.appytalkteam.appytalkcore.ru'
         }
         english {
+            copy {
+                from('src/global/res/raw'){
+                    include '*en.mp3'
+                }
+                into 'src/english/res/raw'
+            }
             applicationId 'com.gmail.appytalkteam.appytalkcore.en'
         }
         global {
