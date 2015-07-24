@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':com.android.support:appcompat-v7', ':com.android.support', ':com.readystatesoftware.sqliteasset', ':com.android.support:percent', ':com.readystatesoftware.sqliteasset:sqliteassethelper', ':com.android.support:support-v4'
 include ':com.android.support:appcompat-v7:22.2.1'
 include ':com.android.support:percent:22.2.0'
 include ':com.android.support:support-v4:22.2.1'
