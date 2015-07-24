@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     setLanguage(locale);
                     Intent intent = new Intent(MainActivity.this, CategorySelectorActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.activity_on_from_right, R.anim.activity_fade_out);
                 }
             }
         }, TIMEOUT);

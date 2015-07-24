@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/com.readystatesoftware.sqliteasset/sqliteassethelper/+/+.iml" filepath="$PROJECT_DIR$/com.readystatesoftware.sqliteasset/sqliteassethelper/+/+.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.android.support/percent/22.2.0/22.2.0.iml" filepath="$PROJECT_DIR$/com.android.support/percent/22.2.0/22.2.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.android.support/appcompat-v7/22.2.1/22.2.1.iml" filepath="$PROJECT_DIR$/com.android.support/appcompat-v7/22.2.1/22.2.1.iml" />
       <module fileurl="file://$PROJECT_DIR$/VocabBuilder.iml" filepath="$PROJECT_DIR$/VocabBuilder.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.android.support/appcompat-v7/appcompat-v7.iml" filepath="$PROJECT_DIR$/com.android.support/appcompat-v7/appcompat-v7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.android.support/com.android.support.iml" filepath="$PROJECT_DIR$/com.android.support/com.android.support.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.readystatesoftware.sqliteasset/com.readystatesoftware.sqliteasset.iml" filepath="$PROJECT_DIR$/com.readystatesoftware.sqliteasset/com.readystatesoftware.sqliteasset.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.android.support/percent/percent.iml" filepath="$PROJECT_DIR$/com.android.support/percent/percent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.readystatesoftware.sqliteasset/sqliteassethelper/sqliteassethelper.iml" filepath="$PROJECT_DIR$/com.readystatesoftware.sqliteasset/sqliteassethelper/sqliteassethelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.android.support/support-v4/support-v4.iml" filepath="$PROJECT_DIR$/com.android.support/support-v4/support-v4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.android.support/support-v4/22.2.1/support-v4-22.2.1.iml" filepath="$PROJECT_DIR$/com.android.support/support-v4/22.2.1/support-v4-22.2.1.iml" />
     </modules>
   </component>
 </project>

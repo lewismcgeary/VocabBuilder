@@ -20,6 +20,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.ChangeBounds;
 import android.transition.ChangeImageTransform;
+import android.transition.Fade;
 import android.transition.Slide;
 import android.transition.TransitionSet;
 import android.view.Surface;
@@ -232,6 +233,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             imageTransition.addTransition(new ChangeBounds());
             imageTransition.addTransition(new ChangeImageTransform());
             questionOutroFragment.setSharedElementEnterTransition(imageTransition);
+            questionOutroFragment.setExitTransition(new Fade());
         }
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -278,6 +280,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             } else {
                 Intent intent = new Intent(this, CategorySelectorActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.activity_on_from_right, R.anim.activity_fade_out);
             }
             this.finish();
         }
@@ -285,14 +288,16 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
     private void showQuestionIntro(Word correctAnswer){
         QuestionIntroFragment questionIntroFragment = QuestionIntroFragment.newInstance(correctAnswer);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         // TODO: remove version check when API 21 is minimum supported
         if (Build.VERSION.SDK_INT>=21) {
             Slide slide = new Slide();
             slide.setDuration(600);
             questionIntroFragment.setEnterTransition(slide);
+        } else {
+            fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
         }
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.question_frame, questionIntroFragment);
         fragmentTransaction.commit();
         Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping

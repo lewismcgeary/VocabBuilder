@@ -34,6 +34,8 @@ public class CategorySelectorActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, QuizActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.activity_on_from_right, R.anim.activity_off_to_left);
+
 
     }
     @Override
