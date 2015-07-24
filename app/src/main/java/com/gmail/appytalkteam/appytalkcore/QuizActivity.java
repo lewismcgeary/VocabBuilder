@@ -264,8 +264,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             //displayQuestion();
             int correctAnswer = quiz.getCurrentQuestion().getAnswer();
             Word Answer = quiz.getCurrentQuestion().getWords().get(correctAnswer);
-            showQuestionIntro(Answer);
-            try {
+                showQuestionIntro(Answer);
+                try {
                 quizSounds.play(soundMap.get(Answer.getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
             } catch (NullPointerException e) {
                 // do nothing, this should be the end of the quiz
@@ -287,25 +287,29 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     private void showQuestionIntro(Word correctAnswer){
-        QuestionIntroFragment questionIntroFragment = QuestionIntroFragment.newInstance(correctAnswer);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        // TODO: remove version check when API 21 is minimum supported
-        if (Build.VERSION.SDK_INT>=21) {
-            Slide slide = new Slide();
-            slide.setDuration(600);
-            questionIntroFragment.setEnterTransition(slide);
-        } else {
-            fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
-        }
-        fragmentTransaction.replace(R.id.question_frame, questionIntroFragment);
-        fragmentTransaction.commit();
-        Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                displayQuestion();
+        if(Build.VERSION.SDK_INT>=21) {
+            QuestionIntroFragment questionIntroFragment = QuestionIntroFragment.newInstance(correctAnswer);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            // TODO: remove version check when API 21 is minimum supported
+            if (Build.VERSION.SDK_INT >= 21) {
+                Slide slide = new Slide();
+                slide.setDuration(600);
+                questionIntroFragment.setEnterTransition(slide);
+            } else {
+                fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
             }
-        }, 1000);
+            fragmentTransaction.replace(R.id.question_frame, questionIntroFragment);
+            fragmentTransaction.commit();
+            Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    displayQuestion();
+                }
+            }, 1000);
+        } else {
+            displayQuestion();
+        }
     }
     public void displayQuestion(){
         enableOrientation();
@@ -330,7 +334,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 ViewCompat.setTransitionName(findViewById(R.id.promptText), "Answer Text");
                 fragmentTransaction.addSharedElement(findViewById(R.id.promptText), "Answer Text");
             } else {
-                fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.slide_off_to_left);
+                fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
             }
             fragmentTransaction.replace(R.id.question_frame, nextQuestion);
             fragmentTransaction.commit();}
