@@ -20,6 +20,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.ChangeBounds;
 import android.transition.ChangeImageTransform;
+import android.transition.Fade;
 import android.transition.Slide;
 import android.transition.TransitionSet;
 import android.view.Surface;
@@ -232,6 +233,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             imageTransition.addTransition(new ChangeBounds());
             imageTransition.addTransition(new ChangeImageTransform());
             questionOutroFragment.setSharedElementEnterTransition(imageTransition);
+            questionOutroFragment.setExitTransition(new Fade());
         }
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -262,8 +264,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             //displayQuestion();
             int correctAnswer = quiz.getCurrentQuestion().getAnswer();
             Word Answer = quiz.getCurrentQuestion().getWords().get(correctAnswer);
-            showQuestionIntro(Answer);
-            try {
+                showQuestionIntro(Answer);
+                try {
                 quizSounds.play(soundMap.get(Answer.getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
             } catch (NullPointerException e) {
                 // do nothing, this should be the end of the quiz
@@ -278,29 +280,36 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             } else {
                 Intent intent = new Intent(this, CategorySelectorActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.activity_on_from_right, R.anim.activity_fade_out);
             }
             this.finish();
         }
     }
 
     private void showQuestionIntro(Word correctAnswer){
-        QuestionIntroFragment questionIntroFragment = QuestionIntroFragment.newInstance(correctAnswer);
-        // TODO: remove version check when API 21 is minimum supported
-        if (Build.VERSION.SDK_INT>=21) {
-            Slide slide = new Slide();
-            slide.setDuration(600);
-            questionIntroFragment.setEnterTransition(slide);
-        }
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.question_frame, questionIntroFragment);
-        fragmentTransaction.commit();
-        Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                displayQuestion();
+        if(Build.VERSION.SDK_INT>=21) {
+            QuestionIntroFragment questionIntroFragment = QuestionIntroFragment.newInstance(correctAnswer);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            // TODO: remove version check when API 21 is minimum supported
+            if (Build.VERSION.SDK_INT >= 21) {
+                Slide slide = new Slide();
+                slide.setDuration(600);
+                questionIntroFragment.setEnterTransition(slide);
+            } else {
+                fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
             }
-        }, 1000);
+            fragmentTransaction.replace(R.id.question_frame, questionIntroFragment);
+            fragmentTransaction.commit();
+            Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    displayQuestion();
+                }
+            }, 1000);
+        } else {
+            displayQuestion();
+        }
     }
     public void displayQuestion(){
         enableOrientation();
@@ -325,7 +334,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 ViewCompat.setTransitionName(findViewById(R.id.promptText), "Answer Text");
                 fragmentTransaction.addSharedElement(findViewById(R.id.promptText), "Answer Text");
             } else {
-                fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.slide_off_to_left);
+                fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
             }
             fragmentTransaction.replace(R.id.question_frame, nextQuestion);
             fragmentTransaction.commit();}
