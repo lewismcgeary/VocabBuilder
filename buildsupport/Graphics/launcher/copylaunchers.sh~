@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+## Syntax: ./copylaunchers.sh ru russian
+## The destination folder where your files will
+## be copied to.
+dest="../../../app/src/"$2"/res/";
+src=$1
+dpis={mipmap-mdpi,mipmap-mdpi,mipmap-mdpi,mipmap-mdpi}
+## For each dpi do
+for subdir in dpis; do
+    for file in $src/$subdir/*; do
+	target=$(basename $file)
+	## We now have everything we need, so lets copy.
+	cp "$file" "$dest"/"$subdir"/"$target";
+    done 
+done
