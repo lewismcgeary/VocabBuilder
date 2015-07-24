@@ -23,6 +23,17 @@ public class CategorySelectorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category_selector);
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        } else {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+        }
+    }
+
     public void startQuizActivity(View view){
         String category = view.getTag().toString();
         SharedPreferences settings = getSharedPreferences("PrefsFile", MODE_PRIVATE);
