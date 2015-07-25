@@ -1,5 +1,5 @@
-<resources>
-
+<resources
+    xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="hell_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="wordToDisplay">Car</string>
