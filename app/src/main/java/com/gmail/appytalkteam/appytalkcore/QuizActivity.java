@@ -54,6 +54,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     boolean stillInQuiz = true;
     boolean questionInterrupted = false;
 
+
     // Variable for managing the quiz
     Quiz quiz;
 
