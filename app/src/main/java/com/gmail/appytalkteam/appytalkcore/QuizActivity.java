@@ -77,7 +77,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
                 displayProgress(0, (int)Math.floor(numberOfSoundsLoaded));
                 numberOfSoundsLoaded++;
-                if (numberOfSoundsLoaded ==totalQuestions+numberOfSoundEffects && stillInQuiz){
+                if (numberOfSoundsLoaded ==totalQuestions+numberOfSoundEffects){
                     moveProgressBarToTop();
                     //displayQuestion();
                 }
@@ -109,7 +109,6 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         }
         stillInQuiz = true;
         if(questionInterrupted){
-            keepProgressBarAtTop();
             //reset boolean
             questionInterrupted = false;
             int correctAnswer = quiz.getCurrentQuestion().getAnswer();
@@ -119,6 +118,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             } catch (NullPointerException e) {
                 // do nothing, this should be the end of the quiz
             }
+            keepProgressBarAtTop();
             showQuestionIntro(Answer);
         }
         super.onResume();
@@ -399,6 +399,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 }
                 this.finish();
             }
+        } else {
+            questionInterrupted = true;
         }
     }
     private void displayProgress(int full, int empty){
