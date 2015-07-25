@@ -1,0 +1,8 @@
+It seems most efficient to read all words in a given language in the alphabetical order of the english equivalents, then split the track into (eg) car_ru, cat_ru, dog_ru mp3s.
+
+Procedure:
+* Record all words about one per second plus some silence at the end
+* select the silence and go to Effects->Noise Removal then click Get Sample
+* select the whole track (click at the side) then go back to Effects->Noise Removal and click OK
+* Use Analyze->Silence Finder to find the words
+* edit the labels appropriately
