@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="yay_data" version="1.3.0" audacityversion="2.0.6" sel0="4.0500000000" sel1="4.0500000000" vpos="0" h="0.0000000000" zoom="86.1328125000" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds">
+	<tags/>
+	<wavetrack name="Audio Track" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="244224">
+				<waveblock start="0">
+					<simpleblockfile filename="e00001f7.au" len="173568" min="-0.990076" max="0.84867" rms="0.120293"/>
+				</waveblock>
+				<waveblock start="173568">
+					<simpleblockfile filename="e00004f0.au" len="70656" min="-0.822156" max="0.829811" rms="0.092027"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Audio Track" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="244224">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000c51.au" len="173568" min="-0.990396" max="0.846769" rms="0.120318"/>
+				</waveblock>
+				<waveblock start="173568">
+					<simpleblockfile filename="e00009b9.au" len="70656" min="-0.822139" max="0.829806" rms="0.092026"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<labeltrack name="Label Track" numlabels="4" height="73" minimized="0" isSelected="1">
+		<label t="0.05000000" t1="0.05000000" title="yay_en"/>
+		<label t="1.45000000" t1="1.45000000" title="yay_fr"/>
+		<label t="2.66000000" t1="2.66000000" title="yay_es"/>
+		<label t="4.05000000" t1="4.05000000" title="yay_ru"/>
+	</labeltrack>
+</project>
