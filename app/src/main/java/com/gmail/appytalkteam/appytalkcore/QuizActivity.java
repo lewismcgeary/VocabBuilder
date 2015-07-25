@@ -48,6 +48,10 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     SoundPool quizSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
     HashMap<String, Integer> soundMap = new HashMap<>();
     int numberOfSoundsLoaded =0;
+    LoadQuizTask loadquizasynchronously;
+
+    //variable to help manage activity being left
+    boolean stillInQuiz = true;
 
     // Variable for managing the quiz
     Quiz quiz;
@@ -64,7 +68,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         initializeVariables();
         setContentView(R.layout.quiz_activity);
         disableOrientation(); // Because it crashes the sound-loading progress stars
-        LoadQuizTask loadquizasynchronously = new LoadQuizTask(this);
+        loadquizasynchronously = new LoadQuizTask(this);
         loadquizasynchronously.execute();
 
         quizSounds.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
@@ -72,7 +76,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             public void onLoadComplete(SoundPool quizSounds, int currentSound, int status) {
                 displayProgress(0, (int)Math.floor(numberOfSoundsLoaded));
                 numberOfSoundsLoaded++;
-                if (numberOfSoundsLoaded ==totalQuestions+numberOfSoundEffects){
+                if (numberOfSoundsLoaded ==totalQuestions+numberOfSoundEffects && stillInQuiz){
                     moveProgressBarToTop();
                     //displayQuestion();
                 }
@@ -82,7 +86,22 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     @Override
+    public void onBackPressed() {
+        stillInQuiz = false;
+        loadquizasynchronously.cancel(true);
+        quizSounds.release();
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        stillInQuiz = false;
+        super.onPause();
+    }
+
+    @Override
     protected void onResume() {
+        stillInQuiz = true;
         super.onResume();
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
@@ -403,7 +422,9 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 } catch (NullPointerException e) {
                     // do nothing, this should be the end of the quiz
                 }
-                showQuestionIntro(Answer);
+                if(stillInQuiz) {
+                    showQuestionIntro(Answer);
+                }
             }
 
             @Override
