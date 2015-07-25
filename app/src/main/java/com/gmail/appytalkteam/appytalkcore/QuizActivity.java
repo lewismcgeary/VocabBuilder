@@ -52,6 +52,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
     //variable to help manage activity being left
     boolean stillInQuiz = true;
+    boolean questionInterrupted = false;
 
     // Variable for managing the quiz
     Quiz quiz;
@@ -101,13 +102,27 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
     @Override
     protected void onResume() {
-        stillInQuiz = true;
-        super.onResume();
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         } else {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
         }
+        stillInQuiz = true;
+        if(questionInterrupted){
+            keepProgressBarAtTop();
+            //reset boolean
+            questionInterrupted = false;
+            int correctAnswer = quiz.getCurrentQuestion().getAnswer();
+            Word Answer = quiz.getCurrentQuestion().getWords().get(correctAnswer);
+            try {
+                quizSounds.play(soundMap.get(Answer.getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
+            } catch (NullPointerException e) {
+                // do nothing, this should be the end of the quiz
+            }
+            showQuestionIntro(Answer);
+        }
+        super.onResume();
+
     }
 
     @Override
@@ -316,67 +331,74 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     private void showQuestionIntro(Word correctAnswer){
-        if(Build.VERSION.SDK_INT>=21) {
-            QuestionIntroFragment questionIntroFragment = QuestionIntroFragment.newInstance(correctAnswer);
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            // TODO: remove version check when API 21 is minimum supported
+        if(stillInQuiz) {
             if (Build.VERSION.SDK_INT >= 21) {
-                Slide slide = new Slide();
-                slide.setDuration(600);
-                questionIntroFragment.setEnterTransition(slide);
-            } else {
-                fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
-            }
-            fragmentTransaction.replace(R.id.question_frame, questionIntroFragment);
-            fragmentTransaction.commit();
-            Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    displayQuestion();
+                QuestionIntroFragment questionIntroFragment = QuestionIntroFragment.newInstance(correctAnswer);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                // TODO: remove version check when API 21 is minimum supported
+                if (Build.VERSION.SDK_INT >= 21) {
+                    Slide slide = new Slide();
+                    slide.setDuration(600);
+                    questionIntroFragment.setEnterTransition(slide);
+                } else {
+                    fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
                 }
-            }, 1000);
+                fragmentTransaction.replace(R.id.question_frame, questionIntroFragment);
+                fragmentTransaction.commit();
+                Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        displayQuestion();
+                    }
+                }, 1000);
+            } else {
+                displayQuestion();
+            }
         } else {
-            displayQuestion();
+            questionInterrupted = true;
         }
     }
     public void displayQuestion(){
         enableOrientation();
-        // TODO:if statement may be unnecessary as end of quiz is checked in newQuestion method
-        if (quiz.getQuestionNumber() < totalQuestions){
-            int tester = quiz.getQuestionNumber();
-            QuestionFragment nextQuestion = QuestionFragment.newInstance(quiz.getCurrentQuestion());
-            // TODO: remove version check when API 21 is minimum supported
-            if (Build.VERSION.SDK_INT>=21){
-            Slide slide = new Slide();
-            slide.setDuration(600);
-            nextQuestion.setEnterTransition(slide);
-                TransitionSet imageTransition = new TransitionSet();
-                imageTransition.setDuration(600);
-                imageTransition.addTransition(new ChangeBounds());
-                nextQuestion.setSharedElementEnterTransition(imageTransition);
-            }
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            // TODO: remove version check when API 21 is minimum supported
-            if (Build.VERSION.SDK_INT>=21) {
-                ViewCompat.setTransitionName(findViewById(R.id.promptText), "Answer Text");
-                fragmentTransaction.addSharedElement(findViewById(R.id.promptText), "Answer Text");
+        //only do this if user has not left activity
+        if(stillInQuiz) {
+            // TODO:if statement may be unnecessary as end of quiz is checked in newQuestion method
+            if (quiz.getQuestionNumber() < totalQuestions) {
+                int tester = quiz.getQuestionNumber();
+                QuestionFragment nextQuestion = QuestionFragment.newInstance(quiz.getCurrentQuestion());
+                // TODO: remove version check when API 21 is minimum supported
+                if (Build.VERSION.SDK_INT >= 21) {
+                    Slide slide = new Slide();
+                    slide.setDuration(600);
+                    nextQuestion.setEnterTransition(slide);
+                    TransitionSet imageTransition = new TransitionSet();
+                    imageTransition.setDuration(600);
+                    imageTransition.addTransition(new ChangeBounds());
+                    nextQuestion.setSharedElementEnterTransition(imageTransition);
+                }
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                // TODO: remove version check when API 21 is minimum supported
+                if (Build.VERSION.SDK_INT >= 21) {
+                    ViewCompat.setTransitionName(findViewById(R.id.promptText), "Answer Text");
+                    fragmentTransaction.addSharedElement(findViewById(R.id.promptText), "Answer Text");
+                } else {
+                    fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
+                }
+                fragmentTransaction.replace(R.id.question_frame, nextQuestion);
+                fragmentTransaction.commit();
             } else {
-                fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
+                quizSounds.release();
+                if (getResources().getString(R.string.locale).equals("global")) {
+                    Intent intent = new Intent(this, LanguageSelectorActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(this, CategorySelectorActivity.class);
+                    startActivity(intent);
+                }
+                this.finish();
             }
-            fragmentTransaction.replace(R.id.question_frame, nextQuestion);
-            fragmentTransaction.commit();}
-        else{
-            quizSounds.release();
-            if(getResources().getString(R.string.locale).equals("global")) {
-                Intent intent = new Intent(this, LanguageSelectorActivity.class);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(this, CategorySelectorActivity.class);
-                startActivity(intent);
-            }
-            this.finish();
         }
     }
     private void displayProgress(int full, int empty){
@@ -422,9 +444,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 } catch (NullPointerException e) {
                     // do nothing, this should be the end of the quiz
                 }
-                if(stillInQuiz) {
                     showQuestionIntro(Answer);
-                }
             }
 
             @Override
