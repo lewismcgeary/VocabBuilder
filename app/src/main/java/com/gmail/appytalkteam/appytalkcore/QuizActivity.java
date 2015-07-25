@@ -307,7 +307,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 slide.setDuration(600);
                 questionIntroFragment.setEnterTransition(slide);
             } else {
-                fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
+                fragmentTransaction.setCustomAnimations(R.animator.slide_up_from_bottom, R.animator.fade_out);
             }
             fragmentTransaction.replace(R.id.question_frame, questionIntroFragment);
             fragmentTransaction.commit();
@@ -344,7 +344,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 ViewCompat.setTransitionName(findViewById(R.id.promptText), "Answer Text");
                 fragmentTransaction.addSharedElement(findViewById(R.id.promptText), "Answer Text");
             } else {
-                fragmentTransaction.setCustomAnimations(R.animator.slide_on_from_right, R.animator.fade_out);
+                fragmentTransaction.setCustomAnimations(R.animator.slide_up_from_bottom, R.animator.fade_out);
             }
             fragmentTransaction.replace(R.id.question_frame, nextQuestion);
             fragmentTransaction.commit();}
