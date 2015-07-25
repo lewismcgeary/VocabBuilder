@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <integer name="numberOfQuestions">7</integer>
     <integer name="numberOfChoices">3</integer>
     <integer name="numberOfSoundEffects">2</integer>
