@@ -97,6 +97,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
     @Override
     protected void onPause() {
+        disableOrientation();
         stillInQuiz = false;
         super.onPause();
     }
@@ -109,6 +110,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
         }
         stillInQuiz = true;
+        enableOrientation();
         if(questionInterrupted){
             //reset boolean
             questionInterrupted = false;
