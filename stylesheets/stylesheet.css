@@ -35,6 +35,7 @@ a {
   border-color: rgba(255, 255, 255, 0.3); }
 
 .googlebutton { vertical-align: middle;
+		display: block;
 	      }
 
 @media screen and (min-width: 64em) {
