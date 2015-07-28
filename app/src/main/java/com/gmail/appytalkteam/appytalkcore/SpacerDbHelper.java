@@ -3,7 +3,6 @@ package com.gmail.appytalkteam.appytalkcore;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -22,12 +21,14 @@ import java.util.ArrayList;
 public class SpacerDbHelper extends SQLiteOpenHelper {
     Context mcontext;
     SharedPreferences prefs;
+    ArrayList<Word> freshVocab;
     // All Static variables
     // Database Version
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
     private static final String DATABASE_NAME = "userwords";
+    private SQLiteDatabase db;
 
     // Contacts table name
 //    private static final String TABLE_ = "words";
@@ -51,22 +52,21 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
             String language = prefs.getString("language", "en");
-            String CREATE_CONTACTS_TABLE = "CREATE TABLE " + language +
-                    "(" + KEY_IMG + " TEXT PRIMARY KEY," +
-                    KEY_TEXT + " TEXT,"
-                    + KEY_AUDIO + " TEXT" +
-                    KEY_CATEGORY + " TEXT" +
-                    KEY_SCORE + " INTEGER" +
-                    KEY_BOX + " INTEGER" +
+            String CREATE_TABLE = "CREATE TABLE " + language +
+                    "(" + KEY_IMG + " TEXT PRIMARY KEY, " +
+                    KEY_TEXT + " TEXT, "
+                    + KEY_AUDIO + " TEXT, " +
+                    KEY_CATEGORY + " TEXT, " +
+                    KEY_SCORE + " INTEGER, " +
+                    KEY_BOX + " INTEGER, " +
                     KEY_SEEN + " INTEGER" + ")";
-            db.execSQL(CREATE_CONTACTS_TABLE);
-
+            db.execSQL(CREATE_TABLE);
         // now to get all the words in the current language from the database
             VocabularyDbHelper vdbh = new VocabularyDbHelper(mcontext);
-            ArrayList<Word> freshVocab = vdbh.getWordsFromDataBase();
+            freshVocab = vdbh.getWordsFromDataBase();
         for(Word wrd : freshVocab) {
             UserWord uwrd = new UserWord(wrd.getWordText(),wrd.getImageLocation(),wrd.getAudioLocation(),wrd.getCategory());
-            addWord(uwrd);
+            addWord(uwrd, db);
         }
 
     }
@@ -82,8 +82,8 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
     }
 
     // Adding new word
-    public void addWord(UserWord wrd) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void addWord(UserWord wrd, SQLiteDatabase db) {
+        // SQLiteDatabase db = this.getWritableDatabase();
         String language = prefs.getString("language", "en");
 
         ContentValues values = new ContentValues();
@@ -97,10 +97,35 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
 
         // Inserting Row
         db.insert(language, null, values);
-        db.close(); // Closing database connection
+//        db.close(); // Closing database connection
     }
+    public ArrayList<Word> getAllWords () {
+        // Select All Query
+        String language = prefs.getString("language", "en");
+        String selectQuery = "SELECT  * FROM " + language;
+        ArrayList<Word> output = new ArrayList<Word>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
-    public ArrayList<UserWord> getAllWords() {
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                UserWord word = new UserWord(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        Integer.parseInt(cursor.getString(4)),
+                        Integer.parseInt(cursor.getString(5)),
+                        Integer.parseInt(cursor.getString(6)));
+                output.add(word.asWord());
+            } while (cursor.moveToNext());
+        }
+
+        // return word list
+        return output;    }
+
+    public ArrayList<UserWord> getAllUserWords() {
         String language = prefs.getString("language", "en");
 
         ArrayList<UserWord> wordList = new ArrayList<>();
@@ -132,7 +157,7 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
         ArrayList<UserWord> wordList = new ArrayList<>();
         String language = prefs.getString("language", "en");
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + language + " WHERE SEEN = 0";
+        String selectQuery = "SELECT  * FROM " + language + " WHERE " + KEY_SEEN + " = 0";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -159,7 +184,7 @@ public class SpacerDbHelper extends SQLiteOpenHelper {
         ArrayList<UserWord> wordList = new ArrayList<>();
         String language = prefs.getString("language", "en");
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + language + " WHERE SEEN =1";
+        String selectQuery = "SELECT  * FROM " + language + " WHERE " + KEY_SEEN + " = 1";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

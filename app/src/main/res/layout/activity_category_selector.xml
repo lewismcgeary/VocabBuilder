@@ -83,6 +83,17 @@
             android:src="@drawable/categorynature"
             android:background="@android:color/transparent"
             android:padding="@dimen/category_icon_padding"/>
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:text="none"
+            android:tag="none"
+            android:onClick="startQuizActivity"
+            android:src="@drawable/categorynone"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/category_icon_padding"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"

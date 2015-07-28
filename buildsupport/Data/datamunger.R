@@ -25,6 +25,7 @@ dbSendQuery(conn=db,
    NAME TEXT,
    IMGFILE TEXT,
    AUDIO TEXT,
+   PARTOFSPEECH TEXT,
    PRIMARY KEY (BaseName, LANG))
 ")
 
