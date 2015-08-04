@@ -58,6 +58,15 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     // Variable for managing the quiz
     Quiz quiz;
 
+    // Runnable and Handler for playCurrentWordAfterDelay method
+    Runnable playPromptWordRunnable = new Runnable() {
+        @Override
+        public void run() {
+            playCurrentWord();
+        }
+    };
+    Handler playDelayedWordHandler = new Handler();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +108,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     protected void onPause() {
         disableOrientation();
         stillInQuiz = false;
+        playCurrentWordAfterDelay(false);
         super.onPause();
     }
 
@@ -225,6 +235,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
     @Override
     public void correctAnswerSelected(View view) {
+        playCurrentWordAfterDelay(false);
         Question currentQ = quiz.getCurrentQuestion();
         //disable orientation change while 'success' screen shows. is re-enabled by next question
         disableOrientation();
@@ -375,6 +386,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 }
                 fragmentTransaction.replace(R.id.question_frame, nextQuestion);
                 fragmentTransaction.commit();
+                playCurrentWordAfterDelay(true);
             } else {
                 quizSounds.release();
                 if (getResources().getString(R.string.locale).equals("global")) {
@@ -392,9 +404,23 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     public void playCurrentWord(){
+        try {
         int correctAnswer = quiz.getCurrentQuestion().getAnswer();
         Word Answer = quiz.getCurrentQuestion().getWords().get(correctAnswer);
-        quizSounds.play(soundMap.get(Answer.getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
+            quizSounds.play(soundMap.get(Answer.getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
+        } catch(IndexOutOfBoundsException e) {
+            //do nothing, should be end of quiz
+        }
+    }
+
+
+    public void playCurrentWordAfterDelay(boolean play){
+
+        if(play) {
+            playDelayedWordHandler.postDelayed(playPromptWordRunnable, 5000);
+        } else{
+            playDelayedWordHandler.removeCallbacks(playPromptWordRunnable);
+        }
     }
     private void displayProgress(int full, int empty){
         // when loading, call like displayProgress(0,n), when playing displayProgress(n,total)
