@@ -58,6 +58,15 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     // Variable for managing the quiz
     Quiz quiz;
 
+    // Runnable and Handler for playCurrentWordAfterDelay method
+    Runnable playPromptWordRunnable = new Runnable() {
+        @Override
+        public void run() {
+            playCurrentWord();
+        }
+    };
+    Handler playDelayedWordHandler = new Handler();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +108,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     protected void onPause() {
         disableOrientation();
         stillInQuiz = false;
+        playCurrentWordAfterDelay(false);
         super.onPause();
     }
 
@@ -225,48 +235,33 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
     @Override
     public void correctAnswerSelected(View view) {
+        playCurrentWordAfterDelay(false);
         Question currentQ = quiz.getCurrentQuestion();
         //disable orientation change while 'success' screen shows. is re-enabled by next question
         disableOrientation();
-        // get all siblings, and disable clickiness
-        // nothing more to click in this question
-        /**
-        LinearLayout cont = (LinearLayout) view.getParent();
-        int count = cont.getChildCount();
-        int skip;
-        if(count == nChoices){ // horizontal layout
-            skip = 0;
-        } else { //vertical layout
-            Button prompt = (Button) cont.getChildAt(0);
-            prompt.setEnabled(false);
-            skip = 1;
-        }
-        for(int i = skip; i<count; i++){
-            ImageButton b = (ImageButton) cont.getChildAt(i);
-            b.setEnabled(false);
-        }
-        for(int i = 0; i<nChoices; i++) {
-//            tried[i] = true;
-            currentQ.setGuessed(i,true);
-        } // until the end of this function */
-        Random rn = new Random();
-        float soundSpeed = (rn.nextInt(2)+8)/10.0f;
-        quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
+
+
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.successcolor));
 
         displayProgress(quiz.getQuestionNumber() + 1, totalQuestions);
-
-        // experimental for new question outro state
+        playCurrentWord();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Random rn = new Random();
+                float soundSpeed = (rn.nextInt(2)+8)/10.0f;
+                quizSounds.play(soundMap.get("correctSound"), 1.0f, 1.0f, 1, 0, soundSpeed);
+            }
+        }, 1200);
         Word correctAnswer = currentQ.getCorrectWord();
         transitionToQuestionOutro(view, correctAnswer);
-        // experimental for new question outro state
 
-        Handler handler = new Handler(); // TODO: this delay is temporary to stop sounds overlapping
+        Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
                 newQuestion();
             }
-        }, 2000);
+        }, 3200);
     }
 
     private void transitionToQuestionOutro(View view, Word correctAnswer){
@@ -391,6 +386,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 }
                 fragmentTransaction.replace(R.id.question_frame, nextQuestion);
                 fragmentTransaction.commit();
+                playCurrentWordAfterDelay(true);
             } else {
                 quizSounds.release();
                 if (getResources().getString(R.string.locale).equals("global")) {
@@ -404,6 +400,26 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             }
         } else {
             questionInterrupted = true;
+        }
+    }
+
+    public void playCurrentWord(){
+        try {
+        int correctAnswer = quiz.getCurrentQuestion().getAnswer();
+        Word Answer = quiz.getCurrentQuestion().getWords().get(correctAnswer);
+            quizSounds.play(soundMap.get(Answer.getWordText()), 1.0f, 1.0f, 1, 0, 1.0f);
+        } catch(IndexOutOfBoundsException e) {
+            //do nothing, should be end of quiz
+        }
+    }
+
+
+    public void playCurrentWordAfterDelay(boolean play){
+
+        if(play) {
+            playDelayedWordHandler.postDelayed(playPromptWordRunnable, 5000);
+        } else{
+            playDelayedWordHandler.removeCallbacks(playPromptWordRunnable);
         }
     }
     private void displayProgress(int full, int empty){
