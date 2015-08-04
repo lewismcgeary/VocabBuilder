@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="148.44888mm"
-   height="148.53058mm"
-   viewBox="0 0 525.99998 526.28945"
+   width="173.84889mm"
+   height="169.92915mm"
+   viewBox="0 0 616.00001 602.11117"
    id="svg5941"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-66.400939"
-     inkscape:cy="183.14473"
+     inkscape:zoom="0.7"
+     inkscape:cx="-186.1515"
+     inkscape:cy="197.09519"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -56,52 +56,70 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-89.972368,-189.21748)">
+     transform="translate(434.31335,-114.82431)">
     <g
-       id="g5916"
-       transform="matrix(1.0170183,0,0,1,1202.5855,-81.28666)">
-      <circle
-         r="108.08632"
-         cy="378.59045"
-         cx="-778.82758"
+       id="g4184">
+      <ellipse
+         ry="108.08632"
+         rx="109.92577"
+         cy="223.0181"
+         cx="-42.353542"
          id="path5838"
          style="fill:#ff6600" />
-      <circle
-         r="108.08632"
-         cy="500.81891"
-         cx="-684.88336"
+      <ellipse
+         ry="108.08632"
+         rx="109.92577"
+         cy="350.96085"
+         cx="71.760887"
          id="path5838-2"
          style="fill:#ffcc00" />
-      <circle
-         r="108.08632"
-         cy="609.91541"
-         cx="-692.96454"
+      <ellipse
+         ry="108.08632"
+         rx="109.92577"
+         cy="517.20013"
+         cx="42.113583"
          id="path5838-9"
          style="fill:#009a00;fill-opacity:1" />
-      <circle
-         r="108.08632"
-         cy="688.70728"
-         cx="-830.34528"
+      <ellipse
+         ry="108.08632"
+         rx="109.92577"
+         cy="608.84918"
+         cx="-114.74798"
          id="path5838-28"
          style="fill:#0000ff" />
-      <circle
-         r="108.08632"
-         cy="626.07788"
-         cx="-961.66522"
+      <ellipse
+         ry="108.08632"
+         rx="109.92577"
+         cy="530.50549"
+         cx="-276.87421"
          id="path5838-22"
          style="fill:#9400ff;fill-opacity:1" />
-      <circle
-         r="108.08632"
-         cy="521.02197"
-         cx="-985.90887"
+      <ellipse
+         ry="108.08632"
+         rx="109.92577"
+         cy="369.73532"
+         cx="-324.38757"
          id="path5838-7"
          style="fill:#ff92c8;fill-opacity:1" />
-      <circle
-         r="108.08632"
-         cy="393.74271"
-         cx="-913.1778"
+      <ellipse
+         ry="108.08632"
+         rx="109.92577"
+         cy="232.45605"
+         cx="-217.5616"
          id="path5838-6"
          style="fill:#ff0000" />
+      <path
+         transform="matrix(0,1,-1,0,0,0)"
+         d="m 330.39014,45.596836 a 107.78291,105.97932 0 0 1 -54.09256,91.894654 107.78291,105.97932 0 0 1 -107.98326,-0.3429 107.78291,105.97932 0 0 1 -53.48776,-92.236285 l 107.78066,0.684531 z"
+         sodipodi:end="3.1480518"
+         sodipodi:start="0"
+         sodipodi:ry="105.97932"
+         sodipodi:rx="107.78291"
+         sodipodi:cy="45.596836"
+         sodipodi:cx="222.60722"
+         sodipodi:type="arc"
+         id="path5838-77"
+         style="fill:#ff6600" />
     </g>
   </g>
 </svg>
