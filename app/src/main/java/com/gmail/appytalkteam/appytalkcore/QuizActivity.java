@@ -75,7 +75,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         } else {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
         }
-
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.backgroundcolor));
         initializeVariables();
         setContentView(R.layout.quiz_activity);
         disableOrientation(); // Because it crashes the sound-loading progress stars

@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-
+    android:background="@color/backgroundcolor"
     tools:context="com.gmail.appytalkteam.appytalkcore.CategorySelectorActivity">
     <ImageButton
         android:id="@+id/transparent_background_button"
