@@ -210,6 +210,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             }
             asyncSoundMap.put("correctSound", quizSounds.load(myCtx, R.raw.yay, 1));
             asyncSoundMap.put("incorrectSound", quizSounds.load(myCtx, R.raw.click, 1));
+            asyncSoundMap.put("correctArpeggioSound", quizSounds.load(myCtx, R.raw.winarpeggio, 1));
             return asyncSoundMap;
         }
 
@@ -236,6 +237,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     @Override
     public void correctAnswerSelected(View view) {
         playCurrentWordAfterDelay(false);
+        quizSounds.play(soundMap.get("correctArpeggioSound"), 1.0f, 1.0f, 1, 0, 1.0f);
         Question currentQ = quiz.getCurrentQuestion();
         //disable orientation change while 'success' screen shows. is re-enabled by next question
         disableOrientation();

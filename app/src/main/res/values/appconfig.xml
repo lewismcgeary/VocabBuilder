@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <integer name="numberOfQuestions">7</integer>
     <integer name="numberOfChoices">3</integer>
-    <integer name="numberOfSoundEffects">2</integer>
+    <integer name="numberOfSoundEffects">3</integer>
     <string-array name="locales_array">
         <item>en</item>
         <item>es</item>
