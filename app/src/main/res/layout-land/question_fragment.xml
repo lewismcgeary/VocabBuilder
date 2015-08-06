@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
  tools:context=".QuestionActivity"
     >
+    <ImageButton
+        android:id="@+id/transparent_background_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        />
 
     <Button
         style="@style/buttonprompt"
