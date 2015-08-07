@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1000"
-   height="1000"
-   viewBox="0 0 1000 1000"
+   width="1024.5592"
+   height="996.02551"
+   viewBox="0 0 1024.5592 996.02551"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="143.93671"
-     inkscape:cy="393.90914"
+     inkscape:cx="361.88183"
+     inkscape:cy="506.38264"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -37,7 +37,11 @@
      inkscape:window-height="1056"
      inkscape:window-x="65"
      inkscape:window-y="24"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -46,7 +50,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -54,14 +58,14 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-52.3622)">
+     transform="translate(12.230834,-54.524477)">
     <path
        sodipodi:type="star"
-       style="fill:#ffff00;fill-opacity:1;stroke:#3f3f3f;stroke-width:30;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.55686277"
+       style="fill:#ffff00;fill-opacity:1;stroke:#3f3f3f;stroke-width:60;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.55686275"
        id="path3338"
        sodipodi:sides="5"
        sodipodi:cx="507.97424"
-       sodipodi:cy="-589.70084"
+       sodipodi:cy="-589.70087"
        sodipodi:r1="303.52292"
        sodipodi:r2="505.87152"
        sodipodi:arg1="0.9971468"
@@ -72,6 +76,9 @@
        d="M 672.69643,-334.76408 C 617.03229,-298.79783 546.50621,-80.963849 480.33254,-84.585106 414.15886,-88.206363 367.82402,-312.43539 316.41691,-354.26096 265.00981,-396.08652 36.04362,-395.8464 19.038851,-459.90033 2.0340811,-523.95427 200.9703,-637.31191 224.86311,-699.12778 c 23.89281,-61.81588 -47.09,-279.50146 8.57415,-315.46772 55.66415,-35.9662 224.94834,118.20392 291.12201,121.82517 66.17368,3.62126 251.27007,-131.15597 302.67718,-89.33039 51.4071,41.82557 -42.90574,250.46561 -25.90096,314.51954 17.00477,64.05393 202.38341,198.44262 178.49063,260.25849 -23.89281,61.81588 -251.46554,36.59235 -307.12969,72.55861 z"
        inkscape:transform-center-x="-8.4042883"
        inkscape:transform-center-y="39.432559"
-       transform="scale(1,-1)" />
+       transform="scale(1,-1)"
+       inkscape:export-filename="/home/ubuntu/StudioProjects/VocabBuilder/buildsupport/Graphics/icons/bitmap/star_full.png"
+       inkscape:export-xdpi="22.5"
+       inkscape:export-ydpi="22.5" />
   </g>
 </svg>

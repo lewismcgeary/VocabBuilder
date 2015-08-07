@@ -1,201 +1,23 @@
-<?xml version="1.0"?>
-<svg
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:cc="http://creativecommons.org/ns#"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
-    xmlns:svg="http://www.w3.org/2000/svg"
-    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-    xmlns:ns1="http://sozi.baierouge.fr"
-    id="svg2"
-    viewBox="0 0 442.23 482.04"
-    version="1.1"
-  >
-  <defs
-      id="defs4"
-    >
-    <linearGradient
-        id="linearGradient5419"
-        y2="230.38"
-        gradientUnits="userSpaceOnUse"
-        x2="343.82"
-        y1="677.87"
-        x1="435.95"
-      >
-      <stop
-          id="stop5383"
-          stop-color="#8c3611"
-          offset="0"
-      />
-      <stop
-          id="stop5385"
-          stop-color="#ec081a"
-          offset="1"
-      />
-    </linearGradient
-    >
-    <linearGradient
-        id="linearGradient5421"
-        y2="233.98"
-        gradientUnits="userSpaceOnUse"
-        x2="452.54"
-        y1="347.11"
-        x1="409.12"
-      >
-      <stop
-          id="stop5393"
-          stop-color="#703f06"
-          offset="0"
-      />
-      <stop
-          id="stop5395"
-          stop-color="#621e00"
-          offset="1"
-      />
-    </linearGradient
-    >
-    <linearGradient
-        id="linearGradient5423"
-        y2="201.36"
-        gradientUnits="userSpaceOnUse"
-        x2="158.59"
-        y1="288.23"
-        x1="351.64"
-      >
-      <stop
-          id="stop5403"
-          stop-color="#38822b"
-          offset="0"
-      />
-      <stop
-          id="stop5405"
-          stop-color="#00ce02"
-          stop-opacity="0"
-          offset="1"
-      />
-    </linearGradient
-    >
-  </defs
-  >
-  <g
-      id="layer1"
-      transform="translate(-185.44 -156.02)"
-    >
-    <g
-        id="g5413"
-        transform="translate(4.0406 -68.69)"
-      >
-      <path
-          id="path3054"
-          fill="url(#linearGradient5419)"
-          d="m404.25 693.33c205.07 93.329 322.49-370.73 92.036-351.88-52.37 12.89-118.11 23.937-187.14 1.6726-242.8-24.351-95.055 436.5 95.1 350.21z"
-      />
-      <path
-          id="path3064"
-          fill="url(#linearGradient5421)"
-          d="m426.79 265.96c-8.1595-24.063-9.0009-33.491-5.0508-33.335 23.513-4.567 32.962 10.557 43.437 24.244-14.542 0.5411-19.918 6.3201-25.254 12.122-17.628 32.357-19.297 56.634-26.264 82.327l-27.274 2.0203c20.262-19.774 29.904-59.692 40.406-87.378z"
-      />
-      <path
-          id="path3066"
-          fill="url(#linearGradient5423)"
-          d="m410.12 307.88c-17.615-70.003-86.197-92.056-140.92-78.287-92.792 23.349 71.872 94.905 140.92 78.287z"
-      />
-      <path
-          id="path3070"
-          d="m390.93 294.24c-60.97-42.23-91.1-45.32-135.36-48.48"
-          stroke="#3bae28"
-          stroke-width="1px"
-          fill="none"
-      />
-    </g
-    >
-  </g
-  >
-  <metadata
-    >
-    <rdf:RDF
-      >
-      <cc:Work
-        >
-        <dc:format
-          >image/svg+xml</dc:format
-        >
-        <dc:type
-            rdf:resource="http://purl.org/dc/dcmitype/StillImage"
-        />
-        <cc:license
-            rdf:resource="http://creativecommons.org/licenses/publicdomain/"
-        />
-        <dc:publisher
-          >
-          <cc:Agent
-              rdf:about="http://openclipart.org/"
-            >
-            <dc:title
-              >Openclipart</dc:title
-            >
-          </cc:Agent
-          >
-        </dc:publisher
-        >
-        <dc:title
-          >Simple Red Apple</dc:title
-        >
-        <dc:date
-          >2013-09-25T21:59:16</dc:date
-        >
-        <dc:description
-          >A simple 2D red apple with a slightly transparent leaf.</dc:description
-        >
-        <dc:source
-          >https://openclipart.org/detail/183893/simple-red-apple-by-sanja-183893</dc:source
-        >
-        <dc:creator
-          >
-          <cc:Agent
-            >
-            <dc:title
-              >sanja</dc:title
-            >
-          </cc:Agent
-          >
-        </dc:creator
-        >
-        <dc:subject
-          >
-          <rdf:Bag
-            >
-            <rdf:li
-              >apple</rdf:li
-            >
-            <rdf:li
-              >simple apple</rdf:li
-            >
-          </rdf:Bag
-          >
-        </dc:subject
-        >
-      </cc:Work
-      >
-      <cc:License
-          rdf:about="http://creativecommons.org/licenses/publicdomain/"
-        >
-        <cc:permits
-            rdf:resource="http://creativecommons.org/ns#Reproduction"
-        />
-        <cc:permits
-            rdf:resource="http://creativecommons.org/ns#Distribution"
-        />
-        <cc:permits
-            rdf:resource="http://creativecommons.org/ns#DerivativeWorks"
-        />
-      </cc:License
-      >
-    </rdf:RDF
-    >
-  </metadata
-  >
-</svg
->
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024pt" height="1116pt" viewBox="0 0 1024 1116" version="1.1">
+<defs>
+<linearGradient id="linear0" gradientUnits="userSpaceOnUse" x1="435.95" y1="677.87" x2="343.82" y2="230.38" gradientTransform="matrix(2.315537,0,0,2.314149,-420.037052,-519.768382)">
+<stop offset="0" style="stop-color:rgb(54.901961%,21.176471%,6.666667%);stop-opacity:1;"/>
+<stop offset="1" style="stop-color:rgb(92.54902%,3.137255%,10.196078%);stop-opacity:1;"/>
+</linearGradient>
+<linearGradient id="linear1" gradientUnits="userSpaceOnUse" x1="409.12" y1="347.11" x2="452.54" y2="233.98" gradientTransform="matrix(2.315537,0,0,2.314149,-420.037052,-519.768382)">
+<stop offset="0" style="stop-color:rgb(43.921569%,24.705882%,2.352941%);stop-opacity:1;"/>
+<stop offset="1" style="stop-color:rgb(38.431373%,11.764706%,0%);stop-opacity:1;"/>
+</linearGradient>
+<linearGradient id="linear2" gradientUnits="userSpaceOnUse" x1="351.64" y1="288.23" x2="158.59" y2="201.36" gradientTransform="matrix(2.315537,0,0,2.314149,-420.037052,-519.768382)">
+<stop offset="0" style="stop-color:rgb(21.960784%,50.980392%,16.862745%);stop-opacity:1;"/>
+<stop offset="1" style="stop-color:rgb(0%,80.784314%,0.784314%);stop-opacity:0;"/>
+</linearGradient>
+</defs>
+<g id="surface1">
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#linear0);" d="M 516.019531 1084.699219 C 990.867188 1300.675781 1262.757812 226.777344 729.132812 270.398438 C 607.867188 300.226562 455.644531 325.792969 295.800781 274.269531 C -266.410156 217.917969 75.699219 1284.394531 516.007812 1084.707031 Z M 516.019531 1084.699219 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#linear1);" d="M 568.210938 95.703125 C 549.316406 40.015625 547.367188 18.199219 556.515625 18.558594 C 610.960938 7.992188 632.839844 42.992188 657.097656 74.664062 C 623.421875 75.917969 610.976562 89.289062 598.621094 102.714844 C 557.800781 177.59375 553.9375 233.777344 537.804688 293.234375 L 474.648438 297.910156 C 521.566406 252.148438 543.894531 159.773438 568.210938 95.703125 Z M 568.210938 95.703125 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#linear2);" d="M 529.609375 192.710938 C 488.824219 30.714844 330.019531 -20.320312 203.304688 11.542969 C -11.558594 65.578125 369.726562 231.167969 529.609375 192.710938 Z M 529.609375 192.710938 "/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(23.137255%,68.235294%,15.686275%);stroke-opacity:1;stroke-miterlimit:4;" d="M 390.929952 294.240762 C 329.959354 252.010732 299.830006 248.920029 255.570567 245.76012 " transform="matrix(2.315537,0,0,2.314149,-420.037052,-519.768382)"/>
+</g>
+</svg>
