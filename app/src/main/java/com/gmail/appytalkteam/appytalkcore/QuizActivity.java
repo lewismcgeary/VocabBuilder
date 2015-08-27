@@ -141,13 +141,17 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        keepProgressBarAtTop();
-        displayProgress(quiz.getQuestionNumber(), totalQuestions);
-        QuestionFragment nextQuestion = QuestionFragment.newInstance(quiz.getCurrentQuestion());
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.question_frame, nextQuestion);
-        fragmentTransaction.commit();
+        if(quiz != null) {
+            keepProgressBarAtTop();
+            displayProgress(quiz.getQuestionNumber(), totalQuestions);
+            QuestionFragment nextQuestion = QuestionFragment.newInstance(quiz.getCurrentQuestion());
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.question_frame, nextQuestion);
+            fragmentTransaction.commit();
+        } else {
+            endQuiz();
+        }
     }
 
     @Override
@@ -155,6 +159,15 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList("Answers", quiz.getCurrentQuestion().getWords());
         outState.putInt("CorrectAnswer", quiz.getCurrentQuestion().getAnswer());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        //if activity has been killed by the system to free up memory while in the
+        //background, we just want to go back to category to avoid crashed and other
+        //undesireable behaviour
+        endQuiz();
     }
 
     @Override
@@ -390,19 +403,23 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
                 fragmentTransaction.commit();
                 playCurrentWordAfterDelay(true);
             } else {
-                quizSounds.release();
-                if (getResources().getString(R.string.locale).equals("global")) {
-                    Intent intent = new Intent(this, LanguageSelectorActivity.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(this, CategorySelectorActivity.class);
-                    startActivity(intent);
-                }
-                this.finish();
+                endQuiz();
             }
         } else {
             questionInterrupted = true;
         }
+    }
+
+    public void endQuiz(){
+        quizSounds.release();
+        if (getResources().getString(R.string.locale).equals("global")) {
+            Intent intent = new Intent(this, LanguageSelectorActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, CategorySelectorActivity.class);
+            startActivity(intent);
+        }
+        this.finish();
     }
 
     public void playCurrentWord(){
