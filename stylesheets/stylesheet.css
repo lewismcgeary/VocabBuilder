@@ -40,6 +40,7 @@ a {
 @media screen and(max-width: 480px) {
 
     .googlebutton {
+	border: 3px red;
 	max-width: 50%;
 	width: 66%;
     }
