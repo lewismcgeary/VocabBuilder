@@ -37,7 +37,16 @@ a {
 .googlebutton { vertical-align: middle;
 		display: block;
 	      }
+@media screen and(max-width: 64em) {
 
+    .googlebutton {
+	max-width: 50%;
+    }
+    .googlebutton img {
+	max-width:100%;
+	height:auto;
+    }
+}
 @media screen and (min-width: 64em) {
   .btn {
     padding: 0.75rem 1rem; } }
