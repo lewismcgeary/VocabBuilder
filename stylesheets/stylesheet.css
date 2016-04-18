@@ -41,10 +41,12 @@ a {
 
     .googlebutton {
 	max-width: 50%;
+	width: 50%;
     }
     .googlebutton img {
 	max-width: 20rem;
 	height:auto;
+	width: 100%;
     }
 }
 @media screen and (min-width: 64em) {
