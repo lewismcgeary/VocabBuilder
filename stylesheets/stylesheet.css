@@ -36,7 +36,16 @@ a {
 
 .googlebutton { vertical-align: middle;
 		display: block;
+		width: 25rem;
+		min-width: 20%;
+		max-width: 66%;
 	      }
+
+.googlebutton img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
 @media screen and(max-width: 480px) {
 
     .googlebutton {
