@@ -37,7 +37,7 @@ a {
 .googlebutton { vertical-align: middle;
 		display: block;
 	      }
-@media screen and(max-width: 64em) {
+@media screen and(max-width: 480px) {
 
     .googlebutton {
 	max-width: 50%;
