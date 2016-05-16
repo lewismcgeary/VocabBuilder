@@ -23,6 +23,22 @@
             <option value="$PROJECT_DIR$/com.readystatesoftware.sqliteasset/sqliteassethelper/+" />
           </set>
         </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/com.android.support" />
+            <option value="$PROJECT_DIR$/com.android.support/appcompat-v7" />
+            <option value="$PROJECT_DIR$/com.android.support/appcompat-v7/22.2.1" />
+            <option value="$PROJECT_DIR$/com.android.support/percent" />
+            <option value="$PROJECT_DIR$/com.android.support/percent/22.2.0" />
+            <option value="$PROJECT_DIR$/com.android.support/support-v4" />
+            <option value="$PROJECT_DIR$/com.android.support/support-v4/22.2.1" />
+            <option value="$PROJECT_DIR$/com.readystatesoftware.sqliteasset" />
+            <option value="$PROJECT_DIR$/com.readystatesoftware.sqliteasset/sqliteassethelper" />
+            <option value="$PROJECT_DIR$/com.readystatesoftware.sqliteasset/sqliteassethelper/+" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
