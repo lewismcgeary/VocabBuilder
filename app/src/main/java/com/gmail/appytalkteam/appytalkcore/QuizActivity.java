@@ -184,7 +184,8 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
         @Override
         protected Vocabulary doInBackground(Void ... nope) {
-            Vocabulary vocab = new Vocabulary(myCtx);
+            VocabularyDbHelper myDbHelper = new VocabularyDbHelper(myCtx);
+            Vocabulary vocab = new Vocabulary(myDbHelper);
         return vocab;
         }
 
