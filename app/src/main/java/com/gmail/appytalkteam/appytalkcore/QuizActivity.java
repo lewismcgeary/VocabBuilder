@@ -190,7 +190,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
         @Override
         protected void onPostExecute(Vocabulary vocab) {
-            quiz = new Quiz(myCtx,vocab);
+            quiz = new Quiz(totalQuestions, nChoices, vocab);
             ArrayList<Word> AllAnswers = quiz.getAllAnswers();
 
             LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(myCtx);

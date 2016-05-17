@@ -1,8 +1,5 @@
 package com.gmail.appytalkteam.appytalkcore;
 
-import android.content.Context;
-import android.content.res.Resources;
-
 import java.util.ArrayList;
 
 /**
@@ -12,18 +9,15 @@ import java.util.ArrayList;
  */
 public class Quiz {
 
-private Context myCtx;
-ArrayList<Question> quiz;
-    int nQuestions;
-    int currentQuestion;
+    private ArrayList<Question> quiz;
+    private int numberOfQuestions;
+    private int currentQuestion;
 
-    public Quiz(Context context, Vocabulary vocab){
+    public Quiz(int numberOfQuestions, int numberOfOptions, Vocabulary vocab){
         ArrayList<Question> myQs = new ArrayList<>();
-        this.myCtx = context;
-        Resources res = myCtx.getResources();
-        nQuestions = res.getInteger(R.integer.numberOfQuestions);
-        for(int i = 0; i < nQuestions; i++){
-            Question addme = new Question(myCtx,vocab);
+        this.numberOfQuestions = numberOfQuestions;
+        for(int i = 0; i < this.numberOfQuestions; i++){
+            Question addme = new Question(numberOfOptions, vocab);
             myQs.add(addme);
         }
         quiz = myQs;
@@ -40,7 +34,7 @@ ArrayList<Question> quiz;
 
     public boolean incrementQuestionNumber(){
         currentQuestion++;
-        return currentQuestion < nQuestions; // If false, we've overshot!
+        return currentQuestion < numberOfQuestions; // If false, we've overshot!
     }
 
     public int getQuestionNumber(){
