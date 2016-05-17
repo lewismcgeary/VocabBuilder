@@ -217,7 +217,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             // load sound files for current vocabulary into the quizSounds pool
             // hashmap matches each word to the soundId
             for(int i=0; i<(AllAnswers.size()); i++){
-                int currentSound = AllAnswers.get(i).audioRes(myCtx);
+                int currentSound = AllAnswers.get(i).getAudioResourceId();
                 String wordText = AllAnswers.get(i).getWordText();
                 asyncSoundMap.put(wordText, quizSounds.load(myCtx, currentSound, 1));
 

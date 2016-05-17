@@ -135,8 +135,13 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Word word = new Word(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
-                wordList.add(word);
+                String imageResourceName = cursor.getString(0);
+                int imageResourceId =  myContext.getResources().getIdentifier(imageResourceName.replaceFirst("[.][^.]+$", ""), "drawable", myContext.getPackageName());
+                String wordText = cursor.getString(1);
+                String audioResourceName = cursor.getString(2);
+                int audioResourceId =  myContext.getResources().getIdentifier(audioResourceName.replaceFirst("[.][^.]+$", ""), "raw", myContext.getPackageName());
+                String categoryName = cursor.getString(3);
+                Word word = new Word(imageResourceId, wordText, audioResourceId, categoryName);                wordList.add(word);
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -157,7 +162,13 @@ public class VocabularyDbHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Word word = new Word(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                String imageResourceName = cursor.getString(0);
+                int imageResourceId =  myContext.getResources().getIdentifier(imageResourceName.replaceFirst("[.][^.]+$", ""), "drawable", myContext.getPackageName());
+                String wordText = cursor.getString(1);
+                String audioResourceName = cursor.getString(2);
+                int audioResourceId =  myContext.getResources().getIdentifier(audioResourceName.replaceFirst("[.][^.]+$", ""), "drawable", myContext.getPackageName());
+                String categoryName = cursor.getString(3);
+                Word word = new Word(imageResourceId, wordText, audioResourceId, categoryName);
                 wordList.add(word);
             } while (cursor.moveToNext());
         }

@@ -1,6 +1,5 @@
 package com.gmail.appytalkteam.appytalkcore;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -25,20 +24,20 @@ public class Word implements Parcelable{
     };
 
     public String wordText;
-    public String imageLocation;
-    public String audioLocation;
+    public int imageResourceId;
+    public int audioResourceId;
     public String category="None";
 
     public void setWordText(String wordText) {
         this.wordText = wordText;
     }
 
-    public void setImageLocation(String imageLocation) {
-        this.imageLocation = imageLocation;
+    public void setImageResourceId(int imageResourceId) {
+        this.imageResourceId = imageResourceId;
     }
 
-    public void setAudioLocation(String audioLocation) {
-        this.audioLocation = audioLocation;
+    public void setAudioResourceId(int audioResourceId) {
+        this.audioResourceId = audioResourceId;
     }
 
     public void setCategory(String category) {
@@ -47,9 +46,9 @@ public class Word implements Parcelable{
     //
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(imageLocation);
+        dest.writeInt(imageResourceId);
         dest.writeString(wordText);
-        dest.writeString(audioLocation);
+        dest.writeInt(audioResourceId);
         dest.writeString(category);
     }
 
@@ -58,45 +57,37 @@ public class Word implements Parcelable{
         // empty!
     }
 
-    public Word(String image, String word, String audio){
-        imageLocation=image;
+    public Word(int imageResId, String word, int audioResId){
+        imageResourceId =imageResId;
         wordText=word;
-        audioLocation=audio;
+        audioResourceId =audioResId;
     }
     // overloading to get category in there
-    public Word(String image, String word, String audio, String Category){
-        imageLocation=image;
+    public Word(int imageResId, String word, int audioResId, String Category){
+        imageResourceId =imageResId;
         wordText=word;
-        audioLocation=audio;
+        audioResourceId =audioResId;
         category = Category;
     }
 
     private Word(Parcel in){
-        imageLocation = in.readString();
+        imageResourceId = in.readInt();
         wordText = in.readString();
-        audioLocation = in.readString();
+        audioResourceId = in.readInt();
         category = in.readString();
     }
 
-    public int imageRes(Context context){
-
-        return context.getResources().getIdentifier(imageLocation.replaceFirst("[.][^.]+$", ""), "drawable", context.getPackageName());
+    public int getImageResourceId(){
+        return imageResourceId;
     }
-    public int audioRes(Context context){
-
-        return context.getResources().getIdentifier(audioLocation.replaceFirst("[.][^.]+$", ""), "raw", context.getPackageName());
+    public int getAudioResourceId(){
+        return audioResourceId;
     }
     String getWordText(){
         return wordText;
     }
     String getCategory() { return category;}
 
-    String getImageLocation(){
-        return imageLocation.replaceFirst("[.][^.]+$", "");
-    }
-    String getAudioLocation(){
-        return audioLocation.replaceFirst("[.][^.]+$", "");
-    }
 
     @Override
     public int describeContents() {

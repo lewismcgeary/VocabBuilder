@@ -82,7 +82,7 @@ public class QuestionFragment extends Fragment {
         // Set up the answer buttons with appropriate images and tag correct answer with "correct"
         for (int i = 0; i < Answers.size(); i++) {
             ImageButton butto = (ImageButton) view.findViewById(imRes[i]);
-            butto.setImageResource(Answers.get(i).imageRes(context));
+            butto.setImageResource(Answers.get(i).getImageResourceId());
             butto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
