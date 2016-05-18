@@ -184,13 +184,14 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
 
         @Override
         protected Vocabulary doInBackground(Void ... nope) {
-            Vocabulary vocab = new Vocabulary(myCtx);
+            VocabularyDbHelper myDbHelper = new VocabularyDbHelper(myCtx);
+            Vocabulary vocab = new Vocabulary(myDbHelper);
         return vocab;
         }
 
         @Override
         protected void onPostExecute(Vocabulary vocab) {
-            quiz = new Quiz(myCtx,vocab);
+            quiz = new Quiz(totalQuestions, nChoices, vocab);
             ArrayList<Word> AllAnswers = quiz.getAllAnswers();
 
             LoadSoundsTask loadSoundsAsynchronously = new LoadSoundsTask(myCtx);
@@ -216,7 +217,7 @@ public class QuizActivity extends AppCompatActivity implements QuestionFragment.
             // load sound files for current vocabulary into the quizSounds pool
             // hashmap matches each word to the soundId
             for(int i=0; i<(AllAnswers.size()); i++){
-                int currentSound = AllAnswers.get(i).audioRes(myCtx);
+                int currentSound = AllAnswers.get(i).getAudioResourceId();
                 String wordText = AllAnswers.get(i).getWordText();
                 asyncSoundMap.put(wordText, quizSounds.load(myCtx, currentSound, 1));
 

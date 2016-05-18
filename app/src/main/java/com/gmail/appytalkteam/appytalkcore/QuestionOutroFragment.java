@@ -69,7 +69,7 @@ public class QuestionOutroFragment extends Fragment {
         Button correctAnswerTextButton = (Button) view.findViewById(R.id.correctAnswerTextButton);
         ImageButton correctAnswerImageButton = (ImageButton) view.findViewById(R.id.correctAnswerImageButton);
         correctAnswerTextButton.setText(correctAnswer.getWordText());
-        correctAnswerImageButton.setImageResource(correctAnswer.imageRes(context));
+        correctAnswerImageButton.setImageResource(correctAnswer.getImageResourceId());
         return view;
     }
 
